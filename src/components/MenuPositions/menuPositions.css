@@ -49,9 +49,12 @@
     background: #75777B;
     border-radius: 12px;
     margin-bottom: 20px;
+    min-width: 260px;
 }
 .card-img{
     margin-bottom: 15px;
+    max-width: 260px;
+    max-height: 140px;
 }
 .card-title{
     margin-bottom: 5px;

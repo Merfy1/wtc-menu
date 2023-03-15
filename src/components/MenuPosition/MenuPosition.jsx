@@ -15,7 +15,7 @@ export function MenuPosition({name, price, img, ingridint}) {
         </div>
          <Modal active={modalActive} setActive={setModalActive}>
                 <div className="modal-img">
-                    <img src={"http://localhost:3001"+img} alt="tom"/>
+                    <img  src={"http://localhost:3001"+img} alt="tom"/>
                 </div>
                 <div className="modal-info">
                     <div className="position-info">

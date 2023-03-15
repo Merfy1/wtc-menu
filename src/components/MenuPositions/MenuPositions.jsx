@@ -27,7 +27,7 @@ export function MenuPositions() {
                     </div>
                     <div className="cards">
                         {positions?.map((positions) =>
-                            <MenuPosition key={positions.id} ingridint={positions.ingridint} name={positions.name} price={positions.price} img={positions.img[0]?.patch}/>
+                            <MenuPosition key={positions.id} ingridint={positions.ingridint} name={positions.name} price={positions.price} img={positions.img[0]?.patch} img1={positions.img[1]?.patch}/>
                         )}
                     </div>
                 </div>

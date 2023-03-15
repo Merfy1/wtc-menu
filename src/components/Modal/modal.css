@@ -40,8 +40,7 @@
     padding: 26px 52px;
     background: #636364;
     border-radius: 20px; 
-    display: flex;
-       
+    display: flex;   
     align-items: center;
 }
 .modal-info{
