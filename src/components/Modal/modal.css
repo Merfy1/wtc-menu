@@ -1,16 +1,4 @@
 .modal {
-    /* height: 100vh;
-    width: 100vw;
-    background-color: rgba(0,0,0,0.4);
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.5s ease; */
     position:fixed;
     top:0;
     left:0;
@@ -23,24 +11,20 @@
     opacity: 0;
     pointer-events: none;
     transition: 0.5s ease;
-
 }
 .modal__dialog{
     max-width: 848px;
     margin: 100px auto;
 }
+.modal-basket__dialog{
+    max-width: 428px;
+    margin: 50px auto;
+}
 .modal.active{
     opacity: 1;
     pointer-events: all;
 }
-
 .modal__content{
-    /* padding: 20px;
-    border-radius: 12px;
-    background-color: white;
-    width: 50vh; */
-
-    
     position:relative;
     width:100%;
     background-color:#75767A;
@@ -53,13 +37,9 @@
     transform: scale(0.5);
     transition: 0.5s ease;
 }
-
 .modal__content.active{
     transform: scale(1);
 }
-
-
-
 .modal-img{
     padding: 26px 52px;
     background: #636364;
@@ -138,4 +118,93 @@
     border:none;
     background-color:transparent;
     cursor:pointer
+}
+
+
+
+
+
+.modal-basket__title{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 42px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 20px;
+}
+.modal-basket__position{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 25px;
+}
+.modal-basket__position-info{
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+}   
+.plus-minus-basket{
+    width: 136px;
+    height: 41px;
+    border: 3px solid #FFFFFF;
+    border-radius: 74px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn-count-basket{
+    align-items: center;
+    padding: 0 15px;
+    border: none;
+    background-color: transparent;
+}
+.count-basket{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+}
+.position-name{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+}
+.modal-basket__change-pay{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.change-pay__title{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.radio-modal{
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+.modal-basket__button-buy{
+    background-color: #E69952;
+    color: white;
+    padding: 19px 75px;
+    width: 369px;
+    height: 60px;
+    border-radius: 74px;
+    border: none;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+}
+.buy-basket{
+    padding: 38px 0;
+    display: flex;
+    justify-content: center;
 }
