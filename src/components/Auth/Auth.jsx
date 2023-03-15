@@ -47,11 +47,5 @@ export function Auth(){
                 </div>
             </div>
         </div>
-        
-        // <div>
-        //     <input type="text" value={nickname} onChange={e => setLogin(e.target.value)}/>
-        //     <input type="text" value={password} onChange={e => setPassword(e.target.value)}/>
-        //     <button onClick={() => {auth()}}></button>
-        // </div>
     )
 }
