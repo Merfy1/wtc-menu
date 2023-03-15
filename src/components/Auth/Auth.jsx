@@ -7,12 +7,14 @@ import './auth.css';
 export function Auth(){
     const [nickname, setLogin] = useState('')
     const [password, setPassword] = useState('')
-    async function auth(  ) { 
+    async function auth(e) {
+        e.preventDefault();
         const authResult = await axios.post('http://localhost:3001/api/admin/login', {
             nickname,
             password
         })
         localStorage.setItem('tokenLogin', authResult.data.session)
+        window.location.reload();
     }
 
     return (
@@ -27,7 +29,7 @@ export function Auth(){
                 </span>
                 <div className="form-box login">
                     <h2>Вход</h2>
-                    <form action="#">
+                    <form>
                         <div className="input-box">
                             <span className="icon">
                                 <AiFillMail name="mail"/>
@@ -42,8 +44,9 @@ export function Auth(){
                             <input required type="text" id="passwd" value={password} onChange={e => setPassword(e.target.value)}/>
                             <label>Пароль</label>
                         </div>
-                        <button className="btn" type="submit" onClick={() => {auth()}}>Войти</button>
+                        
                     </form>
+                    <button className="btn" type="submit" onClick={(e) => {auth(e)}}>Войти</button>
                 </div>
             </div>
         </div>

@@ -10,11 +10,11 @@ import { MenuFooter } from "../MenuFooter/MenuFooter";
 
 export function Menu() {
     return (
-        <div>
+        <>
             <MenuHeader/>
             <MenuSlider/>
             <MenuPositions/>
             <MenuFooter/>
-        </div>
+        </>
     )
 }
