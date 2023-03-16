@@ -9,7 +9,7 @@ export function MenuPositions() {
     const [modalActive, setModalActive] = useState(false)
     const [positions, statePosition] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:3001/api/public/positions/1', {
+        axios.get('http://localhost:3001/api/public/positions/', {
         }).then((e) => {
             statePosition(e.data.positions)
         })
