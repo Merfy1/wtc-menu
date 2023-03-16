@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios, {isCancel, AxiosError} from 'axios';
 import { BsBasket } from "react-icons/bs";
 import { ModalBasket } from "../ModalBasket/ModalBasket";
 import './menuHeader.css'
+import { Menucategories } from "../MenuCategories/Menucategories";
 
 export function MenuHeader() {
     const [modalActive, setModalActive] = useState(false)
+    const [catigories, stateCatigories] = useState([])
+    useEffect(() => {
+        axios.get('http://localhost:3001/api/public/categories', {
+        }).then((e) => {
+            stateCatigories(e.data.catigories)
+            console.log(e.data)
+        })
+    },
+    [],
+    )
     return(
         <>
         <div className="header">
@@ -14,21 +25,9 @@ export function MenuHeader() {
                     <img src="/img/WTC-Logo 1.png" alt="Logo" className="logo"/>
                     <nav className="navbar">
                         <ul className="navbar-ul">
-                            <li className="navbar-list">
-                                <a href="" className="navbar-item">Популярное</a>
-                            </li>
-                            <li class="navbar-list">
-                                <a href="" className="navbar-item">Горячее</a>
-                            </li>
-                            <li class="navbar-list">
-                                <a href="" className="navbar-item">Салаты</a>
-                            </li>
-                            <li class="navbar-list">
-                                <a href="" className="navbar-item">Супы</a>
-                            </li>
-                            <li class="navbar-list">
-                                <a href="" className="navbar-item">Напитки</a>
-                            </li>
+                        {catigories?.map((catigories) =>
+                            <Menucategories key={catigories.id} name={catigories.name} />
+                        )}
                         </ul>
                     </nav>
                     <button onClick={() => setModalActive(true)} className="basket-icon"><BsBasket></BsBasket></button>

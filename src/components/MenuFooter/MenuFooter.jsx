@@ -6,9 +6,9 @@ export function MenuFooter() {
     return(
         <div className="footer">
             <div className="container">
-                <div clclassNameass="footer-wrapper">
+                <div className="footer-wrapper">
                     <div className="one">
-                        <img src="img/WTC-Logo 1.png" alt="Logo" class="logo"/>
+                        <img src="img/WTC-Logo 1.png" alt="Logo" className="logo"/>
                         <nav className="navbar">
                             <ul className="navbar-ul">
                                 <li className="navbar-list footer-item">

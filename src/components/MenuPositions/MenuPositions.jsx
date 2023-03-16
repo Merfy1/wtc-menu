@@ -12,7 +12,6 @@ export function MenuPositions() {
         axios.get('http://localhost:3001/api/public/positions/1', {
         }).then((e) => {
             statePosition(e.data.positions)
-            console.log(e.data)
         })
     },
     [],

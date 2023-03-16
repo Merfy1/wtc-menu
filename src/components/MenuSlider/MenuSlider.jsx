@@ -11,11 +11,11 @@ export function MenuSlider() {
                             <FiArrowLeftCircle className="arrow-left"></FiArrowLeftCircle>
                         </button>
                         <img src="img/slider 1.png" alt="" className="slider-image"/>
-                        <button class="button-nav">
+                        <button className="button-nav">
                             <FiArrowRightCircle  className="arrow-right"></FiArrowRightCircle>
                         </button>
                 </div>
-                <div class="slider-wrapper nav">
+                <div className="slider-wrapper nav">
                     <img src="img/slider-nav-active.svg" alt="" className="slider-nav"/>
                     <img src="img/slider-nav.svg" alt="" className="slider-nav"/>
                     <img src="img/slider-nav.svg" alt="" className="slider-nav"/>

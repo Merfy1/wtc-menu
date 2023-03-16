@@ -9,13 +9,13 @@ export function MenuPosition({name, price, img, ingridint}) {
             <div className="card">
                 <img src={"http://localhost:3001"+img} alt="" className="card-img"/>
                 <span className="card-title">{name}</span>
-                <span className="card-price">{price}</span>
+                <span className="card-price">{price + " руб"}</span>
                 <button onClick={() => setModalActive(true)} className="card-buy">В корзину</button>
             </div>
         </div>
          <Modal active={modalActive} setActive={setModalActive}>
                 <div className="modal-img">
-                    <img  src={"http://localhost:3001"+img} alt="tom"/>
+                    <img  src={"http://localhost:3001"+img} alt="tom" className="img-for-modal"/>
                 </div>
                 <div className="modal-info">
                     <div className="position-info">
