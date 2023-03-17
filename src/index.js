@@ -27,7 +27,7 @@ if (localStorage.getItem("tokenLogin")){
     {
       path: "/admin",
       element: <Auth />
-    }
+    },
   ]
 }
 const router = createBrowserRouter(pages)

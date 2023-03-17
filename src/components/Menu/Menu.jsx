@@ -9,12 +9,16 @@ import { MenuFooter } from "../MenuFooter/MenuFooter";
 
 
 export function Menu() {
+
+    const [position, setPositions] = useState([])
+
+
     return (
         <>
-            <MenuHeader/>
+            <MenuHeader setPositions={setPositions}/>
             <MenuSlider/>
-            <MenuPositions/>
-            <MenuFooter/>
+            <MenuPositions positionsID={position} />
+            <MenuFooter />
         </>
     )
 }

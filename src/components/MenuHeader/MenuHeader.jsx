@@ -5,7 +5,7 @@ import { ModalBasket } from "../ModalBasket/ModalBasket";
 import './menuHeader.css'
 import { Menucategories } from "../MenuCategories/Menucategories";
 
-export function MenuHeader() {
+export function MenuHeader( {setPositions} ) {
     const [modalActive, setModalActive] = useState(false)
     const [catigories, stateCatigories] = useState([])
     useEffect(() => {
@@ -13,6 +13,7 @@ export function MenuHeader() {
         }).then((e) => {
             stateCatigories(e.data.catigories)
             console.log(e.data)
+            setPositions(e.data.catigories)
         })
     },
     [],
