@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BsFillTrashFill } from "react-icons/bs";
+import { BsTrash } from "react-icons/bs";
 
 
-export function BasketPosition({name, price, img, count}) {
+export function BasketPosition({id, key, name, price, img, count}) {
     const [count1, setCount] = useState(1)
+    const [deletePositon, setDeletePositon] = useState([])
 
     const plus = () =>{
         setCount(count1 + 1)
@@ -18,6 +19,21 @@ export function BasketPosition({name, price, img, count}) {
             setCount(1)
         }
     }, [count1]);
+
+    function deletePositionBasket(){
+        const element =  JSON.parse(localStorage.getItem('card'))
+        for (let i = 0; i < element?.length; ++i){
+
+            if (element[i]?.key === id){
+                const newElement = element.splice(i, i)
+
+                localStorage.setItem('card', JSON.stringify(newElement))
+                return
+            }
+            return
+        }
+
+    }
     return (
         <div className="modal-basket__position">
             <img src={"http://localhost:3001"+img} alt="" className="modal-basket-img"/>
@@ -30,14 +46,14 @@ export function BasketPosition({name, price, img, count}) {
                     <button className="btn-count-basket" onClick={minus}>
                         <img src="img/minus-mini.svg" alt=""/>
                     </button>
-                    <span className="count-basket">{count1}</span>
+                    <span className="count-basket">{count}</span>
                     <button className="btn-count-basket" onClick={plus}>
                         <img src="img/plus-mini.svg" alt=""/>
                     </button>
                 </div>
             </div>
-            <button className="btn-count-basket" >
-                <BsFillTrashFill></BsFillTrashFill>
+            <button className="btn-trash" onClick={deletePositionBasket}>
+                <BsTrash/>
             </button>
         </div>
     )

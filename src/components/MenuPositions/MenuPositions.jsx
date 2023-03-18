@@ -27,7 +27,7 @@ export function MenuPositions({positionsID}) {
             <div className="container">
                 <div className="popular-wrapper">
                     <div className="title-wrapper">
-                        <span className="title">Популярное</span>
+                        <span className="title">Все товары</span>
                         <input placeholder="Поиск..." type="text" className="search"/>
                     </div>
                     <div className="cards">
