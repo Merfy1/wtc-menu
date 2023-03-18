@@ -20,7 +20,7 @@ export function MenuPositions({positionsID}) {
     )
 
     useEffect(() => {
-        console.log('useEffect', positionsID[0])
+        // console.log('useEffect', positionsID[0])
     }, [positionsID]);
     return (
         <div className="popular">

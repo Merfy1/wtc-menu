@@ -12,7 +12,6 @@ export function MenuHeader( {setPositions} ) {
         axios.get('http://localhost:3001/api/public/categories', {
         }).then((e) => {
             stateCatigories(e.data.catigories)
-            console.log(e.data)
             setPositions(e.data.catigories)
         })
     },

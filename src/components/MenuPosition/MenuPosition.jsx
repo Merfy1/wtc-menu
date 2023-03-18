@@ -1,18 +1,6 @@
 import { useState, useEffect } from "react"
 import { Modal } from "../Modal/Modal";
 
-const checkElementInArray = (id_position, array) => {
-    for (let index = 0; index < array.length; index++) {
-        if (array[index].key === id_position){
-
-            return index+1;
-
-        }                     
-    }
-
-    return false;
-}
-
 export function MenuPosition({name, price, img, ingridint, key, id_position, id_element}) {
 
 
@@ -40,33 +28,40 @@ export function MenuPosition({name, price, img, ingridint, key, id_position, id_
         if (localStorage.getItem('card')){
 
             const elements = JSON.parse(localStorage.getItem('card'))
-            // console.log(elements)
+            let elementIDin
 
-            let resultCheck = checkElementInArray(id_element.id_position, elements)
+            const checkPosition = (elements) => {
+                for (let i = 0; i < elements.length; ++i){
 
-            console.log("r:",resultCheck)
+                    if (elements[i].key === id_element.id_position){
+                        elementIDin = i
+                        return true
+                    }
+                }
+                return false
+            }
 
-            if (!resultCheck){
-
-
-                elements.push({
-                    name, price, img, ingridint, count, key: id_element.id_position
-                })
-
-                localStorage.setItem('card', JSON.stringify(elements))   
-
-            } else {
-
-                elements[resultCheck - 1].count = count
+            if (!checkPosition(elements)){
 
                 localStorage.setItem('card', JSON.stringify([
-                    elements
+                    ...elements,{
+                        name, price, img, ingridint, count, key: id_element.id_position
+                    }
                 ]))
 
+                return
             }
-            // for (let index = 0; index < elements.length; index++) {
-            //     const element = elements[index];
-            // }
+
+            const getCount = elements[elementIDin].count
+
+            elements[elementIDin].count = getCount + count
+
+            localStorage.setItem('card', JSON.stringify(
+                elements
+            ))
+
+
+           
 
         }  else {
 
@@ -78,6 +73,8 @@ export function MenuPosition({name, price, img, ingridint, key, id_position, id_
 
         }
     }
+    
+    
 
     return(
         <>
