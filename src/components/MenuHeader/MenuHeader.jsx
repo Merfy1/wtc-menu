@@ -3,6 +3,7 @@ import axios, {isCancel, AxiosError} from 'axios';
 import { BsBasket } from "react-icons/bs";
 import { ModalBasket } from "../ModalBasket/ModalBasket";
 import './menuHeader.css'
+import '../ModalBasket/modalBasket.css'
 import { Menucategories } from "../MenuCategories/Menucategories";
 import { BasketPosition } from "../BasketPosition/BasketPosition";
 
@@ -31,7 +32,7 @@ export function MenuHeader( {setPositions} ) {
         
         for (let i = 0; i < positionsBasket?.length; ++i){
             let sum = (positionsBasket[i].price * positionsBasket[i].count)
-            console.log(sum)
+
             coutns += sum
         }
         // console.log(coutns)
@@ -91,7 +92,7 @@ export function MenuHeader( {setPositions} ) {
                         </div>
                         <hr className="line"/>
                         <div className="buy-basket">
-                            <button className="modal-basket__button-buy">Продолжить ({finalPrice})</button>
+                            <button className="modal-basket__button-buy">{finalPrice + ' руб'}</button>
                         </div>
                     </>
                 )

@@ -76,6 +76,12 @@
     border: none;
     background-color: transparent;
 }
+.btn-trash {
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 25px;
+}
 .count-basket{
     font-style: normal;
     font-weight: 700;

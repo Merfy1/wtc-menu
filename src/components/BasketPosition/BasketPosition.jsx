@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BsFillTrashFill } from "react-icons/bs";
+import { BsTrash } from "react-icons/bs";
 
 
 export function BasketPosition({id, key, name, price, img, count}) {
@@ -26,7 +26,7 @@ export function BasketPosition({id, key, name, price, img, count}) {
 
             if (element[i]?.key === id){
                 const newElement = element.splice(i, i)
-                console.log(newElement)
+
                 localStorage.setItem('card', JSON.stringify(newElement))
                 return
             }
@@ -52,8 +52,8 @@ export function BasketPosition({id, key, name, price, img, count}) {
                     </button>
                 </div>
             </div>
-            <button className="btn-count-basket" onClick={deletePositionBasket}>
-                <BsFillTrashFill/>
+            <button className="btn-trash" onClick={deletePositionBasket}>
+                <BsTrash/>
             </button>
         </div>
     )
