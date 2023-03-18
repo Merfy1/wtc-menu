@@ -73,7 +73,7 @@ export function MenuHeader( {setPositions} ) {
                         <span className="modal-basket__title">Корзина</span>
                         <hr className="line"/>
                         {positionsBasket?.map((positionsBasket) =>
-                            <BasketPosition  key={positionsBasket.key} count={positionsBasket.count} name={positionsBasket.name} price={positionsBasket.price} img={positionsBasket.img}/>
+                            <BasketPosition id={positionsBasket.key}  key={positionsBasket.key} count={positionsBasket.count} name={positionsBasket.name} price={positionsBasket.price} img={positionsBasket.img}/>
                         )}
                         <hr className="line"/>
                         <div className="modal-basket__change-pay">
