@@ -10,6 +10,7 @@ import PositionsElement from "./PositionsElement";
 export function MenuPositions({positionsID}) {
     const [modalActive, setModalActive] = useState(false)
     const [positions, statePosition] = useState([])
+    const [searchTerm, setSearchTerm] = useState('');
     useEffect(() => {
         axios.get(`http://localhost:3001/api/public/positions/`, {
         }).then((e) => {
@@ -22,16 +23,28 @@ export function MenuPositions({positionsID}) {
     useEffect(() => {
         // console.log('useEffect', positionsID[0])
     }, [positionsID]);
+    const filteredCards = positions.filter((positions) =>
+        positions.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    const handleSearchChange = (event) => {
+        const searchTerm = event.target.value;
+        if (searchTerm.length >= 3) {
+          setSearchTerm(searchTerm);
+        } else {
+          setSearchTerm('');
+        }
+      };
+      
     return (
         <div className="popular">
             <div className="container">
                 <div className="popular-wrapper">
                     <div className="title-wrapper">
                         <span className="title">Все товары</span>
-                        <input placeholder="Поиск..." type="text" className="search"/>
+                        <input placeholder="Поиск..." type="text" className="search" /*value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)}*/ onChange={handleSearchChange}/>
                     </div>
                     <div className="cards">
-                        {positions?.map((positions) =>
+                        {filteredCards?.map((positions) =>
                             <MenuPosition id_element={positions}  key={positions.id_position} ingridint={positions.ingridint} name={positions.name} price={positions.price} img={positions.img[0]?.patch} img1={positions.img[1]?.patch}/>
                         )}
                     </div>
