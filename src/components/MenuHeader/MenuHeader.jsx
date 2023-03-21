@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useContext  } from "react";
 import axios, {isCancel, AxiosError} from 'axios';
 import { BsBasket } from "react-icons/bs";
 import { ModalBasket } from "../ModalBasket/ModalBasket";

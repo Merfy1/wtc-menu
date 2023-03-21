@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { BsBasket } from "react-icons/bs";
+import { Menucategories } from "../MenuCategories/Menucategories";
+
 import './menuFooter.css'
 
 export function MenuFooter() {
@@ -11,21 +13,9 @@ export function MenuFooter() {
                         <img src="img/WTC-Logo 1.png" alt="Logo" className="logo"/>
                         <nav className="navbar">
                             <ul className="navbar-ul">
-                                <li className="navbar-list footer-item">
-                                    <a href="" className="navbar-item">Популярное</a>
-                                </li>
-                                <li className="navbar-list footer-item">
-                                    <a href="" className="navbar-item">Горячее</a>
-                                </li>
-                                <li className="navbar-list footer-item">
-                                    <a href="" className="navbar-item">Салаты</a>
-                                </li>
-                                <li className="navbar-list footer-item">
-                                    <a href="" className="navbar-item">Супы</a>
-                                </li>
-                                <li className="navbar-list footer-item">
-                                    <a href="" className="navbar-item">Напитки</a>
-                                </li>
+                            {/* {catigories?.map((category) =>
+                                <Menucategories key={category.id} name={category.name} />
+                            )} */}
                             </ul>
                         </nav>
                     </div>
