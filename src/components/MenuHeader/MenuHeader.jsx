@@ -24,7 +24,16 @@ export function MenuHeader( {setPositions} ) {
     )
     
     let coutns = 0
-    
+
+    // function handleCategoryClick(categoryId) {
+    //     const categoryElement = document.getElementById(`category-${categoryId}`);
+    //     if (categoryElement) {
+    //       window.scrollTo({
+    //         top: categoryElement.offsetTop,
+    //         behavior: 'smooth'
+    //       });
+    //     }
+    //   }
     
     function sayHi() {
         const elements = JSON.parse(localStorage.getItem('card'))
@@ -35,10 +44,9 @@ export function MenuHeader( {setPositions} ) {
 
             coutns += sum
         }
-        // console.log(coutns)
+
         setFinalPrice(coutns)
         coutns = 0
-        // console.log(elements)
     }
       
     setTimeout(sayHi, 1000);
@@ -57,8 +65,13 @@ export function MenuHeader( {setPositions} ) {
                     <img src="/img/WTC-Logo 1.png" alt="Logo" className="logo"/>
                     <nav className="navbar">
                         <ul className="navbar-ul">
-                        {catigories?.map((catigories) =>
-                            <Menucategories key={catigories.id} name={catigories.name} />
+                        {catigories?.map((category) =>
+                            <Menucategories key={category.id} name={category.name} />
+                            // <li className="navbar-list" key={category.id}>
+                            //     <a className="navbar-item" href="#" onClick={() => handleCategoryClick(category.id)}>
+                            //         {category.name}
+                            //     </a>
+                            // </li>
                         )}
                         </ul>
                     </nav>

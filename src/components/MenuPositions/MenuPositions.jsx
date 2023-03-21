@@ -45,7 +45,7 @@ export function MenuPositions({positionsID}) {
                     </div>
                     <div className="cards">
                         {filteredCards?.map((positions) =>
-                            <MenuPosition id_element={positions}  key={positions.id_position} ingridint={positions.ingridint} name={positions.name} price={positions.price} img={positions.img[0]?.patch} img1={positions.img[1]?.patch}/>
+                            <MenuPosition id_element={positions}  key={positions.id_position} ingridint={positions.ingridint} name={positions.name} price={positions.price} img={positions.img[0]?.patch}/>
                         )}
                     </div>
                 </div>
@@ -53,6 +53,6 @@ export function MenuPositions({positionsID}) {
             {
                 positionsID?.map((e) => <PositionsElement key={e.id_catepositionsgoria} positionsID={e.id_categoria} name={e.name} />)
             }
-        </div>
+        </div>  
     )
 }
