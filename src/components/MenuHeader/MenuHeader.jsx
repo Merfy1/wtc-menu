@@ -7,6 +7,7 @@ import '../ModalBasket/modalBasket.css'
 import { Menucategories } from "../MenuCategories/Menucategories";
 import { BasketPosition } from "../BasketPosition/BasketPosition";
 
+
 export function MenuHeader( {setPositions} ) {
     const [modalActive, setModalActive] = useState(false)
     const [catigories, stateCatigories] = useState([])
@@ -24,16 +25,6 @@ export function MenuHeader( {setPositions} ) {
     )
     
     let coutns = 0
-
-    // function handleCategoryClick(categoryId) {
-    //     const categoryElement = document.getElementById(`category-${categoryId}`);
-    //     if (categoryElement) {
-    //       window.scrollTo({
-    //         top: categoryElement.offsetTop,
-    //         behavior: 'smooth'
-    //       });
-    //     }
-    //   }
     
     function sayHi() {
         const elements = JSON.parse(localStorage.getItem('card'))
@@ -67,11 +58,6 @@ export function MenuHeader( {setPositions} ) {
                         <ul className="navbar-ul">
                         {catigories?.map((category) =>
                             <Menucategories key={category.id} name={category.name} />
-                            // <li className="navbar-list" key={category.id}>
-                            //     <a className="navbar-item" href="#" onClick={() => handleCategoryClick(category.id)}>
-                            //         {category.name}
-                            //     </a>
-                            // </li>
                         )}
                         </ul>
                     </nav>

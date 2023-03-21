@@ -21,7 +21,7 @@ const PositionsElement = ({ name, positionsID}) => {
     return (
         <div className="container">
             <div className="popular-wrapper">
-                <div className="title-wrapper">
+                <div className="title-wrapper" id={name}>
                     <span className="title">{ name }</span>
                 </div>
                 <div className="cards">

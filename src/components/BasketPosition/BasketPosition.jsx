@@ -3,15 +3,17 @@ import { BsTrash } from "react-icons/bs";
 
 
 export function BasketPosition({id, key, name, price, img, count}) {
-    const [count1, setCount] = useState(1)
+    const [count1, setCount] = useState(count)
     const [deletePositon, setDeletePositon] = useState([])
 
     const plus = () =>{
         setCount(count1 + 1)
+        updateCount(id, count + 1)
     };
 
     const minus = () =>{
         setCount(count1 - 1)
+        updateCount(id, count - 1)
     };
 
     useEffect(() => {
@@ -20,19 +22,35 @@ export function BasketPosition({id, key, name, price, img, count}) {
         }
     }, [count1]);
 
+    const updateCount = (id, newCount) => {
+        if (newCount < 1) return 
+        console.log(`updateCount` + id + `: ${newCount}`)
+        const element =  JSON.parse(localStorage.getItem('card'))
+        element.map((element3, index) => {
+            if (element[index]?.key === id){
+                element[index].count = newCount
+            }
+        }) 
+
+        // element[id].count = newCount
+        
+        localStorage.setItem('card', JSON.stringify(element))
+    }
+
     function deletePositionBasket(){
         const element =  JSON.parse(localStorage.getItem('card'))
-        for (let i = 0; i < element?.length; ++i){
-
-            if (element[i]?.key === id){
-                const newElement = element.splice(i, i)
-
-                localStorage.setItem('card', JSON.stringify(newElement))
-                return
+        // console.log(id)
+        
+        let newElement = []
+        newElement = element
+        element.map((element3, index) => {
+            if (element[index]?.key === id){
+                newElement.splice(index, 1)
             }
+        })
+            localStorage.setItem('card', JSON.stringify(newElement))
             return
-        }
-
+        
     }
     return (
         <div className="modal-basket__position">
@@ -46,7 +64,7 @@ export function BasketPosition({id, key, name, price, img, count}) {
                     <button className="btn-count-basket" onClick={minus}>
                         <img src="img/minus-mini.svg" alt=""/>
                     </button>
-                    <span className="count-basket">{count}</span>
+                    <span className="count-basket">{count1}</span>
                     <button className="btn-count-basket" onClick={plus}>
                         <img src="img/plus-mini.svg" alt=""/>
                     </button>
