@@ -18,7 +18,7 @@ export function MenuSlider() {
     useEffect(() => {
         axios.get('http://localhost:3001/api/public/slides', {
         }).then((e) => {
-            console.log(e.data.slides)
+            setSlide(e.data.slides)
         })
     },
     [],
@@ -26,7 +26,7 @@ export function MenuSlider() {
     return (
         <div className="slider">
             <div className="slider-container">
-                {/* <Slider images={images} /> */}
+                <Slider images={slide} />
             </div>
         </div>
     )
