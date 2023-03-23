@@ -1,6 +1,7 @@
 .slider-container{
     max-width: 968px;
     margin: 0 auto;
+    padding-top: 320px;
 }
 .arrow-left{
     font-size: 30px;
@@ -22,7 +23,8 @@
     margin: 0 auto;
     height: 393px;
     width: 960px;
-    overflow: hidden;
+    z-index: 98;
+    margin-bottom: 85px;
 }
 
 .slides {

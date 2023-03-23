@@ -1,7 +1,10 @@
 .header{
+    position: fixed;
     padding: 31px 60px;
     background: #434343;
     margin-bottom: 40px;
+    z-index: 99;
+    width: 100%;
 }
 .container {
     max-width: 848px;

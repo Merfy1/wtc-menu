@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BsTrash } from "react-icons/bs";
 
 
+
 export function BasketPosition({id, key, name, price, img, count}) {
     const [count1, setCount] = useState(count)
     const [deletePositon, setDeletePositon] = useState([])

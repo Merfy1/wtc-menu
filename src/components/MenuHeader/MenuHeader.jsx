@@ -6,7 +6,7 @@ import './menuHeader.css'
 import '../ModalBasket/modalBasket.css'
 import { Menucategories } from "../MenuCategories/Menucategories";
 import { BasketPosition } from "../BasketPosition/BasketPosition";
-
+import emailjs from 'emailjs-com';
 
 export function MenuHeader( {setPositions} ) {
     const [modalActive, setModalActive] = useState(false)
@@ -25,7 +25,29 @@ export function MenuHeader( {setPositions} ) {
     )
     
     let coutns = 0
-    
+
+    function sendMail () {
+
+        if (positionsBasket === []) {
+            return
+        }
+
+        let zakaz = '';
+
+        positionsBasket?.map((positionsBasket) => {
+            zakaz += positionsBasket.name + ' - ' + positionsBasket.count + ' шт.' + ' - ' + positionsBasket.price + ' руб' + ' \n';
+        })
+
+    emailjs.send('service_isdyzs9', 'template_4hrk63c', {message: zakaz}, 'gHcdNx_UCNyEUzLaN')
+      .then((result) => {
+        localStorage.clear();
+        alert('Заказ отправлен');
+      }, (error) => {
+          console.log(error.text);
+      });
+    }
+
+
     function sayHi() {
         const elements = JSON.parse(localStorage.getItem('card'))
         setPositionsBasket(elements)
@@ -69,7 +91,6 @@ export function MenuHeader( {setPositions} ) {
             {
                 modalActive && (
                     <>
-                        <div className="modal__close" data-close>&times;</div>
                         <span className="modal-basket__title">Корзина</span>
                         <hr className="line"/>
                         {positionsBasket?.map((positionsBasket) =>
@@ -91,7 +112,7 @@ export function MenuHeader( {setPositions} ) {
                         </div>
                         <hr className="line"/>
                         <div className="buy-basket">
-                            <button className="modal-basket__button-buy">{finalPrice + ' руб'}</button>
+                            <button onClick={e => sendMail()} className="modal-basket__button-buy">{finalPrice + ' руб'}</button>
                         </div>
                     </>
                 )
