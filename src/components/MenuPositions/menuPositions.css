@@ -38,7 +38,7 @@
 }
 .cards{
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -50,6 +50,7 @@
     border-radius: 12px;
     margin-bottom: 20px;
     min-width: 260px;
+    margin-right: 22.6px;
 }
 .card-img{
     margin-bottom: 15px;
