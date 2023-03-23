@@ -13,6 +13,7 @@ export function MenuHeader( {setPositions} ) {
     const [catigories, stateCatigories] = useState([])
     const [positionsBasket, setPositionsBasket] = useState([])
     const [finalPrice, setFinalPrice] = useState(0)
+    const [typePay, setTypePay] = useState('');
 
     useEffect(() => {
         axios.get('http://localhost:3001/api/public/categories', {
@@ -28,6 +29,10 @@ export function MenuHeader( {setPositions} ) {
 
     function sendMail () {
 
+        if (typePay === '' ){
+            return alert('Не выбран способ оплаты');
+        }
+
         if (positionsBasket === []) {
             return
         }
@@ -37,6 +42,8 @@ export function MenuHeader( {setPositions} ) {
         positionsBasket?.map((positionsBasket) => {
             zakaz += positionsBasket.name + ' - ' + positionsBasket.count + ' шт.' + ' - ' + positionsBasket.price + ' руб' + ' \n';
         })
+
+        zakaz += "\n\nСпособ оплаты: " + typePay;
 
     emailjs.send('service_isdyzs9', 'template_4hrk63c', {message: zakaz}, 'gHcdNx_UCNyEUzLaN')
       .then((result) => {
@@ -93,23 +100,27 @@ export function MenuHeader( {setPositions} ) {
                     <>
                         <span className="modal-basket__title">Корзина</span>
                         <hr className="line"/>
-                        {positionsBasket?.map((positionsBasket) =>
-                            <BasketPosition id={positionsBasket.key}  key={positionsBasket.key} count={positionsBasket.count} name={positionsBasket.name} price={positionsBasket.price} img={positionsBasket.img}/>
-                        )}
-                        <hr className="line"/>
-                        <div className="modal-basket__change-pay">
-                            <span className="change-pay__title">Выберите способ оплаты</span>
-                            <label> 
-                                <input type='radio' className="radio-modal">
-                                </input>
-                                Картой
-                            </label>
-                            <label> 
-                                <input type='radio' className="radio-modal" >
-                                </input>
-                                Наличными
-                            </label>
+                        <div className="modal-basket__position-container">
+                            {positionsBasket?.map((positionsBasket) =>
+                                <BasketPosition id={positionsBasket.key}  key={positionsBasket.key} count={positionsBasket.count} name={positionsBasket.name} price={positionsBasket.price} img={positionsBasket.img}/>
+                            )}
                         </div>
+                        <hr className="line"/>
+                        <form >
+                            <div className="modal-basket__change-pay">
+                                <span className="change-pay__title">Выберите способ оплаты</span>
+                                <label> 
+                                    <input name="option" type='radio' className="radio-modal" value="Картой"  onChange={(e) => {setTypePay(e.target.value)}}>
+                                    </input>
+                                    Картой
+                                </label>
+                                <label> 
+                                    <input name="option" type='radio' className="radio-modal" value="Наличные" onChange={(e) => {setTypePay(e.target.value)}}>
+                                    </input>
+                                    Наличными
+                                </label>
+                            </div>
+                        </form>
                         <hr className="line"/>
                         <div className="buy-basket">
                             <button onClick={e => sendMail()} className="modal-basket__button-buy">{finalPrice + ' руб'}</button>

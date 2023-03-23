@@ -38,3 +38,7 @@
     color: white;
     cursor: pointer;
 }
+.modal-basket__position-container{
+    max-height: 300px;
+    overflow: auto;
+}
