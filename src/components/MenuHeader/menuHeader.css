@@ -32,11 +32,31 @@
     cursor: pointer;
 }
 .basket-icon{
+    position: relative;
     background: transparent;
     border: none;
     font-size: 25px;
     color: white;
     cursor: pointer;
+}
+.basket-wrapper{
+    display: flex;
+}
+.basket-span{
+    margin-right: 5px;
+    margin-bottom: 30px;
+    width: 10px;
+    color: white;
+    font-size: 13px;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    text-align: center;
+    display: none;
+}
+.basket-span.active{
+    display: block;
 }
 .modal-basket__position-container{
     max-height: 300px;

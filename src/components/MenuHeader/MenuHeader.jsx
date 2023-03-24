@@ -13,7 +13,8 @@ export function MenuHeader( {setPositions} ) {
     const [catigories, stateCatigories] = useState([])
     const [positionsBasket, setPositionsBasket] = useState([])
     const [finalPrice, setFinalPrice] = useState(0)
-    const [typePay, setTypePay] = useState('');
+    const [typePay, setTypePay] = useState('')
+    const [basket_active, setBasketActive] = useState(false)
 
     useEffect(() => {
         axios.get('http://localhost:3001/api/public/categories', {
@@ -26,7 +27,6 @@ export function MenuHeader( {setPositions} ) {
     )
     
     let coutns = 0
-
     function sendMail () {
 
         if (typePay === '' ){
@@ -53,20 +53,32 @@ export function MenuHeader( {setPositions} ) {
           console.log(error.text);
       });
     }
-
+    function addNumber() {
+        
+    }
 
     function sayHi() {
         const elements = JSON.parse(localStorage.getItem('card'))
         setPositionsBasket(elements)
         
+        let countTovar = 0
+
         for (let i = 0; i < positionsBasket?.length; ++i){
             let sum = (positionsBasket[i].price * positionsBasket[i].count)
-
+            countTovar += 1
             coutns += sum
         }
 
         setFinalPrice(coutns)
         coutns = 0
+
+        if (positionsBasket?.length > 0) {
+            setBasketActive(countTovar)
+
+        }   else {
+            setBasketActive(false)
+        }
+        
     }
       
     setTimeout(sayHi, 1000);
@@ -90,7 +102,10 @@ export function MenuHeader( {setPositions} ) {
                         )}
                         </ul>
                     </nav>
-                    <button onClick={() => setModalActive(true)} className="basket-icon"><BsBasket></BsBasket></button>
+                    <div className="basket-wrapper">
+                        <span className={basket_active ? "basket-span active" : "basket-span"}>{basket_active}</span>
+                        <button onClick={() => setModalActive(true)} className='basket-icon'><BsBasket></BsBasket></button>
+                    </div>
                 </div>
             </div>         
         </div>   
@@ -128,7 +143,6 @@ export function MenuHeader( {setPositions} ) {
                     </>
                 )
             }
-            
         </ModalBasket>
         </>    
     )

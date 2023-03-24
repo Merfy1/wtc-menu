@@ -27,6 +27,7 @@
     background-position: 185px;
     padding-left: 15px;
     color: #C7C7C7;
+    z-index: 98;
 }
 .search::-webkit-input-placeholder{
     color: rgba(199, 199, 199, 0.55); 
