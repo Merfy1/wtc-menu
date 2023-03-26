@@ -33,7 +33,7 @@ export function MenuHeader( {setPositions} ) {
             return alert('Не выбран способ оплаты');
         }
 
-        if (positionsBasket === []) {
+        if (!positionsBasket.length) {
             return
         }
 
