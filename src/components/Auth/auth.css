@@ -151,3 +151,9 @@ header{
 .hide{
     transform: scale(0);
 }
+.password_change{
+    background-color: transparent;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+}

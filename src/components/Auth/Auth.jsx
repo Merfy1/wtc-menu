@@ -7,6 +7,12 @@ import './auth.css';
 export function Auth(){
     const [nickname, setLogin] = useState('')
     const [password, setPassword] = useState('')
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    
+    const handleTogglePasswordVisibility = (e) => {
+        e.preventDefault();
+        setPasswordVisible(prevState => !prevState);
+    };
     async function auth(e) {
         e.preventDefault();
         const authResult = await axios.post('http://localhost:3001/api/admin/login', {
@@ -21,12 +27,12 @@ export function Auth(){
         <div className="body">
             <header>
                 <h2 className="logo">WTC Москва</h2>
-                <button data-modal className="btnLogin-popup">Вход</button>
+                {/* <button data-modal className="btnLogin-popup">Вход</button> */}
             </header>
             <div className="wrapper">
-                <span className="icon-close" data-close>
+                {/* <span className="icon-close" data-close>
                     <AiOutlineClose name="close"></AiOutlineClose>
-                </span>
+                </span> */}
                 <div className="form-box login">
                     <h2>Вход</h2>
                     <form>
@@ -39,9 +45,11 @@ export function Auth(){
                         </div>
                         <div className="input-box">
                             <span className="icon">
-                                <AiFillLock name="lock-closed"></AiFillLock>
+                                <button className="password_change" onClick={handleTogglePasswordVisibility}>
+                                    <AiFillLock name="lock-closed"></AiFillLock>
+                                </button>
                             </span>
-                            <input required type="text" id="passwd" value={password} onChange={e => setPassword(e.target.value)}/>
+                            <input required type={passwordVisible ? 'text' : 'password'} id="passwd"  value={password}  onChange={e => setPassword(e.target.value)}/>
                             <label>Пароль</label>
                         </div>
                         
