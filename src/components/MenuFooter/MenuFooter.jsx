@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { BsBasket } from "react-icons/bs";
 import { Menucategories } from "../MenuCategories/Menucategories";
-
+import { MyContext } from "../MenuHeader/MenuHeader";
 import './menuFooter.css'
 
 export function MenuFooter() {
+    const catigories = useContext(MyContext)
     return(
         <div className="footer">
             <div className="container">
@@ -13,9 +14,9 @@ export function MenuFooter() {
                         <img src="img/WTC-Logo 1.png" alt="Logo" className="logo"/>
                         <nav className="navbar">
                             <ul className="navbar-ul">
-                            {/* {catigories?.map((category) =>
+                            {catigories?.map((category) =>
                                 <Menucategories key={category.id} name={category.name} />
-                            )} */}
+                            )}
                             </ul>
                         </nav>
                     </div>

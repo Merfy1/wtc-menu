@@ -8,6 +8,8 @@ import { Menucategories } from "../MenuCategories/Menucategories";
 import { BasketPosition } from "../BasketPosition/BasketPosition";
 import emailjs from 'emailjs-com';
 
+export const MyContext = React.createContext();
+
 export function MenuHeader( {setPositions} ) {
     const [modalActive, setModalActive] = useState(false)
     const [catigories, stateCatigories] = useState([])
@@ -96,12 +98,15 @@ export function MenuHeader( {setPositions} ) {
                 <div className="header-wrapper">
                     <img src="/img/WTC-Logo 1.png" alt="Logo" className="logo"/>
                     <nav className="navbar">
+                    <MyContext.Provider value={catigories}>
                         <ul className="navbar-ul">
                         {catigories?.map((category) =>
                             <Menucategories key={category.id} name={category.name} />
                         )}
                         </ul>
+                    </MyContext.Provider>
                     </nav>
+                    
                     <div className="basket-wrapper">
                         <span className={basket_active ? "basket-span active" : "basket-span"}>{basket_active}</span>
                         <button onClick={() => setModalActive(true)} className='basket-icon'><BsBasket></BsBasket></button>
