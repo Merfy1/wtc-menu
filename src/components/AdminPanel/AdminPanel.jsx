@@ -1,7 +1,13 @@
+import React, { useState } from "react";
+import { Sidebar } from "../AdminSidebar/Sidebar"
+import "./adminpanel.css";
+
 export function AdminPanel() {
     return(
-        <div>
-            <p>Добро Пожаловать</p>
+        <>
+        <div className="sidebar-body">
+            <Sidebar></Sidebar>
         </div>
+        </>
     )
 }

@@ -12,13 +12,14 @@ export function Menu() {
 
     const [position, setPositions] = useState([])
 
-
     return (
         <>
-            <MenuHeader setPositions={setPositions}/>
-            <MenuSlider/>
-            <MenuPositions positionsID={position} />
-            <MenuFooter />
+            <div className="menu-body">
+                <MenuHeader setPositions={setPositions}/>
+                <MenuSlider/>
+                <MenuPositions positionsID={position} />
+                <MenuFooter />
+            </div>
         </>
     )
 }
