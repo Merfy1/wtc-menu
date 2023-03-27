@@ -3,8 +3,10 @@
     margin: 0;
     padding: 0;
 }
-.sidebar-body{
-    background-color: white;
+.adminpanel-body{
+    min-height: 100vh;
+    display: flex;
+    background-color: #f6f6f9;
     font-family: 'Inter', sans-serif;
     color: #7B7B8D;
 }

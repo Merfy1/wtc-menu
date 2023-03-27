@@ -1,4 +1,6 @@
-
+.sidebar{
+    background-color: white;
+}
 .sidebar-container{
     max-width: 253px;
     padding: 32px 24px;
@@ -45,9 +47,17 @@
 .sidebar-exit{
     display: flex;
     align-items: center;
-    padding: 20px 22px;
+    padding: 10px 22px;
     cursor: pointer;
     border: none;
     background-color: transparent;
     color: #7B7B8D;
+}
+.horizontal-line{
+    width: 2px;
+    background-color: #EAEAEF;
+}
+.line{
+    height: 2px;
+    background-color: #EAEAEF;
 }

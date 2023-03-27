@@ -1,0 +1,38 @@
+.sidebarmore{
+    padding: 38px 80px 38px 22px;
+    display: block;
+}
+.sidebarmore_active{
+    padding: 38px 80px 38px 22px;
+    display: block;
+}
+.sidebarmore-container{
+    height: 100%;
+}
+.sidebarmore-title{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 28px;
+    color: #000000;
+    margin-bottom: 35px;
+}
+.sidebarmore-items{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 22px 0;
+}
+.sidebarmore-item{
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: #7B7B8D;
+}
+.line{
+    height: 2px;
+    background-color: #EAEAEF;
+}

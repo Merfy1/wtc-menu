@@ -15,7 +15,13 @@ export function Sidebar(){
         } else {
           setSelectedPosition(position);
         }
-      };
+    };
+    // let currentPage;
+    // if (selectedPosition === 1) {
+    //   currentPage = <Page1 />;
+    // } else if (selectedPosition === 2) {
+    //   currentPage = <Page2 />;
+    // }
     return (
         <>
             <div className='sidebar'>
@@ -24,7 +30,7 @@ export function Sidebar(){
                         <div className="sidebar-logo">
                             <img src="/img/WTC-Logo 1.png" alt="" className="logo" />
                         </div>
-                        <hr className="line"/>
+                        <div className="line"/>
                         <div className="sidebar-items">
                             <button className={selectedPosition === 1? 'sidebar-item_active' : 'sidebar-item'} onClick={() => handlePositionClick(1)}>
                                 <FiUser className='sidebar-icon'></FiUser>
@@ -47,7 +53,7 @@ export function Sidebar(){
                                 <span className='sidebar-text'>Заказы</span>
                             </button>
                         </div>
-                        <hr className="line"/>
+                        <div className="line"/>
                         <button className="sidebar-exit">
                             <ImExit className='sidebar-icon'></ImExit>
                             <span className='sidebar-text'>Выход</span>
