@@ -1,5 +1,5 @@
 .sidebarmore{
-    padding: 38px 80px 38px 22px;
+    padding: 38px 0;
     display: block;
 }
 .sidebarmore_active{
@@ -8,6 +8,7 @@
 }
 .sidebarmore-container{
     height: 100%;
+    padding-left: 22px;
 }
 .sidebarmore-title{
     font-style: normal;
@@ -18,6 +19,7 @@
     margin-bottom: 35px;
 }
 .sidebarmore-items{
+    min-height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -26,13 +28,36 @@
 .sidebarmore-item{
     display: flex;
     align-items: center;
-    padding: 10px 0;
+    padding: 10px 132px 10px 20px;
     cursor: pointer;
     border: none;
     background-color: transparent;
     color: #7B7B8D;
+
 }
-.line{
+.sidebarmore-text{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+}
+.sidebarmore-icon{
+    font-size: 20px;
+}
+.sidebarmore-line{
     height: 2px;
+    max-width: 50px;
     background-color: #EAEAEF;
+}
+.sidebarmore-item_active{
+    display: flex;
+    align-items: center;
+    padding: 10px 132px 10px 20px;
+    cursor: pointer;
+    border: none;
+    background-color: #F0F0FF;
+    color: #271FE0;
+    background-image: url('../../../public/img/border.svg');
+    background-repeat: no-repeat;
+    background-position: right;
 }
