@@ -3,7 +3,7 @@ import "./sidebarMore.css"
 import { BsDot } from 'react-icons/bs';
 
 export function SidebarMore() {
-    const [selectedPosition, setSelectedPosition] = useState(null);
+    const [selectedPosition, setSelectedPosition] = useState(1);
     const handlePositionClick = (position) => {
         if (selectedPosition === position) {
           setSelectedPosition(null);

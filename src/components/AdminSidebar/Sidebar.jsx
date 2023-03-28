@@ -14,29 +14,58 @@ import { AdminMain } from '../AdminMain/AdminMain';
 import "./sidebar.css"
 import { SidebarMore } from '../AdminSidebarMore/SidebarMore';
 
+const SlidebarMore = () => {
+    return <SidebarMore></SidebarMore>;
+  };
 
 const Component1 = () => {
-    return <AdminMain></AdminMain>;
+    return <AdminMain></AdminMain>
+
   };
   
   const Component2 = () => {
-    return <AdminUser></AdminUser>;
+    return (
+        <>
+            <SidebarMore></SidebarMore>
+            <AdminUser></AdminUser>
+        </>
+    )
   };
   
   const Component3 = () => {
-    return <AdminCategory></AdminCategory>;
+    return (
+        <>
+            <SidebarMore></SidebarMore>
+            <AdminCategory></AdminCategory>
+        </>
+    )
   };
   
   const Component4 = () => {
-    return <AdminSlider></AdminSlider>;
+    return (
+        <>
+            <SidebarMore></SidebarMore>
+            <AdminSlider></AdminSlider>
+        </>
+    )
   };
   
   const Component5 = () => {
-    return <AdminPosition></AdminPosition>;
+    return (
+        <>
+            <SidebarMore></SidebarMore>
+            <AdminOrder></AdminOrder>
+        </>
+    )
   };
 
   const Component6 = () => {
-    return <AdminOrder></AdminOrder>;
+    return (
+        <>
+            <SidebarMore></SidebarMore>
+            <AdminUser></AdminUser>
+        </>
+    )
   };
 
 export function Sidebar(){
@@ -92,13 +121,13 @@ export function Sidebar(){
                     </div>
                 </div>   
             </div>
-            <SidebarMore></SidebarMore>
+            {/* <SidebarMore></SidebarMore> */}
             {activeComponent === 1 && <AdminMain />}
-            {activeComponent === 2 && <AdminUser />}
-            {activeComponent === 3 && <AdminCategory/>}
-            {activeComponent === 4 && <AdminSlider />}
-            {activeComponent === 5 && <AdminPosition />}
-            {activeComponent === 6 && <AdminOrder />}
+            {activeComponent === 2 && <Component2 /> }
+            {activeComponent === 3 && <Component3/>}
+            {activeComponent === 4 && <Component4 />}
+            {activeComponent === 5 && <Component5 />}
+            {activeComponent === 6 && <Component6 />}
         </>
     );
 };
