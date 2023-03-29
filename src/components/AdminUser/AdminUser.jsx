@@ -1,9 +1,20 @@
-import React from 'react';
-import { BsPencil,  BsTrash } from 'react-icons/bs';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { AdminUserComponent } from '../AdminUserComponent/AdminUserComponent';
 import "../AdminCategory/admincategory.css"
 
 
 export function AdminUser (){
+    const [date, setUsers] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:3001/api/admin/user/view/')
+          .then(response => {
+            setUsers(response.data.date);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }, []);
     return (
         <>
             <div className="main">
@@ -26,44 +37,12 @@ export function AdminUser (){
                                         <th>Фамилия</th>
                                         <th>Отчество</th>
                                         <th>Логин</th>
-                                        <th>Пароль</th>
                                         <th className="main-table__button">Действия</th>
                                     </tr>
                                 </thead>
-                                <td colspan="6">
-                                    <div className='line'/>
-                                </td>
-                                <tbody>
-                                    <tr>
-                                        <td>Александр</td>
-                                        <td>Стороженко</td>
-                                        <td>Евгеньевич</td>
-                                        <td>admin</td>
-                                        <td>admin</td>
-                                        <div className="main-table__button">
-                                            <button>
-                                                <BsPencil className='icon'></BsPencil>
-                                                <BsTrash className='icon'/>
-                                            </button>
-                                        </div>
-                                    </tr>
-                                    <td colspan="6">
-                                        <div className='line'/>
-                                    </td>
-                                    <tr>
-                                        <td>Александр</td>
-                                        <td>Стороженко</td>
-                                        <td>Евгеньевич</td>
-                                        <td>admin</td>
-                                        <td>admin</td>
-                                        <div className="main-table__button">
-                                            <button>
-                                                <BsPencil className='icon'></BsPencil>
-                                                <BsTrash className='icon'/>
-                                            </button>
-                                        </div>
-                                    </tr>
-                                </tbody>
+                                {date?.map((user) =>
+                                    <AdminUserComponent key={user.id} name={user.name} surname={user.surname} lastname={user.lastname} nickname={user.nickname}/>
+                                )}
                             </table>
                         </div>
                     </div>
