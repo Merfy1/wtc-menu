@@ -1,9 +1,21 @@
-import React from 'react';
 import { BsPencil,  BsTrash } from 'react-icons/bs';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import "../AdminCategory/admincategory.css"
+import { AdminPositionComponent } from '../AdminPositionComponent/AdminPositionComponent';
 
 
 export function AdminPosition (){
+    const [listPositions, setPosition] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:3001/api/admin/positions/')
+          .then(response => {
+            setPosition(response.data.listPositions);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }, []);
     return (
         <>
             <div className="main">
@@ -29,38 +41,9 @@ export function AdminPosition (){
                                         <th className="main-table__button">Действия</th>
                                     </tr>
                                 </thead>
-                                <td colspan="5">
-                                    <div className='line'/>
-                                </td>
-                                <tbody>
-                                    <tr>
-                                        <td>Курочка Гриль</td>
-                                        <td>1200</td>
-                                        <td>Горячее</td>
-                                        <td>Курица</td>
-                                        <div className="main-table__button">
-                                            <button>
-                                                <BsPencil className='icon'></BsPencil>
-                                                <BsTrash className='icon'/>
-                                            </button>
-                                        </div>
-                                    </tr>
-                                    <td colspan="5">
-                                        <div className='line'/>
-                                    </td>
-                                    <tr>
-                                        <td>Том ям</td>
-                                        <td>999</td>
-                                        <td>Горячее</td>
-                                        <td>Том и ям</td>
-                                        <div className="main-table__button">
-                                            <button>
-                                                <BsPencil className='icon'></BsPencil>
-                                                <BsTrash className='icon'/>
-                                            </button>
-                                        </div>
-                                    </tr>
-                                </tbody>
+                                {listPositions?.map((position) =>
+                                    <AdminPositionComponent key={position.id} name={position.name} price={position.price} categories={position.categories} ingridint={position.ingridint} />
+                                )}
                             </table>
                         </div>
                     </div>
