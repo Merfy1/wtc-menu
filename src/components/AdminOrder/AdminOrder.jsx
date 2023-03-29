@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { BsPencil,  BsTrash } from 'react-icons/bs';
 import "../AdminCategory/admincategory.css"
 
 
 export function AdminOrder (){
+    const [order, setOrder] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:3001/api/admin/order/')
+          .then(response => {
+            setOrder(response.data.order);
+            console.log(response.data.order)
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }, []);
     return (
         <>
             <div className="main">
@@ -18,7 +30,7 @@ export function AdminOrder (){
                                 Добавить
                             </button>
                         </div>
-                        <div class="table-wrapper">
+                        <div className="table-wrapper">
                             <table className='main-table'>
                                 <thead>
                                     <tr>
@@ -28,7 +40,7 @@ export function AdminOrder (){
                                         <th className="main-table__button">Действия</th>
                                     </tr>
                                 </thead>
-                                <td colspan="5">
+                                <td colSpan="5">
                                     <div className='line'/>
                                 </td>
                                 <tbody>
@@ -43,7 +55,7 @@ export function AdminOrder (){
                                             </button>
                                         </div>
                                     </tr>
-                                    <td colspan="5">
+                                    <td colSpan="5">
                                         <div className='line'/>
                                     </td>
                                     <tr>

@@ -7,10 +7,20 @@ import { AdminPositionComponent } from '../AdminPositionComponent/AdminPositionC
 
 export function AdminPosition (){
     const [listPositions, setPosition] = useState([]);
+    const [catigories, setCatigories] = useState([]);
     useEffect(() => {
         axios.get('http://localhost:3001/api/admin/positions/')
           .then(response => {
             setPosition(response.data.listPositions);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }, []);
+    useEffect(() => {
+        axios.get('http://localhost:3001/api/admin/tags/')
+          .then(response => {
+            setCatigories(response.data.catigories);
           })
           .catch(error => {
             console.error(error);
@@ -30,7 +40,7 @@ export function AdminPosition (){
                                 Добавить
                             </button>
                         </div>
-                        <div class="table-wrapper">
+                        <div className="table-wrapper">
                             <table className='main-table'>
                                 <thead>
                                     <tr>
@@ -42,7 +52,7 @@ export function AdminPosition (){
                                     </tr>
                                 </thead>
                                 {listPositions?.map((position) =>
-                                    <AdminPositionComponent key={position.id} name={position.name} price={position.price} categories={position.categories} ingridint={position.ingridint} />
+                                    <AdminPositionComponent catigories={catigories} key={position.id} name={position.name} price={position.price} categories={position.categories} ingridint={position.ingridint} />
                                 )}
                             </table>
                         </div>

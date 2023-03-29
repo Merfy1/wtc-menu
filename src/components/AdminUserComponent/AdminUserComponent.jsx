@@ -4,7 +4,7 @@ import { BsPencil,  BsTrash } from 'react-icons/bs';
 export function AdminUserComponent ({name, lastname, surname, nickname}){
     return (
         <>
-           <td colspan="5">
+           <td colSpan="5">
                 <div className='line'/>
             </td>
             <tbody>

@@ -31,7 +31,7 @@ export function AdminCategory (){
                                 Добавить
                             </button>
                         </div>
-                        <div class="table-wrapper">
+                        <div className="table-wrapper">
                             <table className='main-table'>
                                 <thead>
                                     <tr>
