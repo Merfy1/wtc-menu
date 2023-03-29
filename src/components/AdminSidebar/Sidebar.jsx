@@ -73,6 +73,7 @@ export function Sidebar(){
     const [selectedPosition, setSelectedPosition] = useState(null);
     const [activeComponent, setActiveComponent] = useState(1);
     const [isClicked, setIsClicked] = useState(false);
+    
     // const [showComponent1, setShowComponent1] = useState(true);
     const handlePositionClick = (position) => {
         if (selectedPosition === position) {
@@ -87,6 +88,11 @@ export function Sidebar(){
     const handleClick = () => {
         setIsClicked(!isClicked);
       };
+
+    const handleLogOut = () =>{
+        localStorage.removeItem('tokenLogin')
+        window.location.reload()
+    }
     return (
         <>
             <div className='sidebar'>
@@ -115,7 +121,10 @@ export function Sidebar(){
                                 </button>
                             </div>
                             <div className="line"/>
-                            <button className="sidebar-exit">
+                            <button className="sidebar-exit" onClick={() => {
+                                localStorage.removeItem('tokenLogin')
+                                window.location.reload()
+                            }}>
                                 <ImExit className='sidebar_hiden-icon'></ImExit>
                             </button>
                             <button className="sidebar-hide">
@@ -153,7 +162,10 @@ export function Sidebar(){
                                 </button>
                             </div>
                             <div className="line"/>
-                            <button className="sidebar-exit">
+                            <button className="sidebar-exit" onClick={() => {
+                                localStorage.removeItem('tokenLogin')
+                                window.location.reload()
+                            }}>
                                 <ImExit className='sidebar-icon'></ImExit>
                                 <span className='sidebar-text'>Выход</span>
                             </button>

@@ -4,6 +4,7 @@ import "./admincategory.css"
 
 
 export function AdminCategory (){
+    
     return (
         <>
             <div className="main">
