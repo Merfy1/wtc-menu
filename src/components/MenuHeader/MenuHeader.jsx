@@ -7,6 +7,7 @@ import '../ModalBasket/modalBasket.css'
 import { Menucategories } from "../MenuCategories/Menucategories";
 import { BasketPosition } from "../BasketPosition/BasketPosition";
 import emailjs from 'emailjs-com';
+import { Logo } from "../Logo/Logo";
 
 export const MyContext = React.createContext();
 
@@ -96,7 +97,7 @@ export function MenuHeader( {setPositions} ) {
         <div className="header">
             <div className="container">
                 <div className="header-wrapper">
-                    <img src="/img/WTC-Logo 1.png" alt="Logo" className="logo"/>
+                    <Logo></Logo>
                     <nav className="navbar">
                     <MyContext.Provider value={catigories}>
                         <ul className="navbar-ul">
