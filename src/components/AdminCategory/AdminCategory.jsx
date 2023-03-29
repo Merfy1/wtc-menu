@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { BsPencil,  BsTrash } from 'react-icons/bs';
 import "./admincategory.css"
+import { AdminCategoryComponent } from '../AdminCategoryComponent/AdminCategoryComponent';
 
 
 export function AdminCategory (){
-    
+    const [catigories, setCategories] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:3001/api/admin/tags/')
+          .then(response => {
+            setCategories(response.data.catigories);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }, []);
+
     return (
         <>
             <div className="main">
@@ -27,32 +39,9 @@ export function AdminCategory (){
                                         <th className="main-table__button">Действия</th>
                                     </tr>
                                 </thead>
-                                <td colspan="2">
-                                        <div className='line'/>
-                                    </td>
-                                <tbody>
-                                    <tr>
-                                        <td>Напитки</td>
-                                        <div className="main-table__button">
-                                            <button>
-                                                <BsPencil className='icon'></BsPencil>
-                                                <BsTrash className='icon'/>
-                                            </button>
-                                        </div>
-                                    </tr>
-                                    <td colspan="2">
-                                        <div className='line'/>
-                                    </td>
-                                    <tr>
-                                        <td>Горячее</td>
-                                        <div className="main-table__button">
-                                            <button>
-                                                <BsPencil className='icon'></BsPencil>
-                                                <BsTrash className='icon'/>
-                                            </button>
-                                        </div>
-                                    </tr>
-                                </tbody>
+                                {catigories?.map((category) =>
+                                    <AdminCategoryComponent key={category.id} name={category.name} />
+                                )}
                             </table>
                         </div>
                     </div>
