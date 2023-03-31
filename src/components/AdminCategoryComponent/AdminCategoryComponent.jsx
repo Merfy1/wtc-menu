@@ -1,7 +1,10 @@
 import React from 'react';
 import { BsPencil,  BsTrash } from 'react-icons/bs';
 
-export function AdminCategoryComponent ({name}){
+export function AdminCategoryComponent ({category, onDelete}){
+    const handleDelete = () => {
+        onDelete(category.id_categoria);
+      }
     return (
         <>
             <td colSpan="2">
@@ -9,11 +12,15 @@ export function AdminCategoryComponent ({name}){
             </td>
             <tbody>
                 <tr>
-                    <td>{name}</td>
+                    <td>{category.name}</td>
                     <div className="main-table__button">
-                        <button>
-                            <BsPencil className='icon'></BsPencil>
-                            <BsTrash className='icon'/>
+                        <button> 
+                            <button>
+                                <BsPencil className='icon'></BsPencil>
+                            </button>
+                            <button onClick={handleDelete}>
+                                <BsTrash className='icon'/>
+                            </button>
                         </button>
                     </div>
                 </tr>

@@ -9,14 +9,21 @@ export function AdminCategory (){
     const [catigories, setCategories] = useState([]);
     useEffect(() => {
         axios.get('http://localhost:3001/api/admin/tags/')
-          .then(response => {
-            setCategories(response.data.catigories);
-          })
-          .catch(error => {
+        .then(res => {
+            setCategories(res.data.catigories);
+        })
+        .catch(error => {
             console.error(error);
-          });
-      }, []);
-
+        });
+    }, []);
+    const handleDeleteCategory = (id) => {
+      axios.delete(`http://localhost:3001/api/admin/tags/${id}`).then(() => {
+        setCategories(catigories.filter((category) => category.id_categoria !== id));
+      }).catch((err) => {
+        console.log(err);
+        alert("Не удалось удалить категорию");
+      });
+    }
     return (
         <>
             <div className="main">
@@ -40,8 +47,11 @@ export function AdminCategory (){
                                     </tr>
                                 </thead>
                                 {catigories?.map((category) =>
-                                    <AdminCategoryComponent key={category.id} name={category.name} />
-                                )}
+                                    <AdminCategoryComponent             
+                                        key={category.id_categoria}
+                                        category={category}
+                                        onDelete={handleDeleteCategory} />
+                                    )}
                             </table>
                         </div>
                     </div>
