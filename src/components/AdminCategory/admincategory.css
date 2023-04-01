@@ -69,8 +69,9 @@
     width: 100%;
     border-radius: 6px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 .main-form__span{
     font-style: normal;
@@ -91,6 +92,12 @@
     font-weight: 700;
     font-size: 23px;
     line-height: 28px;
+}
+.main-form__input-create{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
 }
 .main-table__button{
     display: flex;

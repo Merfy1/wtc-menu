@@ -3,7 +3,7 @@ import axios from 'axios';
 import { BiArrowBack, BiCheck } from 'react-icons/bi';
 import { AdminCategory } from './AdminCategory';
 export function AdminCreateCategory (){
-    const [ShowAdminCategory, setShowAdminCategory] = useState(false);
+    const [ShowComponent, setShowComponent] = useState(false);
     const [categoryName, setCategoryName] = useState('');
     const handleCreateCategory = async () => {
         const token = localStorage.getItem('tokenLogin'); // получаем токен из localStorage
@@ -18,14 +18,14 @@ export function AdminCreateCategory (){
         } catch (error) {
           console.error(error); // выводим ошибку в консоль
         }
-        setShowAdminCategory(true);
+        setShowComponent(true);
     };
     const handleClick = () => {
-        setShowAdminCategory(true);
+        setShowComponent(true);
     };
     return (
         <>
-            {ShowAdminCategory ? (
+            {ShowComponent ? (
                 <AdminCategory/>
             ) : (
                 <div className="main">
@@ -45,8 +45,10 @@ export function AdminCreateCategory (){
                             </div>
                             <div className="table-wrapper">
                                 <form className='main-form'> 
-                                    <span className="main-form__span">Наименование</span>
-                                    <input value={categoryName} onChange={(e) => setCategoryName(e.target.value)} type="text" className="main-form__input"/>
+                                    <div className="main-form__input-create">
+                                        <span className="main-form__span">Наименование</span>
+                                        <input value={categoryName} onChange={(e) => setCategoryName(e.target.value)} type="text" className="main-form__input"/>
+                                    </div>
                                 </form>
                             </div>
                         </div>

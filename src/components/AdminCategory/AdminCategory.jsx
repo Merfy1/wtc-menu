@@ -8,10 +8,10 @@ import { AdminCreateCategory } from './AdminCreateCategory';
 
 export function AdminCategory (){
     const [catigories, setCategories] = useState([]);
-    const [ShowAdminCreate, setShowAdminCreate] = useState(false);
+    const [ShowComponent, setShowComponent] = useState(false);
 
     const handleClick = () => {
-        setShowAdminCreate(true);
+        setShowComponent(true);
     };
     useEffect(() => {
         axios.get('http://localhost:3001/api/admin/tags/')
@@ -32,7 +32,7 @@ export function AdminCategory (){
     }
     return (
         <>
-            {ShowAdminCreate ? (
+            {ShowComponent ? (
                 <AdminCreateCategory/>
             ) : (
                 <div className="main">
