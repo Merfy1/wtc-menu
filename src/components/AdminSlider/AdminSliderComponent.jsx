@@ -13,7 +13,7 @@ export function AdminSliderComponent ({slide, onDelete}) {
             <tbody>
                 <tr>
                     <td>{slide.id}</td>    
-                    <td>{slide.hidden}</td>
+                    <td>{slide.hidden.toString()}</td>
                     <td>{slide.date_create}</td>
                     <div className="main-table__button">
                         <button>

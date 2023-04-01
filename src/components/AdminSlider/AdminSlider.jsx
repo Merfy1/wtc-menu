@@ -56,7 +56,7 @@ export function AdminSlider (){
                                     <thead>
                                         <tr>
                                             <th>Номер слайда</th>
-                                            <th>Показ</th>
+                                            <th>Скрыт</th>
                                             <th>Дата создания</th>
                                             <th className="main-table__button">Действия</th>
                                         </tr>

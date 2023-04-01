@@ -35,6 +35,7 @@ export function AdminCreateSlider(){
         axios.post("http://localhost:3001/api/admin/slides/create/", formData)
           .then((res) => console.log(res.data))
           .catch((err) => console.log(err));
+          setShowComponent(true);
       };
       const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -55,24 +56,25 @@ export function AdminCreateSlider(){
                             <button className="main-header__back" onClick={handleClick}>
                                 <BiArrowBack/> Назад
                             </button>
-                            <div className="main-header">
-                                <span className="main-header__title">
-                                    Создание
-                                </span>
-                                <button className="main-header__button" type="submit">
-                                    <span><BiCheck/></span>
-                                    Сохранить
-                                </button>
-                            </div>
-                            <div className="table-wrapper">
-                                <form className='main-form' onSubmit={handleSubmit}> 
-                                    <div className="main-form__input-create">
-                                        <span className="main-form__span">Картинка</span>
-                                        <input type="file" onChange={handleFileChange} className="main-form__input"/>
-                                    </div>
-                                    <button type="submit">Upload</button>
-                                </form>
-                            </div>
+                            <form onSubmit={handleSubmit}>
+                                <div className="main-header">
+                                    <span className="main-header__title">
+                                        Создание
+                                    </span>
+                                    <button className="main-header__button" type="submit">
+                                        <span><BiCheck/></span>
+                                        Сохранить
+                                    </button>
+                                </div>
+                                <div className="table-wrapper">
+                                    <form className='main-form' > 
+                                        <div className="main-form__input-create">
+                                            <span className="main-form__span">Картинка</span>
+                                            <input type="file" onChange={handleFileChange} className="main-form__input"/>
+                                        </div>
+                                    </form>
+                                </div>
+                            </form> 
                         </div>
                     </div>
                 </div> 
