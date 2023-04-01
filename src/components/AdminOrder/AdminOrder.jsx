@@ -22,6 +22,16 @@ export function AdminOrder (){
         });
           
       }, []);
+    const handleDeleteUser = (id) => {
+      axios.delete(`http://localhost:3001/api/admin/order/${id}`,{
+          data: { token: localStorage.getItem("tokenLogin") },
+      }).then(() => {
+        setOrder(order.filter((orders) => orders.id_order !== id));
+      }).catch((err) => {
+        console.log(err);
+        alert("Не удалось удалить заказ");
+      });
+    } 
     return (
         <>
             <div className="main">
@@ -54,6 +64,9 @@ export function AdminOrder (){
                                         status={orders.status_order.toString()}
                                         table={orders.table_id}
                                         time={orders.timeCreate}
+                                        onDelete={handleDeleteUser}
+                                        order={orders}
+                                        
                                     />
                                 ))}
                             </table>
