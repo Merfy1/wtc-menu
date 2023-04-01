@@ -3,11 +3,18 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../AdminCategory/admincategory.css"
 import { AdminPositionComponent } from './AdminPositionComponent';
+import { AdminCreatePosition } from './AdminCreatePosition';
 
 
 export function AdminPosition (){
     const [listPositions, setPosition] = useState([]);
     const [catigories, setCatigories] = useState([]);
+    const [ShowComponent, setShowComponent] = useState(false);
+
+    const handleClick = () => {
+        setShowComponent(true);
+    };
+
     useEffect(() => {
         axios.get('http://localhost:3001/api/admin/positions/')
           .then(response => {
@@ -38,6 +45,9 @@ export function AdminPosition (){
     } 
     return (
         <>
+            {ShowComponent ? (
+                <AdminCreatePosition/>
+            ) : (
             <div className="main">
                 <div className="main-container">
                     <div className="main-wrapper">
@@ -45,7 +55,7 @@ export function AdminPosition (){
                             <span className="main-header__title">
                                 Позиции
                             </span>
-                            <button className="main-header__button">
+                            <button className="main-header__button" onClick={handleClick}>
                                 <img src="img/plus-mini.svg" alt=""/>
                                 Добавить
                             </button>
@@ -68,7 +78,9 @@ export function AdminPosition (){
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
+            )
+          }
         </>
     );
 };

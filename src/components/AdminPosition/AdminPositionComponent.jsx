@@ -23,7 +23,7 @@ export function AdminPositionComponent({position, name, price, categories, ingri
             <tbody>
                 <tr>
                     <td>{name}</td>
-                    <td>{price + 'руб'}</td>
+                    <td>{price + ' руб'}</td>
                     <td>{nameCategories}</td>
                     <td>{ingridint}</td>
                     <div className="main-table__button">

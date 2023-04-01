@@ -24,7 +24,7 @@ export function AdminCreateSlider(){
     //     setShowComponent(true);
     // };
 
-    const handleSubmit = (e) => {
+    const handleSubmit  = async (e) => {
 
         e.preventDefault();
         const formData = new FormData();
@@ -32,7 +32,7 @@ export function AdminCreateSlider(){
         formData.append("img", file);
         formData.append("tocken", token);
 
-        axios.post("http://localhost:3001/api/admin/slides/create/", formData)
+        await axios.post("http://localhost:3001/api/admin/slides/create/", formData)
           .then((res) => console.log(res.data))
           .catch((err) => console.log(err));
           setShowComponent(true);
