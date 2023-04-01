@@ -26,6 +26,16 @@ export function AdminPosition (){
             console.error(error);
           });
       }, []);
+    const handleDeleteUser = (id) => {
+      axios.delete(`http://localhost:3001/api/admin/positions/${id}`,{
+          data: { token: localStorage.getItem("tokenLogin") },
+      }).then(() => {
+        setPosition(listPositions.filter((position) => position.id_position !== id ));
+      }).catch((err) => {
+        console.log(err);
+        alert("Не удалось удалить пользователя");
+      });
+    } 
     return (
         <>
             <div className="main">
@@ -52,7 +62,7 @@ export function AdminPosition (){
                                     </tr>
                                 </thead>
                                 {listPositions?.map((position) =>
-                                    <AdminPositionComponent catigories={catigories} key={position.id} name={position.name} price={position.price} categories={position.categories} ingridint={position.ingridint} />
+                                    <AdminPositionComponent catigories={catigories} key={position.id_position} name={position.name} onDelete={handleDeleteUser} price={position.price} categories={position.categories} ingridint={position.ingridint} position={position}/>
                                 )}
                             </table>
                         </div>

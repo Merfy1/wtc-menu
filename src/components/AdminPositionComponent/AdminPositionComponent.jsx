@@ -1,10 +1,13 @@
 import React from 'react';
 import { BsPencil,  BsTrash } from 'react-icons/bs';
 
-export function AdminPositionComponent({name, price, categories, ingridint, catigories}){
+export function AdminPositionComponent({position, name, price, categories, ingridint, catigories, onDelete}){
 
     let nameCategories = ""
 
+    const handleDelete = () => {
+        onDelete(position.id_position);
+    }
 
     for (let i = 0; i < catigories.length; i++) {
         if (catigories[i].id_categoria == categories){
@@ -25,8 +28,12 @@ export function AdminPositionComponent({name, price, categories, ingridint, cati
                     <td>{ingridint}</td>
                     <div className="main-table__button">
                         <button>
-                            <BsPencil className='icon'></BsPencil>
-                            <BsTrash className='icon'/>
+                            <button >
+                                <BsPencil className='icon'></BsPencil>
+                            </button>
+                            <button onClick={handleDelete}>
+                                <BsTrash className='icon'/>
+                            </button>
                         </button>
                     </div>
                 </tr>
