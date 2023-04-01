@@ -15,6 +15,17 @@ export function AdminUser (){
             console.error(error);
           });
       }, []);
+
+      const handleDeleteUser = (id) => {
+        axios.delete(`http://localhost:3001/api/admin/user/deleteUser/${id}`,{
+            data: { tocken: localStorage.getItem("tokenLogin") },
+        }).then(() => {
+            setUsers(date.filter((user) => user.id_employeer !== id));
+        }).catch((err) => {
+          console.log(err);
+          alert("Не удалось удалить пользователя");
+        });
+      } 
     return (
         <>
             <div className="main">
@@ -41,7 +52,7 @@ export function AdminUser (){
                                     </tr>
                                 </thead>
                                 {date?.map((user) =>
-                                    <AdminUserComponent key={user.id} name={user.name} surname={user.surname} lastname={user.lastname} nickname={user.nickname}/>
+                                    <AdminUserComponent key={user.id_employeer} user={user} onDelete={handleDeleteUser}/>
                                 )}
                             </table>
                         </div>
