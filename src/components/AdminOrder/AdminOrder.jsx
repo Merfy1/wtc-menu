@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../AdminCategory/admincategory.css"
-import { AdminOrderComponent } from '../AdminOrderComponent/AdminOrderComponent';
+import { AdminOrderComponent } from './AdminOrderComponent';
 
 
 export function AdminOrder (){

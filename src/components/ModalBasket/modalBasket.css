@@ -82,6 +82,8 @@
     background-color: transparent;
     color: white;
     font-size: 25px;
+    cursor: pointer;
+    margin-left: 5px;
 }
 .count-basket{
     font-style: normal;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../AdminCategory/admincategory.css"
-import { AdminSliderComponent } from '../AdminSliderComponent/AdminSliderComponent';
+import { AdminSliderComponent } from './AdminSliderComponent';
 
 export function AdminSlider (){
     const [slides, setSlides] = useState([]);

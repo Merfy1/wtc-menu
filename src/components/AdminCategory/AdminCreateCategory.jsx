@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BiArrowBack, BiCheck } from 'react-icons/bi';
-import { AdminCategory } from '../AdminCategory/AdminCategory';
+import { AdminCategory } from './AdminCategory';
 export function AdminCreateCategory (){
     const [ShowAdminCategory, setShowAdminCategory] = useState(false);
     const [categoryName, setCategoryName] = useState('');

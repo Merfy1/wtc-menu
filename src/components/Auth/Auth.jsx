@@ -22,11 +22,18 @@ export function Auth(){
         localStorage.setItem('tokenLogin', authResult.data.session)
         window.location.reload();
     }
-
+    const [clickCount, setClickCount] = useState(0);
+    const handleClick = () => {
+        setClickCount(clickCount + 1);
+        if (clickCount === 2) {
+          setClickCount(0);
+          window.location.href = '/';
+        }
+      };
     return (
         <div className="body">
             <header>
-                <h2 className="logo">WTC Москва</h2>
+                <h2 onClick={handleClick} className="logo">WTC Москва</h2>
                 {/* <button data-modal className="btnLogin-popup">Вход</button> */}
             </header>
             <div className="wrapper">

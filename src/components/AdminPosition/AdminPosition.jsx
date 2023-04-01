@@ -2,7 +2,7 @@ import { BsPencil,  BsTrash } from 'react-icons/bs';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../AdminCategory/admincategory.css"
-import { AdminPositionComponent } from '../AdminPositionComponent/AdminPositionComponent';
+import { AdminPositionComponent } from './AdminPositionComponent';
 
 
 export function AdminPosition (){

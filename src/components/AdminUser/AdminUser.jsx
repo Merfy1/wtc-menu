@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { AdminUserComponent } from '../AdminUserComponent/AdminUserComponent';
+import { AdminUserComponent } from './AdminUserComponent';
 import "../AdminCategory/admincategory.css"
 
 

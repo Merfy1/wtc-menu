@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BsTrash } from "react-icons/bs";
 
-
-
 export function BasketPosition({id, key, name, price, img, count}) {
     const [count1, setCount] = useState(count)
     const [deletePositon, setDeletePositon] = useState([])
@@ -58,7 +56,7 @@ export function BasketPosition({id, key, name, price, img, count}) {
             <img src={"http://localhost:3001"+img} alt="" className="modal-basket-img"/>
             <div className="modal-basket__position-info">
                 <span className="position-name">{name}</span>
-                <span className="position-price">{price}</span>
+                <span className="position-price">{price + ' руб'}</span>
             </div>
             <div className="modal__position-buy">
                 <div className="plus-minus-basket">

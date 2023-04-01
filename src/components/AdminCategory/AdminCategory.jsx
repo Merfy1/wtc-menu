@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BsPencil,  BsTrash } from 'react-icons/bs';
 import "./admincategory.css"
-import { AdminCategoryComponent } from '../AdminCategoryComponent/AdminCategoryComponent';
-import { AdminCreateCategory } from '../AdminCreateCategory/AdminCreateCategory';
+import { AdminCategoryComponent } from './AdminCategoryComponent';
+import { AdminCreateCategory } from './AdminCreateCategory';
 
 
 export function AdminCategory (){

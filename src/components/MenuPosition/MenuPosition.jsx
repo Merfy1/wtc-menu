@@ -24,7 +24,7 @@ export function MenuPosition({name, price, img, ingridint, key, id_position, id_
 
     const addPositions = () => {
         if (localStorage.getItem('card')){
-
+            setModalActive(false)
             const elements = JSON.parse(localStorage.getItem('card'))
             let elementIDin
 
@@ -57,45 +57,7 @@ export function MenuPosition({name, price, img, ingridint, key, id_position, id_
             localStorage.setItem('card', JSON.stringify(
                 elements
             ))
-
-
-                /*
-        import React, { useState } from 'react';
-        function RadioButton() {
-        const [selectedOption, setSelectedOption] = useState(null);
-        const options = [
-            { id: 1, value: 'Option 1' },
-            { id: 2, value: 'Option 2' },
-            { id: 3, value: 'Option 3' },
-        ];
-        const handleOptionChange = (e) => {
-            setSelectedOption(e.target.value);
-        };
-        return (
-            <div>
-            <h1>Radio Button Example</h1>
-            {options.map((option) => (
-                <div key={option.id}>
-                <label>
-                    <input
-                    type="radio"
-                    name="option"
-                    value={option.value}
-                    checked={selectedOption === option.value}
-                    onChange={handleOptionChange}
-                    />
-                    {option.value}
-                </label>
-                </div>
-            ))}
-            </div>
-        );
-        }
-        export default RadioButton;
-           */
-
         }  else {
-
             localStorage.setItem('card', JSON.stringify([
                 {
                     name, price, img, ingridint, count, key: id_element.id_position

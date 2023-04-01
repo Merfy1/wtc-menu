@@ -31,7 +31,7 @@ export function MenuHeader( {setPositions} ) {
     
     let coutns = 0
     function sendMail () {
-
+        setModalActive(false)
         if (typePay === '' ){
             return alert('Не выбран способ оплаты');
         }
