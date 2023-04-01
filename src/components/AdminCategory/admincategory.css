@@ -17,6 +17,25 @@
     line-height: 39px;
     color: #000000;
 }
+.main-header__back{
+    background: transparent;
+    width: 80px;
+    border: none;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+    color: #7B7B8D;
+}
+.main-header__back:hover{
+    color: #271FE0;
+    transition: 0.3s;
+}
 .main-header__button{    
     background: #4945FF;
     border-radius: 6px;
@@ -31,6 +50,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+}
+.main-header__button span{
+    font-size: 20px;
 }
 .main-table{
     padding: 20px 45px;
@@ -38,6 +61,36 @@
     background-color: white;
     width: 100%;
     border-radius: 6px;
+}
+.main-form{
+    padding: 20px 45px;
+    margin-top: 50px;
+    background-color: white;
+    width: 100%;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main-form__span{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 28px;
+    color: #7B7B8D;
+    margin-bottom: 25px;
+}
+.main-form__input{
+    width: 320px;
+    height: 40px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #DCDCE4;
+    border-radius: 4px;
+    color: black;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 28px;
 }
 .main-table__button{
     display: flex;
