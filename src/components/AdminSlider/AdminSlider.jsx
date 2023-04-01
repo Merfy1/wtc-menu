@@ -14,6 +14,18 @@ export function AdminSlider (){
             console.error(error);
           });
       }, []);
+    const handleDeleteUser = (id) => {
+      axios.delete(`http://localhost:3001/api/admin/slides/delete/`,{
+        data: { tocken: localStorage.getItem("tokenLogin"),
+                id_slide: id
+              },
+      }).then(() => {
+        setSlides(slides.filter((slide) => slide.id !== id));
+      }).catch((err) => {
+        console.log(err);
+        alert("Не удалось удалить пользователя");
+      });
+    } 
     return (
         <>
             <div className="main">
@@ -39,7 +51,7 @@ export function AdminSlider (){
                                     </tr>
                                 </thead>
                                 {slides?.map((slide) =>
-                                    <AdminSliderComponent key={slide.id} id={slide.id} hidden={slide.hidden.toString()} date_create={slide.date_create}/>
+                                    <AdminSliderComponent key={slide.id_slide} slide={slide} onDelete={handleDeleteUser}/>
                                 )}
                             </table>
                         </div>

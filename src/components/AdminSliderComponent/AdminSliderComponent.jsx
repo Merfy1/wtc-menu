@@ -1,7 +1,10 @@
 import React from 'react';
 import { BsPencil,  BsTrash } from 'react-icons/bs';
 
-export function AdminSliderComponent ({id, hidden, date_create}) {
+export function AdminSliderComponent ({slide, onDelete}) {
+    const handleDelete = () => {
+        onDelete(slide.id);
+      }
     return (
         <>
             <td colSpan="5">
@@ -9,13 +12,17 @@ export function AdminSliderComponent ({id, hidden, date_create}) {
             </td>
             <tbody>
                 <tr>
-                    <td>{id}</td>    
-                    <td>{hidden}</td>
-                    <td>{date_create}</td>
+                    <td>{slide.id}</td>    
+                    <td>{slide.hidden}</td>
+                    <td>{slide.date_create}</td>
                     <div className="main-table__button">
                         <button>
-                            <BsPencil className='icon'></BsPencil>
-                            <BsTrash className='icon'/>
+                            <button >
+                                <BsPencil className='icon'></BsPencil>
+                            </button>
+                            <button onClick={handleDelete}>
+                                <BsTrash className='icon'/>
+                            </button>
                         </button>
                     </div>
                 </tr>
