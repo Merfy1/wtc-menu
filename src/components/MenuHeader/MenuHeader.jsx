@@ -18,6 +18,26 @@ export function MenuHeader( {setPositions} ) {
     const [finalPrice, setFinalPrice] = useState(0)
     const [typePay, setTypePay] = useState('')
     const [basket_active, setBasketActive] = useState(false)
+    const [tableNumber, setTableNumber] = useState("");
+    const [modalVisible, setModalVisible] = useState(false);
+
+    useEffect(() => {
+        const storedTableNumber = localStorage.getItem("tableNumber");
+        if (storedTableNumber) {
+          setTableNumber(storedTableNumber);
+        } else {
+          setModalVisible(true); // Если номера нет, открываем модальное окно
+        }
+      }, []);
+
+      const handleTableNumberChange = (e) => {
+        setTableNumber(e.target.value);
+      };
+
+      const handleOrderSubmit = () => {
+        localStorage.setItem("tableNumber", tableNumber); // Сохраняем номер столика в localStorage
+        setModalVisible(false); // Закрываем модальное окно
+      };
 
     useEffect(() => {
         axios.get('http://localhost:3001/api/public/categories', {
@@ -56,9 +76,6 @@ export function MenuHeader( {setPositions} ) {
           console.log(error.text);
       });
     }
-    function addNumber() {
-        
-    }
 
     function sayHi() {
         const elements = JSON.parse(localStorage.getItem('card'))
@@ -96,6 +113,17 @@ export function MenuHeader( {setPositions} ) {
         <>
         <div className="header">
             <div className="container">
+            {modalVisible && (
+                <div className="">
+                <h2>Введите номер столика:</h2>
+                <input
+                    type="text"
+                    value={tableNumber}
+                    onChange={handleTableNumberChange}
+                />
+                <button onClick={handleOrderSubmit}>Отправить заказ</button>
+                </div>
+            )}    
                 <div className="header-wrapper">
                     <Logo></Logo>
                     <nav className="navbar">
@@ -107,14 +135,13 @@ export function MenuHeader( {setPositions} ) {
                         </ul>
                     </MyContext.Provider>
                     </nav>
-                    
                     <div className="basket-wrapper">
                         <span className={basket_active ? "basket-span active" : "basket-span"}>{basket_active}</span>
                         <button onClick={() => setModalActive(true)} className='basket-icon'><BsBasket></BsBasket></button>
                     </div>
                 </div>
-            </div>         
-        </div>   
+            </div>  
+        </div>
         <ModalBasket active={modalActive} setActive={setModalActive}>
             {
                 modalActive && (

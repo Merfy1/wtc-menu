@@ -6,7 +6,6 @@ import { AdminCategory } from './AdminCategory';
 export function AdminUpdateCategory ( {categoryId, onUpdateCategory}){
     const [ShowComponent, setShowComponent] = useState(false);
     const [newName, setNewName] = useState("");
-    
     const handleNameChange = (e) => {
         setNewName(e.target.value);
     };
