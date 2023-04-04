@@ -5,6 +5,8 @@ import { Auth } from './components/Auth/Auth';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AdminPanel } from './components/AdminPanel/AdminPanel';
 import { Menu } from './components/Menu/Menu';
+import { AdminCategory } from './components/AdminCategory/AdminCategory';
+import { AdminUpdateCategory } from './components/AdminCategory/AdminUpdateCategory';
 
 let pages
 

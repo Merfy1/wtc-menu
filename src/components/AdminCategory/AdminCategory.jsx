@@ -4,15 +4,22 @@ import { BsPencil,  BsTrash } from 'react-icons/bs';
 import "./admincategory.css"
 import { AdminCategoryComponent } from './AdminCategoryComponent';
 import { AdminCreateCategory } from './AdminCreateCategory';
+import { AdminUpdateCategory } from './AdminUpdateCategory';
 
 
 export function AdminCategory (){
     const [catigories, setCategories] = useState([]);
+    const [categoryToUpdate, setCategoryToUpdate] = useState(null);
     const [ShowComponent, setShowComponent] = useState(false);
+
+    const handleUpdateCategory = (categoryId) => {
+        setCategoryToUpdate(categoryId);
+    };
 
     const handleClick = () => {
         setShowComponent(true);
     };
+
     useEffect(() => {
         axios.get('http://localhost:3001/api/admin/tags/')
         .then(res => {
@@ -22,6 +29,7 @@ export function AdminCategory (){
             console.error(error);
         });
     }, []);
+
     const handleDeleteCategory = (id) => {
       axios.delete(`http://localhost:3001/api/admin/tags/${id}`).then(() => {
         setCategories(catigories.filter((category) => category.id_categoria !== id));
@@ -30,6 +38,22 @@ export function AdminCategory (){
         alert("Не удалось удалить категорию");
       });
     }
+
+    const handleCategoryUpdate  = async (newName) => {
+        const tocken = localStorage.getItem("tokenLogin");
+        try {
+        const response = await axios.put(`http://localhost:3001/api/admin/tags/${categoryToUpdate}`,{
+            new_name: newName,
+            tocken: tocken,
+          })
+          .then((res) => {
+            setCategoryToUpdate(null);
+          })
+        } catch (error) {
+            console.error(error); // выводим ошибку в консоль
+        }
+    };
+
     return (
         <>
             {ShowComponent ? (
@@ -55,12 +79,17 @@ export function AdminCategory (){
                                             <th className="main-table__button">Действия</th>
                                         </tr>
                                     </thead>
-                                    {catigories?.map((category) =>
-                                        <AdminCategoryComponent             
-                                            key={category.id_categoria}
-                                            category={category}
-                                            onDelete={handleDeleteCategory} />
-                                        )}
+                                    {categoryToUpdate ? (
+                                        <AdminUpdateCategory
+                                        categoryId={categoryToUpdate}
+                                        onUpdateCategory={handleCategoryUpdate}
+                                        />
+                                    ) : (
+                                        <AdminCategoryComponent
+                                        catigories={catigories}
+                                        onUpdateCategory={handleUpdateCategory}
+                                        />
+                                    )}
                                 </table>
                             </div>
                         </div>

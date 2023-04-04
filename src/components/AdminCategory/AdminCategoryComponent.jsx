@@ -1,29 +1,33 @@
-import React from 'react';
 import { BsPencil,  BsTrash } from 'react-icons/bs';
+import React from 'react';
 
-export function AdminCategoryComponent ({category, onDelete}){
+export function AdminCategoryComponent ({catigories, onDelete, onUpdateCategory }){
+
     const handleDelete = () => {
-        onDelete(category.id_categoria);
-      }
+        onDelete(catigories.id_categoria);
+    }
+
     return (
         <>
             <td colSpan="2">
                 <div className='line'/>
             </td>
             <tbody>
-                <tr>
-                    <td>{category.name}</td>
-                    <div className="main-table__button">
-                        <button> 
-                            <button>
-                                <BsPencil className='icon'></BsPencil>
-                            </button>
-                            <button onClick={handleDelete}>
-                                <BsTrash className='icon'/>
-                            </button>
-                        </button>
-                    </div>
-                </tr>
+                    {catigories.map((category) => (
+                        <tr>
+                            <td>{category.name}</td>
+                            <div className="main-table__button">
+                                <button> 
+                                    <button onClick={() => onUpdateCategory(category.id_categoria)}>
+                                        <BsPencil className='icon'></BsPencil>
+                                    </button>
+                                    <button onClick={handleDelete}>
+                                        <BsTrash className='icon'/>
+                                    </button>
+                                </button>
+                            </div>
+                        </tr>
+                    ))}
             </tbody>
         </>
     );
