@@ -22,6 +22,7 @@ export function AdminPositionComponent({position, name, price, categories, ingri
             </td>
             <tbody>
                 <tr>
+                    <td>{position.id_position}</td>
                     <td>{name}</td>
                     <td>{price + ' руб'}</td>
                     <td>{nameCategories}</td>

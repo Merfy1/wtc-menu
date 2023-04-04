@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BiArrowBack, BiCheck } from 'react-icons/bi';
 import { AdminCategory } from './AdminCategory';
+
 export function AdminCreateCategory (){
     const [ShowComponent, setShowComponent] = useState(false);
     const [categoryName, setCategoryName] = useState('');
@@ -11,7 +12,7 @@ export function AdminCreateCategory (){
           const response = await axios.post('http://localhost:3001/api/admin/tags/',
             {
               name: categoryName,
-              token: token,
+              tocken: token,
             }
           );
           console.log(response.data); // выводим ответ сервера в консоль

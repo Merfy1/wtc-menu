@@ -64,6 +64,7 @@ export function AdminPosition (){
                             <table className='main-table'>
                                 <thead>
                                     <tr>
+                                        <th>Номер позици</th>
                                         <th>Наименование</th>
                                         <th>Цена</th>
                                         <th>Категория</th>
