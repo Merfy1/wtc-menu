@@ -12,7 +12,7 @@ export function AdminCreateCategory (){
           const response = await axios.post('http://localhost:3001/api/admin/tags/',
             {
               name: categoryName,
-              tocken: token,
+              token: token,
             }
           );
           console.log(response.data); // выводим ответ сервера в консоль

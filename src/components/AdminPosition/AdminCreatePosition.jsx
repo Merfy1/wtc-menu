@@ -16,6 +16,8 @@ export function AdminCreatePosition (){
         axios.get('http://localhost:3001/api/admin/tags/')
         .then(res => {
             setCatigories(res.data.catigories);
+            console.log(res.data.catigories[0])
+            setSelectedCategory(res.data.catigories[0]['id_categoria'])
         })
           .catch(error => console.log(error));
       }, []);
