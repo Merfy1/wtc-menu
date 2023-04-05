@@ -52,6 +52,14 @@ export function AdminCategory (){
         } catch (error) {
             console.error(error); // выводим ошибку в консоль
         }
+
+        axios.get('http://localhost:3001/api/admin/tags/')
+        .then(res => {
+            setCategories(res.data.catigories);
+        })
+        .catch(error => {
+            console.error(error);
+        });
     };
 
     return (
