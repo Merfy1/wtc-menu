@@ -3,18 +3,29 @@ import axios from 'axios';
 import { BiArrowBack, BiCheck } from 'react-icons/bi';
 import { AdminCategory } from './AdminCategory';
 
-export function AdminUpdateCategory ( {categoryId, onUpdateCategory}){
+export function AdminUpdateCategory ( {categoryId, onUpdateCategory, setCategoryToUpdate, setShowComponent1, setShowUpdate}){
     const [ShowComponent, setShowComponent] = useState(false);
     const [newName, setNewName] = useState("");
+
+    useEffect(() => {
+        setShowComponent1(false)
+        setShowUpdate(false)
+    }, []);
+
     const handleNameChange = (e) => {
         setNewName(e.target.value);
+        setShowComponent1(false)
     };
     const handleSubmit = (e) => {
         e.preventDefault();
         onUpdateCategory(newName);
+        setShowComponent1(false)
+        setShowUpdate(true)
     };
     const handleClick = () => {
         setShowComponent(true);
+        setCategoryToUpdate(null)
+        setShowComponent1(false)
     };
     return (
         <>

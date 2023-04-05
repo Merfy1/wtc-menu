@@ -3,8 +3,8 @@ import React from 'react';
 
 export function AdminCategoryComponent ({catigories, onDelete, onUpdateCategory }){
 
-    const handleDelete = () => {
-        onDelete(catigories.id_categoria);
+    const handleDelete = (category) => {
+        onDelete(category.id_categoria);
     }
 
     return (
@@ -21,7 +21,7 @@ export function AdminCategoryComponent ({catigories, onDelete, onUpdateCategory 
                                     <button onClick={() => onUpdateCategory(category.id_categoria)}>
                                         <BsPencil className='icon'></BsPencil>
                                     </button>
-                                    <button onClick={handleDelete}>
+                                    <button onClick={(e) => {handleDelete(category)}}>
                                         <BsTrash className='icon'/>
                                     </button>
                                 </button>
