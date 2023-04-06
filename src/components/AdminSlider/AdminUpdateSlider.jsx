@@ -2,12 +2,29 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BiArrowBack, BiCheck } from 'react-icons/bi';
 import { AdminSlider } from './AdminSlider';
+import { AdminSliderComponent } from './AdminSliderComponent';
 
 export function AdminUpdateSlider({sliderId, onClose}){
-    const [ShowComponent, setShowComponent] = useState(false);
     const token = localStorage.getItem("tokenLogin");
+    const [ShowComponent, setShowComponent] = useState(false);
+    const [allSlides, setAllSlides] = useState([]);
     const [slides, setSlides] = useState([]);
     const [title, setTitle] = useState("");
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/api/admin/slides/', {
+            headers: {
+                Authorization: token
+              }
+          })
+          .then(response => {
+            setAllSlides(response.data.date);
+            console.log(response.data.date)
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }, []);
 
     useEffect(() => {
       axios.get(`http://localhost:3001/api/public/slides/`).then((response) => {
@@ -48,6 +65,19 @@ export function AdminUpdateSlider({sliderId, onClose}){
             console.log(error);
           });
       };
+      const handleDeleteUser = (id) => {
+        axios.delete(`http://localhost:3001/api/admin/slides/delete/`,{
+          data: { 
+                    tocken: localStorage.getItem("tokenLogin"),
+                    id_slide: id
+                },
+        }).then(() => {
+          setSlides(slides.filter((slide) => slide.id !== id));
+        }).catch((err) => {
+          console.log(err);
+          alert("Не удалось удалить пользователя");
+        });
+      }     
 
     return (
         <>
@@ -79,6 +109,21 @@ export function AdminUpdateSlider({sliderId, onClose}){
                                             value={title}
                                             onChange={handleTitleChange}/>
                                         </div>
+                                        <table className='main-table'>
+                                        <thead>
+                                            <tr>
+                                                <th>Номер слайда</th>
+                                                <th>Скрыт</th>
+                                                <th>Дата создания</th>
+                                                <th className="main-table__button">Действия</th>
+                                            </tr>
+                                        </thead>
+                                        {allSlides?.map((slide) => (
+                                            <AdminSliderComponent 
+                                                key={slide.id_slide} slide={slide} onDelete={handleDeleteUser}  
+                                            />
+                                        ))}
+                                    </table>
                                     </form>
                                 </div>
                             </form> 

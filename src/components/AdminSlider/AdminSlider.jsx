@@ -7,6 +7,7 @@ import {AdminUpdateSlider} from './AdminUpdateSlider';
 import moment from 'moment';
 
 export function AdminSlider (){
+    const token = localStorage.getItem("tokenLogin");
     const [slides, setSlides] = useState([]);
     const [countSlide, setCountSlide] = useState([]);
     const [ShowComponent, setShowComponent] = useState(false);
@@ -23,10 +24,6 @@ export function AdminSlider (){
         setSelectedSliderId(id);
         setShowUpdateSlider(true);
     };
-
-    function getHiddenValue(hidden) {
-        return hidden ? 'Да' : 'Нет';
-    }
 
     useEffect(() => {
         axios.get('http://localhost:3001/api/public/slides')
