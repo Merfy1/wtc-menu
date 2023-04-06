@@ -15,11 +15,15 @@ export function AdminCreateSlider(){
 
         formData.append("img", file);
         formData.append("tocken", token);
-
         await axios.post("http://localhost:3001/api/admin/slides/create/", formData)
-          .then((res) => console.log(res.data))
-          .catch((err) => console.log(err));
-          setShowComponent(true);
+        .then(res => { 
+            setShowComponent(true); 
+        })
+        .catch (error => {
+          alert("Недопустимое расширение файлов")
+          console.error(error); 
+        });
+ 
       };
       const handleFileChange = (e) => {
         setFile(e.target.files[0]);

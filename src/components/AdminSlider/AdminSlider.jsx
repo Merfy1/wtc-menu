@@ -4,12 +4,16 @@ import "../AdminCategory/admincategory.css"
 import { AdminSliderComponent } from './AdminSliderComponent';
 import { AdminCreateSlider } from './AdminCreateSlider';
 import {AdminUpdateSlider} from './AdminUpdateSlider';
+import moment from 'moment';
 
 export function AdminSlider (){
     const [slides, setSlides] = useState([]);
+    const [countSlide, setCountSlide] = useState([]);
     const [ShowComponent, setShowComponent] = useState(false);
     const [showUpdateSlider, setShowUpdateSlider] = useState(false);
     const [selectedSliderId, setSelectedSliderId] = useState(null);
+    const [RusHidden, setRusHidden] = useState([]);
+    const [date, setDate] = useState('');
 
     const handleClick = () => {
         setShowComponent(true);
@@ -20,10 +24,15 @@ export function AdminSlider (){
         setShowUpdateSlider(true);
     };
 
+    function getHiddenValue(hidden) {
+        return hidden ? 'Да' : 'Нет';
+    }
+
     useEffect(() => {
         axios.get('http://localhost:3001/api/public/slides')
           .then(response => {
             setSlides(response.data.slides);
+            setCountSlide(response.data);
           })
           .catch(error => {
             console.error(error);
@@ -50,7 +59,6 @@ export function AdminSlider (){
             onClose={() => setShowUpdateSlider(false)}
             />
         ) : (
-
         <>
             {ShowComponent ? (
                 <AdminCreateSlider/>
@@ -69,10 +77,12 @@ export function AdminSlider (){
                                     </button>
                                     <button className="main-header__button" onClick={() => handleEditClick(slides.id)}>
                                         <img src="img/plus-mini.svg" alt=""/>
-                                        Обновить
+                                        Изменить
                                     </button>
                                 </div>
+
                             </div>
+                            <span> Количество слайдов: {countSlide.countSlides}</span>
                             <div className="table-wrapper">
                                 <table className='main-table'>
                                     <thead>
@@ -84,7 +94,7 @@ export function AdminSlider (){
                                         </tr>
                                     </thead>
                                     {slides?.map((slide) =>
-                                        <AdminSliderComponent onEdit={() => handleEditClick(slide.id)} key={slide.id_slide} slide={slide} onDelete={handleDeleteUser}/>
+                                        <AdminSliderComponent hidden={RusHidden} data={date} onEdit={() => handleEditClick(slide.id)} key={slide.id_slide} slide={slide} onDelete={handleDeleteUser}/>
                                     )}
                                 </table>
                             </div>

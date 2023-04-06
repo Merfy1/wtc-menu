@@ -37,14 +37,15 @@ export function AdminUpdateSlider({sliderId, onClose}){
             onClose();
           })
         } catch (error) {
-            console.error(error); // выводим ошибку в консоль
+            console.error(error); 
+            alert("Не удалось изменить слайд");// выводим ошибку в консоль
         }
           axios.get('http://localhost:3001/api/public/slides/')
           .then(response => {
             setSlides(response.data.slides);
           })
           .catch(error => {
-            console.error(error);
+            console.log(error);
           });
       };
 
@@ -62,13 +63,14 @@ export function AdminUpdateSlider({sliderId, onClose}){
                             <form onSubmit={handleSubmit}>
                                 <div className="main-header">
                                     <span className="main-header__title">
-                                        Обновить
+                                        Изменить
                                     </span>
                                     <button className="main-header__button" type="submit">
                                         <span><BiCheck/></span>
                                         Сохранить
                                     </button>
                                 </div>
+                                <span>Введите номер слайда который кхотите скрыть/показать</span>
                                 <div className="table-wrapper">
                                     <form className='main-form' > 
                                         <div className="main-form__input-create">
