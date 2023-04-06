@@ -17,9 +17,6 @@ export function AdminSliderComponent ({slide, onDelete}) {
                     <td>{slide.date_create}</td>
                     <div className="main-table__button">
                         <button>
-                            <button >
-                                <BsPencil className='icon'></BsPencil>
-                            </button>
                             <button onClick={handleDelete}>
                                 <BsTrash className='icon'/>
                             </button>

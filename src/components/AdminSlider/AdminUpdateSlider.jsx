@@ -3,31 +3,50 @@ import axios from 'axios';
 import { BiArrowBack, BiCheck } from 'react-icons/bi';
 import { AdminSlider } from './AdminSlider';
 
-export function AdminCreateSlider(){
+export function AdminUpdateSlider({sliderId, onClose}){
     const [ShowComponent, setShowComponent] = useState(false);
-    const [file, setFile] = useState(null);
     const token = localStorage.getItem("tokenLogin");
+    const [slides, setSlides] = useState([]);
+    const [title, setTitle] = useState("");
 
-    const handleSubmit  = async (e) => {
-
-        e.preventDefault();
-        const formData = new FormData();
-
-        formData.append("img", file);
-        formData.append("tocken", token);
-
-        await axios.post("http://localhost:3001/api/admin/slides/create/", formData)
-          .then((res) => console.log(res.data))
-          .catch((err) => console.log(err));
-          setShowComponent(true);
-      };
-      const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-      };
+    useEffect(() => {
+      axios.get(`http://localhost:3001/api/public/slides/`).then((response) => {
+        setTitle(response.data.title);
+      });
+    }, [sliderId]);
+  
+    const handleTitleChange = (event) => {
+      setTitle(event.target.value);
+    };
 
     const handleClick = () => {
         setShowComponent(true);
     };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+        await axios.put(`http://localhost:3001/api/admin/slides/update/`,{     
+
+                id_slide: title,
+                tocken: token
+            },
+          )
+          .then((res) => {
+            setSlides(res.data.slides);
+            onClose();
+          })
+        } catch (error) {
+            console.error(error); // выводим ошибку в консоль
+        }
+          axios.get('http://localhost:3001/api/public/slides/')
+          .then(response => {
+            setSlides(response.data.slides);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      };
 
     return (
         <>
@@ -43,7 +62,7 @@ export function AdminCreateSlider(){
                             <form onSubmit={handleSubmit}>
                                 <div className="main-header">
                                     <span className="main-header__title">
-                                        Создание
+                                        Обновить
                                     </span>
                                     <button className="main-header__button" type="submit">
                                         <span><BiCheck/></span>
@@ -53,8 +72,10 @@ export function AdminCreateSlider(){
                                 <div className="table-wrapper">
                                     <form className='main-form' > 
                                         <div className="main-form__input-create">
-                                            <span className="main-form__span">Картинка</span>
-                                            <input type="file" onChange={handleFileChange} className="main-form__input"/>
+                                            <span className="main-form__span">Номер слайда</span>
+                                            <input type="text" className="main-form__input" id="title"
+                                            value={title}
+                                            onChange={handleTitleChange}/>
                                         </div>
                                     </form>
                                 </div>

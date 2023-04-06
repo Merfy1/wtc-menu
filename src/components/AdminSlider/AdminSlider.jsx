@@ -3,13 +3,21 @@ import axios from 'axios';
 import "../AdminCategory/admincategory.css"
 import { AdminSliderComponent } from './AdminSliderComponent';
 import { AdminCreateSlider } from './AdminCreateSlider';
+import {AdminUpdateSlider} from './AdminUpdateSlider';
 
 export function AdminSlider (){
     const [slides, setSlides] = useState([]);
     const [ShowComponent, setShowComponent] = useState(false);
+    const [showUpdateSlider, setShowUpdateSlider] = useState(false);
+    const [selectedSliderId, setSelectedSliderId] = useState(null);
 
     const handleClick = () => {
         setShowComponent(true);
+    };
+
+    const handleEditClick = (id) => {
+        setSelectedSliderId(id);
+        setShowUpdateSlider(true);
     };
 
     useEffect(() => {
@@ -36,6 +44,14 @@ export function AdminSlider (){
     } 
     return (
         <>
+        {showUpdateSlider ? (
+            <AdminUpdateSlider
+            sliderId={selectedSliderId}
+            onClose={() => setShowUpdateSlider(false)}
+            />
+        ) : (
+
+        <>
             {ShowComponent ? (
                 <AdminCreateSlider/>
             ) : (
@@ -46,10 +62,16 @@ export function AdminSlider (){
                                 <span className="main-header__title">
                                     Слайдер
                                 </span>
-                                <button className="main-header__button" onClick={handleClick}>
-                                    <img src="img/plus-mini.svg" alt=""/>
-                                    Добавить
-                                </button>
+                                <div className='main-button-wrapper'>
+                                    <button className="main-header__button" onClick={handleClick}>
+                                        <img src="img/plus-mini.svg" alt=""/>
+                                        Добавить
+                                    </button>
+                                    <button className="main-header__button" onClick={() => handleEditClick(slides.id)}>
+                                        <img src="img/plus-mini.svg" alt=""/>
+                                        Обновить
+                                    </button>
+                                </div>
                             </div>
                             <div className="table-wrapper">
                                 <table className='main-table'>
@@ -62,7 +84,7 @@ export function AdminSlider (){
                                         </tr>
                                     </thead>
                                     {slides?.map((slide) =>
-                                        <AdminSliderComponent key={slide.id_slide} slide={slide} onDelete={handleDeleteUser}/>
+                                        <AdminSliderComponent onEdit={() => handleEditClick(slide.id)} key={slide.id_slide} slide={slide} onDelete={handleDeleteUser}/>
                                     )}
                                 </table>
                             </div>
@@ -72,5 +94,7 @@ export function AdminSlider (){
                 )
             }    
         </>
+        )}
+    </>
     );
 };

@@ -138,6 +138,11 @@
     border: none;
     cursor: pointer;
 }
+.main-button-wrapper{
+    display: flex;
+    justify-content: space-between;
+    width: 310px;
+}
 /* .table-wrapper {
     overflow-x: auto;
   }
