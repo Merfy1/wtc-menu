@@ -105,6 +105,11 @@
     margin-right: 25px;
     padding: 20px 0;
 }
+.main-table__button.more{
+    display: flex;
+    justify-content: flex-end;
+    padding: 30px 0;
+}
 .main-table td{
     font-style: normal;
     font-weight: 400;

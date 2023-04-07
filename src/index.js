@@ -5,10 +5,9 @@ import { Auth } from './components/Auth/Auth';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AdminPanel } from './components/AdminPanel/AdminPanel';
 import { Menu } from './components/Menu/Menu';
-import { AdminCategory } from './components/AdminCategory/AdminCategory';
-import { AdminUpdateCategory } from './components/AdminCategory/AdminUpdateCategory';
+// import { AdminOrderMore } from './components/AdminOrder/AdminOrderMore';
 
-let pages
+let pages;
 
 if (localStorage.getItem("tokenLogin")){
   pages = [
@@ -17,7 +16,11 @@ if (localStorage.getItem("tokenLogin")){
       element: (
         <AdminPanel></AdminPanel>
       )
-    }
+    },
+    // {
+    //   path: `admin/orders/${number}`,
+    //   element: <AdminOrderMore />
+    // }
   ]
   
 } else {
@@ -29,7 +32,7 @@ if (localStorage.getItem("tokenLogin")){
     {
       path: "/admin",
       element: <Auth />
-    },
+    }
   ]
 }
 const router = createBrowserRouter(pages)
