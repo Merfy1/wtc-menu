@@ -1,7 +1,10 @@
 import React from 'react';
-import { BsPencil,  BsTrash } from 'react-icons/bs';
+import { BsTrash } from 'react-icons/bs';
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { CiCircleMore } from "react-icons/ci";
 
-export function AdminOrderComponent ({onDelete, id_order, time, status, table}) {
+export function AdminOrderComponent ({onDelete, id_order, time, status, table, onEdit}) {
+    
     const handleDelete = () => {
         onDelete(id_order);
     }
@@ -18,8 +21,11 @@ export function AdminOrderComponent ({onDelete, id_order, time, status, table}) 
                     <td>{table}</td>
                     <div className="main-table__button">
                         <button>
-                            <button >
-                                <TiCancelOutline className='icon'></TiCancelOutline>
+                            <button>
+                                <CiCircleMore className='icon'></CiCircleMore>
+                            </button>
+                            <button onClick={onEdit}>
+                                <AiOutlineCloseCircle className='icon'></AiOutlineCloseCircle>
                             </button>
                             <button onClick={handleDelete}>
                                 <BsTrash className='icon'/>

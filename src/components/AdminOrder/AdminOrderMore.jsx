@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function AdminAllOrder () {
+export function AdminOrderMore () {
     return (
         <div>
             

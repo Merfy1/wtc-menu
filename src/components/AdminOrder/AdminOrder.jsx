@@ -2,15 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../AdminCategory/admincategory.css"
 import { AdminOrderComponent } from './AdminOrderComponent';
-import { AdminAllOrder } from './AdminAllOrder';
 
 
 export function AdminOrder (){
     const [order, setOrder] = useState([]);
-
-    const access_token = localStorage.getItem('tokenLogin')
-
     useEffect(() => {
+        const access_token = localStorage.getItem('tokenLogin')
         axios.get('http://localhost:3001/api/admin/order/', {
             headers: {
               'Authorization': access_token
@@ -18,13 +15,12 @@ export function AdminOrder (){
         })
         .then(response => {
             setOrder(response.data.result_serch);
-            console.log(response.data.result_serch)
         })
         .catch(error => {
             console.error(error);
-        });
-          
-      }, []);
+        });   
+    }, []);
+
     const handleDeleteOrder = (id) => {
         axios.delete(`http://localhost:3001/api/admin/order/${id}`,
         {
@@ -36,6 +32,33 @@ export function AdminOrder (){
             alert("Не удалось удалить заказ");
         });
     } 
+    
+    const handleEdit = (orderId) => {
+        const access_token = localStorage.getItem('tokenLogin')
+        axios.put(`http://localhost:3001/api/admin/order/${orderId}`,
+            {
+                token: access_token,
+            }
+        )
+        .then((response) => {
+            axios.get('http://localhost:3001/api/admin/order/', {
+                headers: {
+                  'Authorization': access_token
+                }
+            })
+            .then(response => {
+                setOrder(response.data.result_serch);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+        
+    };
 
     return (
         <>
@@ -66,6 +89,7 @@ export function AdminOrder (){
                                         table={orders.table_id}
                                         time={orders.timeCreate}
                                         onDelete={handleDeleteOrder}
+                                        onEdit={() => handleEdit(orders.id_order)}
                                         order={orders}    
                                     />
                                 ))}
