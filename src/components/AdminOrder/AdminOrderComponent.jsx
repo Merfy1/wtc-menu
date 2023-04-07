@@ -1,9 +1,9 @@
 import React from 'react';
 import { BsPencil,  BsTrash } from 'react-icons/bs';
 
-export function AdminOrderComponent ({onDelete, order, id_order, time, status, table}) {
+export function AdminOrderComponent ({onDelete, id_order, time, status, table}) {
     const handleDelete = () => {
-        onDelete(order.id_order);
+        onDelete(id_order);
     }
     return (
         <>
@@ -19,7 +19,7 @@ export function AdminOrderComponent ({onDelete, order, id_order, time, status, t
                     <div className="main-table__button">
                         <button>
                             <button >
-                                <BsPencil className='icon'></BsPencil>
+                                <TiCancelOutline className='icon'></TiCancelOutline>
                             </button>
                             <button onClick={handleDelete}>
                                 <BsTrash className='icon'/>
