@@ -57,6 +57,7 @@ export function AdminOrder (){
             console.log(response);
         })
         .catch((error) => {
+            alert(error)
             console.log(error);
         });
         
@@ -72,6 +73,7 @@ export function AdminOrder (){
                                 Заказы
                             </span>
                         </div>
+                        <span> Количество заказов: {order.length}</span>
                         <div className="table-wrapper">
                             <table className='main-table'>
                                 {hiddenHeader && (

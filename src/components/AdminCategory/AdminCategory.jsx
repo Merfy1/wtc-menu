@@ -106,6 +106,7 @@ export function AdminCategory (){
                                         Добавить
                                     </button>
                                 </div>
+                                <span> Количество категорий: {catigories.length}</span>
                                 <div className="table-wrapper">
                                     <table className='main-table'>
                                         <thead>
