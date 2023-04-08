@@ -16,21 +16,22 @@ export function AdminUpdateSlider({sliderId, onClose}){
         axios.get('http://localhost:3001/api/admin/slides/', {
             headers: {
                 Authorization: token
-              }
-          })
-          .then(response => {
-            setAllSlides(response.data.date);
+            }
+            })
+            .then(response => {
+                setAllSlides(response.data.date);
             console.log(response.data.date)
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }, []);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        }, []);
 
     useEffect(() => {
-      axios.get(`http://localhost:3001/api/public/slides/`).then((response) => {
-        setTitle(response.data.title);
-      });
+        axios.get(`http://localhost:3001/api/public/slides/`)
+        .then((response) => {
+          setTitle(response.data.title);
+        });
     }, [sliderId]);
   
     const handleTitleChange = (event) => {
@@ -51,7 +52,6 @@ export function AdminUpdateSlider({sliderId, onClose}){
             },
           )
           .then((res) => {
-            setSlides(slides.filter((slide) => slide.id !== id));
             setSlides(res.data.slides);
             onClose();
           })
@@ -95,7 +95,7 @@ export function AdminUpdateSlider({sliderId, onClose}){
                                         Сохранить
                                     </button>
                                 </div>
-                                <span>Введите номер слайда который кхотите скрыть/показать</span>
+                                <span>Введите номер слайда который хотите скрыть/показать</span>
                                 <div className="table-wrapper">
                                     <form className='main-form' > 
                                         <div className="main-form__input-create">
