@@ -50,6 +50,31 @@ export function MenuHeader( {setPositions} ) {
     )
     
     let coutns = 0
+    function twoFunction(){
+        sendOrder()
+        // sendMail()
+    }
+    function sendOrder() {
+        const tableId = localStorage.getItem('tableNumber');
+        const card = JSON.parse(localStorage.getItem('card'));
+        const orderData = {
+            table_id: parseInt(tableId),
+            positions: card.map(item => ({
+                count: item.count,
+                id_positions: item.key,
+                price_positions: item.price
+            }))
+        };
+        axios.post('http://localhost:3001/api/public/order', orderData)
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.log(error);
+            console.log(orderData)
+        });
+    }
+
     function sendMail () {
         setModalActive(false)
         if (typePay === '' ){
@@ -171,7 +196,7 @@ export function MenuHeader( {setPositions} ) {
                         </form>
                         <hr className="line"/>
                         <div className="buy-basket" >
-                            <button onClick={e => sendMail()} className="modal-basket__button-buy">{finalPrice + ' руб'}</button>
+                            <button onClick={twoFunction} className="modal-basket__button-buy">{finalPrice + ' руб'}</button>
                         </div>
                     </>
                 )
