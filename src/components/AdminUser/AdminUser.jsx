@@ -50,6 +50,7 @@ export function AdminUser (){
                                     Добавить
                                 </button>
                             </div>
+                            <span> Количество пользователей: {date.length}</span>
                             <div className="table-wrapper">
                                 <table className='main-table'>
                                     <thead>

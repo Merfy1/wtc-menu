@@ -19,9 +19,6 @@ export function AdminUserComponent ({user, onDelete}){
                     <td>{user.nickname}</td>
                     <div className="main-table__button">
                         <button>
-                            <button >
-                                <BsPencil className='icon'></BsPencil>
-                            </button>
                             <button onClick={handleDelete}>
                                 <BsTrash className='icon'/>
                             </button>
