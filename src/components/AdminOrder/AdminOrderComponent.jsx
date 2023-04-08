@@ -1,15 +1,20 @@
-import React, { useState as useStatReact } from 'react';
 import { BsTrash } from 'react-icons/bs';
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { CiCircleMore } from "react-icons/ci";
 import { useState } from 'react';
 import { AdminOrderMore } from './AdminOrderMore';
+import { useEffect } from 'react';
 
-export function AdminOrderComponent ({onDelete, id_order, time, status, table, onEdit, order}) {
+export function AdminOrderComponent ({onDelete, id_order, time, status, table, onEdit, order, onHidden, onHiddenSet}) {
     const [ShowComponent, setShowComponent] = useState(false);
+    var date = new Date(time);
+    useEffect(() => {
+        console.log(Boolean(status))
+    }, [status]);
     
     const handleClick = () => {
         setShowComponent(true);
+        onHiddenSet(false)
     };
 
     const handleDelete = () => {
@@ -18,41 +23,37 @@ export function AdminOrderComponent ({onDelete, id_order, time, status, table, o
     return (
         <>
             {ShowComponent ? (
-                <AdminOrderMore id_order={id_order}/>
+                <AdminOrderMore id_order={id_order} setShowComponent1={setShowComponent} onHidden={onHidden} onHiddenSet={onHiddenSet}/>
             ) : (
-                <>  <thead>
-                        <tr>
-                            <th>Номер заказа</th>
-                            <th>Дата создания</th>
-                            <th>Статус заказа</th>
-                            <th>Номер столика</th>
-                            <th className="main-table__button">Действия</th>
-                        </tr>
-                    </thead>
-                    <td colSpan="5">
-                        <div className='line'/>
-                    </td>
-                    <tbody>
-                        <tr>
-                            <td>{id_order}</td>
-                            <td>{time}</td>
-                            <td>{status}</td>
-                            <td>{table}</td>
-                            <div className="main-table__button">
-                                <button>
-                                    <button onClick={() => handleClick(id_order)} >
-                                        <CiCircleMore className='icon'></CiCircleMore>
-                                    </button>
-                                    <button onClick={onEdit}>
-                                        <AiOutlineCloseCircle className='icon'></AiOutlineCloseCircle>
-                                    </button>
-                                    <button onClick={handleDelete}>
-                                        <BsTrash className='icon'/>
-                                    </button>
-                                </button>
-                            </div>
-                        </tr>
-                    </tbody>
+                <>  
+                    {onHidden && (
+                        <>
+                            <td colSpan="5">
+                                <div className='line'/>
+                            </td>
+                            <tbody>
+                                <tr>
+                                    <td>{id_order}</td>
+                                    <td>{date.toLocaleString()}</td>
+                                    <td>{status == "true" ? "Да" : "Нет"}</td>
+                                    <td>{table}</td>
+                                    <div className="main-table__button">
+                                        <button>
+                                            <button onClick={() => handleClick(id_order)} >
+                                                <CiCircleMore className='icon'></CiCircleMore>
+                                            </button>
+                                            <button onClick={onEdit}>
+                                                <AiOutlineCloseCircle className='icon'></AiOutlineCloseCircle>
+                                            </button>
+                                            <button onClick={handleDelete}>
+                                                <BsTrash className='icon'/>
+                                            </button>
+                                        </button>
+                                    </div>
+                                </tr>
+                            </tbody>
+                        </>
+                    )}  
                 </>
             )}
         </>

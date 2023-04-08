@@ -16,6 +16,7 @@ export function AdminSlider (){
     const [RusHidden, setRusHidden] = useState([]);
     const [date, setDate] = useState('');
 
+    
     const handleClick = () => {
         setShowComponent(true);
     };

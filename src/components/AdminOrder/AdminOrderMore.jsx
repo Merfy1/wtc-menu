@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { AdminOrderMoreComponent } from './AdminOrderMoreComponent';
 import { AdminOrderComponent } from './AdminOrderComponent';
+import { BiArrowBack, BiCheck } from 'react-icons/bi';
 
-export function AdminOrderMore ({id_order}) {
+
+export function AdminOrderMore ({id_order, onHidden, onHiddenSet, setShowComponent1}) {
     const [order, setOrder] = useState([]);
     const [ShowComponent, setShowComponent] = useState(false);
     
     const handleClick = () => {
         setShowComponent(true);
+        onHiddenSet(true)
+        setShowComponent1(false)
     };
 
     useEffect(() => {
@@ -24,7 +28,6 @@ export function AdminOrderMore ({id_order}) {
                 order.derails
             )
             setOrder(fullOrder);
-            console.log(fullOrder)
         })
         .catch(error => {
             console.error(error);
@@ -35,10 +38,13 @@ export function AdminOrderMore ({id_order}) {
         <>
             <thead>
                 <tr>
-                    <th>Номер Позиции</th>
-                    <th>Количество товара</th>
+                    <th>Название Позиции</th>
                     <th>Цена товара</th>
-                    <th>Номер столика</th>
+                    <th>Категория товара</th>
+                    <th>Ингридиенты</th>
+                    <button className="main-header__back" onClick={() => handleClick(id_order)}>
+                        <BiArrowBack/> Назад
+                    </button>
                 </tr>
             </thead>
             {order?.map((order) =>

@@ -55,6 +55,11 @@
 .main-header__button span{
     font-size: 20px;
 }
+.button-back{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
 .main-table{
     padding: 20px 45px;
     margin-top: 50px;

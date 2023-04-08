@@ -6,6 +6,7 @@ import { AdminOrderComponent } from './AdminOrderComponent';
 
 export function AdminOrder (){
     const [order, setOrder] = useState([]);
+    const [hiddenHeader, setHiddenHeader] = useState(true)
     
     useEffect(() => {
         const access_token = localStorage.getItem('tokenLogin')
@@ -73,6 +74,17 @@ export function AdminOrder (){
                         </div>
                         <div className="table-wrapper">
                             <table className='main-table'>
+                                {hiddenHeader && (
+                                    <thead>
+                                        <tr>
+                                            <th>Номер заказа</th>
+                                            <th>Дата создания</th>
+                                            <th>Статус заказа</th>
+                                            <th>Номер столика</th>
+                                            <th className="main-table__button">Действия</th>
+                                        </tr>
+                                    </thead>
+                                )}
                                 {order?.map((orders) => (
                                     <AdminOrderComponent 
                                         key={orders.id} 
@@ -82,7 +94,9 @@ export function AdminOrder (){
                                         time={orders.timeCreate}
                                         onDelete={handleDeleteOrder}
                                         onEdit={() => handleEdit(orders.id_order)}
-                                        order={orders}    
+                                        order={orders}
+                                        onHidden={hiddenHeader}
+                                        onHiddenSet={setHiddenHeader}  
                                     />
                                 ))}
                             </table>

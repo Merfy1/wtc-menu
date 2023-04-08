@@ -7,6 +7,7 @@ import { AdminSliderComponent } from './AdminSliderComponent';
 export function AdminUpdateSlider({sliderId, onClose}){
     const token = localStorage.getItem("tokenLogin");
     const [ShowComponent, setShowComponent] = useState(false);
+    const [countSlide, setCountSlide] = useState([]);
     const [allSlides, setAllSlides] = useState([]);
     const [slides, setSlides] = useState([]);
     const [title, setTitle] = useState("");
@@ -40,7 +41,7 @@ export function AdminUpdateSlider({sliderId, onClose}){
         setShowComponent(true);
     };
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event, id) => {
         event.preventDefault();
         try {
         await axios.put(`http://localhost:3001/api/admin/slides/update/`,{     
@@ -50,6 +51,7 @@ export function AdminUpdateSlider({sliderId, onClose}){
             },
           )
           .then((res) => {
+            setSlides(slides.filter((slide) => slide.id !== id));
             setSlides(res.data.slides);
             onClose();
           })
@@ -57,13 +59,6 @@ export function AdminUpdateSlider({sliderId, onClose}){
             console.error(error); 
             alert("Не удалось изменить слайд");// выводим ошибку в консоль
         }
-          axios.get('http://localhost:3001/api/public/slides/')
-          .then(response => {
-            setSlides(response.data.slides);
-          })
-          .catch(error => {
-            console.log(error);
-          });
       };
       const handleDeleteUser = (id) => {
         axios.delete(`http://localhost:3001/api/admin/slides/delete/`,{

@@ -2,6 +2,9 @@ import React from 'react';
 import { BsPencil,  BsTrash } from 'react-icons/bs';
 
 export function AdminSliderComponent ({slide, onDelete}) {
+    var date = new Date(slide.date_create);
+    let infoStatus = slide.hidden ? "Да" : "Нет";
+
     const handleDelete = () => {
         onDelete(slide.id);
       }
@@ -13,8 +16,8 @@ export function AdminSliderComponent ({slide, onDelete}) {
             <tbody>
                 <tr>
                     <td>{slide.id}</td>    
-                    <td>{slide.hidden.toString()}</td>
-                    <td>{slide.date_create}</td>
+                    <td>{infoStatus}</td>
+                    <td>{date.toLocaleString()}</td>
                     <div className="main-table__button">
                         <button>
                             <button onClick={handleDelete}>
