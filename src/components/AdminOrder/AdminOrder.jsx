@@ -75,15 +75,17 @@ export function AdminOrder (){
                         <div className="table-wrapper">
                             <table className='main-table'>
                                 {hiddenHeader && (
-                                    <thead>
-                                        <tr>
-                                            <th>Номер заказа</th>
-                                            <th>Дата создания</th>
-                                            <th>Статус заказа</th>
-                                            <th>Номер столика</th>
-                                            <th className="main-table__button">Действия</th>
-                                        </tr>
-                                    </thead>
+                                    <>
+                                        <thead>
+                                            <tr>
+                                                <th>Номер заказа</th>
+                                                <th>Дата создания</th>
+                                                <th>Статус заказа</th>
+                                                <th>Номер столика</th>
+                                                <th className="main-table__button">Действия</th>
+                                            </tr>
+                                        </thead>
+                                    </>
                                 )}
                                 {order?.map((orders) => (
                                     <AdminOrderComponent 

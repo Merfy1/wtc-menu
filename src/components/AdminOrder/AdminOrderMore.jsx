@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { AdminOrderMoreComponent } from './AdminOrderMoreComponent';
-import { AdminOrderComponent } from './AdminOrderComponent';
-import { BiArrowBack, BiCheck } from 'react-icons/bi';
+import { BiArrowBack } from 'react-icons/bi';
 
 
 export function AdminOrderMore ({id_order, onHidden, onHiddenSet, setShowComponent1}) {
@@ -42,7 +41,7 @@ export function AdminOrderMore ({id_order, onHidden, onHiddenSet, setShowCompone
                     <th>Цена товара</th>
                     <th>Категория товара</th>
                     <th>Ингридиенты</th>
-                    <button className="main-header__back" onClick={() => handleClick(id_order)}>
+                    <button className="main-header__back order" onClick={() => handleClick(id_order)}>
                         <BiArrowBack/> Назад
                     </button>
                 </tr>

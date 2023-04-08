@@ -9,7 +9,6 @@ export function AdminOrderComponent ({onDelete, id_order, time, status, table, o
     const [ShowComponent, setShowComponent] = useState(false);
     var date = new Date(time);
     useEffect(() => {
-        console.log(Boolean(status))
     }, [status]);
     
     const handleClick = () => {
@@ -35,7 +34,7 @@ export function AdminOrderComponent ({onDelete, id_order, time, status, table, o
                                 <tr>
                                     <td>{id_order}</td>
                                     <td>{date.toLocaleString()}</td>
-                                    <td>{status == "true" ? "Да" : "Нет"}</td>
+                                    <td>{status === "true" ? "Закрыт" : "Открыт"}</td>
                                     <td>{table}</td>
                                     <div className="main-table__button">
                                         <button>

@@ -32,6 +32,9 @@
     margin-bottom: 10px;
     color: #7B7B8D;
 }
+.main-header__back.order{
+    margin-top: 20px;
+}
 .main-header__back:hover{
     color: #271FE0;
     transition: 0.3s;

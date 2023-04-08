@@ -52,7 +52,7 @@ export function MenuHeader( {setPositions} ) {
     let coutns = 0
     function twoFunction(){
         sendOrder()
-        // sendMail()
+        sendMail()
     }
     function sendOrder() {
         const tableId = localStorage.getItem('tableNumber');
