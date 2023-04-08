@@ -15,9 +15,9 @@ import { AdminMain } from '../AdminMain/AdminMain';
 import "./sidebar.css"
 import { SidebarMore } from '../AdminSidebarMore/SidebarMore';
 
-const SlidebarMore = () => {
-    return <SidebarMore></SidebarMore>;
-  };
+// const SlidebarMore = () => {
+//     return <SidebarMore></SidebarMore>;
+//   };
 
 const Component1 = () => {
     return <AdminMain></AdminMain>
@@ -27,7 +27,7 @@ const Component1 = () => {
   const Component2 = () => {
     return (
         <>
-            <SidebarMore></SidebarMore>
+            {/* <SidebarMore></SidebarMore> */}
             <AdminUser></AdminUser>
         </>
     )
@@ -36,7 +36,7 @@ const Component1 = () => {
   const Component3 = () => {
     return (
         <>
-            <SidebarMore></SidebarMore>
+            {/* <SidebarMore></SidebarMore> */}
             <AdminCategory></AdminCategory>
         </>
     )
@@ -45,7 +45,7 @@ const Component1 = () => {
   const Component4 = () => {
     return (
         <>
-            <SidebarMore></SidebarMore>
+            {/* <SidebarMore></SidebarMore> */}
             <AdminSlider></AdminSlider>
         </>
     )
@@ -54,7 +54,7 @@ const Component1 = () => {
   const Component5 = () => {
     return (
         <>
-            <SidebarMore></SidebarMore>
+            {/* <SidebarMore></SidebarMore> */}
             <AdminPosition></AdminPosition>
         </>
     )
@@ -63,7 +63,7 @@ const Component1 = () => {
   const Component6 = () => {
     return (
         <>
-            <SidebarMore></SidebarMore>
+            {/* <SidebarMore></SidebarMore> */}
             <AdminOrder></AdminOrder>
         </>
     )
