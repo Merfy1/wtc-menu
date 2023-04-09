@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo, useContext  } from "react";
-import axios, {isCancel, AxiosError} from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import { BsBasket } from "react-icons/bs";
 import { ModalBasket } from "../ModalBasket/ModalBasket";
 import './menuHeader.css'
@@ -13,31 +13,32 @@ export const MyContext = React.createContext();
 
 export function MenuHeader( {setPositions} ) {
     const [modalActive, setModalActive] = useState(false)
+    const [modalActive1, setModalActive1] = useState(true)
     const [catigories, stateCatigories] = useState([])
     const [positionsBasket, setPositionsBasket] = useState([])
     const [finalPrice, setFinalPrice] = useState(0)
     const [typePay, setTypePay] = useState('')
     const [basket_active, setBasketActive] = useState(false)
     const [tableNumber, setTableNumber] = useState("");
-    const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
-        const storedTableNumber = localStorage.getItem("tableNumber");
+        const storedTableNumber = localStorage.getItem("tableNumber");  
         if (storedTableNumber) {
           setTableNumber(storedTableNumber);
+          setModalActive1(false);
         } else {
-          setModalVisible(true); // Если номера нет, открываем модальное окно
+            setModalActive1(true); // Если номера нет, открываем модальное окно
         }
-      }, []);
+    }, []);
 
-      const handleTableNumberChange = (e) => {
-        setTableNumber(e.target.value);
-      };
+    const handleTableNumberChange = (e) => {
+      setTableNumber(e.target.value);
+    };
 
-      const handleOrderSubmit = () => {
-        localStorage.setItem("tableNumber", tableNumber); // Сохраняем номер столика в localStorage
-        setModalVisible(false); // Закрываем модальное окно
-      };
+    const handleOrderSubmit = () => {
+      localStorage.setItem("tableNumber", tableNumber);
+      setModalActive1(false)
+    };
 
     useEffect(() => {
         axios.get('http://localhost:3001/api/public/categories', {
@@ -93,19 +94,18 @@ export function MenuHeader( {setPositions} ) {
 
         zakaz += "\n\nСпособ оплаты: " + typePay;
 
-    emailjs.send('service_isdyzs9', 'template_4hrk63c', {message: zakaz}, 'gHcdNx_UCNyEUzLaN')
-      .then((result) => {
-        localStorage.clear();
-        alert('Заказ отправлен');
-      }, (error) => {
-          console.log(error.text);
-      });
+        emailjs.send('service_isdyzs9', 'template_4hrk63c', {message: zakaz}, 'gHcdNx_UCNyEUzLaN')
+        .then((result) => {
+          localStorage.clear();
+          alert('Заказ отправлен');
+        }, (error) => {
+            console.log(error.text);
+        });
     }
 
     function sayHi() {
         const elements = JSON.parse(localStorage.getItem('card'))
         setPositionsBasket(elements)
-        
         let countTovar = 0
 
         for (let i = 0; i < positionsBasket?.length; ++i){
@@ -126,7 +126,7 @@ export function MenuHeader( {setPositions} ) {
         
     }
       
-    setTimeout(sayHi, 1000);
+    setTimeout(sayHi, 100);
 
     useEffect(() => {
         const elements = JSON.parse(localStorage.getItem('card'))
@@ -138,17 +138,17 @@ export function MenuHeader( {setPositions} ) {
         <>
         <div className="header">
             <div className="container">
-            {modalVisible && (
-                <div className="">
-                <h2>Введите номер столика:</h2>
-                <input
-                    type="text"
-                    value={tableNumber}
-                    onChange={handleTableNumberChange}
-                />
-                <button onClick={handleOrderSubmit}>Отправить заказ</button>
-                </div>
-            )}    
+            <ModalBasket active={modalActive1} setActive={setModalActive1}> 
+                    <div className="modal-info photo">
+                        <h2 className='modal-title' photo>Введите номер столика:</h2>
+                        <input
+                            type="text"
+                            value={tableNumber}
+                            onChange={handleTableNumberChange}
+                        />
+                        <button className="buy-position photo" onClick={handleOrderSubmit}>Сохранить</button>
+                    </div>   
+            </ModalBasket>
                 <div className="header-wrapper">
                     <Logo></Logo>
                     <nav className="navbar">

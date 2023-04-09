@@ -27,7 +27,7 @@ export function AdminPositionComponent({position, name, price, categories, ingri
           alert("Недопустимое расширение файлов")
           console.error(error); 
         });
- 
+        setModalActive(false)
     };
     const handleFileChange = (e) => {
       setFile(e.target.files[0]);
@@ -41,10 +41,10 @@ export function AdminPositionComponent({position, name, price, categories, ingri
     return (
         <>
             <>
-                <td colSpan="5">
-                    <div className='line'/>
-                </td>
                 <tbody>
+                    <td colSpan="5">
+                        <div className='line'/>
+                    </td>
                     <tr>
                         <td>{name}</td>
                         <td>{price + ' руб'}</td>
