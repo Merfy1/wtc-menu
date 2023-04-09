@@ -4,17 +4,13 @@ import "../AdminCategory/admincategory.css"
 import { AdminSliderComponent } from './AdminSliderComponent';
 import { AdminCreateSlider } from './AdminCreateSlider';
 import {AdminUpdateSlider} from './AdminUpdateSlider';
-import moment from 'moment';
 
 export function AdminSlider (){
-    const token = localStorage.getItem("tokenLogin");
     const [slides, setSlides] = useState([]);
     const [countSlide, setCountSlide] = useState([]);
     const [ShowComponent, setShowComponent] = useState(false);
     const [showUpdateSlider, setShowUpdateSlider] = useState(false);
     const [selectedSliderId, setSelectedSliderId] = useState(null);
-    const [RusHidden, setRusHidden] = useState([]);
-    const [date, setDate] = useState('');
 
     
     const handleClick = () => {
@@ -92,7 +88,7 @@ export function AdminSlider (){
                                         </tr>
                                     </thead>
                                     {slides?.map((slide) =>
-                                        <AdminSliderComponent hidden={RusHidden} data={date} onEdit={() => handleEditClick(slide.id)} key={slide.id_slide} slide={slide} onDelete={handleDeleteUser}/>
+                                        <AdminSliderComponent onEdit={() => handleEditClick(slide.id)} key={slide.id_slide} slide={slide} onDelete={handleDeleteUser}/>
                                     )}
                                 </table>
                             </div>

@@ -17,7 +17,7 @@ export function AdminOrderMoreComponent ({order}){
     }, []);
 
     for (let i = 0; i < catigories.length; i++) {
-        if (catigories[i].id_categoria == order.categories){
+        if (catigories[i].id_categoria == order?.categories){
             nameCategories = catigories[i].name
         }
     }
@@ -32,10 +32,10 @@ export function AdminOrderMoreComponent ({order}){
             </td>
             <tbody>
                 <tr>
-                    <td>{order.name}</td>
-                    <td>{order.price}</td>
+                    <td>{order?.name}</td>
+                    <td>{order?.price}</td>
                     <td>{nameCategories}</td>
-                    <td>{order.ingridint}</td>
+                    <td>{order?.ingridint}</td>
                     <div className="main-table__button more">
                     </div>
                 </tr>
