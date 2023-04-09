@@ -57,6 +57,20 @@
     flex-direction: column;
     justify-content: space-between;
 }
+.modal-info.photo input{
+    background: transparent;
+    color: white;
+    width: 320px;
+    height: 50px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #DCDCE4;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 28px;
+    margin-left: 15px;
+}
 .modal-title{
     font-style: normal;
     font-weight: 700;
@@ -64,6 +78,10 @@
     line-height: 36px;
     margin-bottom: 15px;
 }
+.modal-title.photo{
+    color:white;
+}
+
 .modal-subtitle{
     font-style: normal;
     font-weight: 500;
@@ -113,6 +131,10 @@
     font-size: 18px;
     line-height: 22px;
     cursor: pointer;
+}
+.buy-position.photo{
+    margin-top: 10px;
+    padding: 10px 5px;
 }
 .modal__close{
     position:absolute;

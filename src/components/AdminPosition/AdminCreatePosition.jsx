@@ -12,7 +12,6 @@ export function AdminCreatePosition (){
     const [posIngrid, setPosIngrid] = useState('');
 
     useEffect(() => {
-        // Получаем список категорий с сервера
         axios.get('http://localhost:3001/api/admin/tags/')
         .then(res => {
             setCatigories(res.data.catigories);

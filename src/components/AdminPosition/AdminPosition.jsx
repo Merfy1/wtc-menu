@@ -1,4 +1,3 @@
-import { BsPencil,  BsTrash } from 'react-icons/bs';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../AdminCategory/admincategory.css"
@@ -60,11 +59,11 @@ export function AdminPosition (){
                                 Добавить
                             </button>
                         </div>
+                        <span> Количество позиций: {listPositions.length}</span>
                         <div className="table-wrapper">
                             <table className='main-table'>
                                 <thead>
                                     <tr>
-                                        <th>Номер позици</th>
                                         <th>Наименование</th>
                                         <th>Цена</th>
                                         <th>Категория</th>
@@ -73,7 +72,7 @@ export function AdminPosition (){
                                     </tr>
                                 </thead>
                                 {listPositions?.map((position) =>
-                                    <AdminPositionComponent catigories={catigories} key={position.id_position} name={position.name} onDelete={handleDeleteUser} price={position.price} categories={position.categories} ingridint={position.ingridint} position={position}/>
+                                    <AdminPositionComponent catigories={catigories} key={position.id_position} name={position.name} onDelete={handleDeleteUser} price={position.price} categories={position.categories} ingridint={position.ingridint} position={position} id={position.id_position}/>
                                 )}
                             </table>
                         </div>
