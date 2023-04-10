@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { Modal } from "../Modal/Modal";
+import "../MenuPositions/menuPositions.css"
 
 export function MenuPosition({name, price, img, ingridint, key, id_position, id_element}) {
     const [modalActive, setModalActive] = useState(false)

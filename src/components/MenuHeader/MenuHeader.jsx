@@ -138,17 +138,17 @@ export function MenuHeader( {setPositions} ) {
         <>
         <div className="header">
             <div className="container">
-            <ModalBasket active={modalActive1} setActive={setModalActive1}> 
-                    <div className="modal-info photo">
-                        <h2 className='modal-title' photo>Введите номер столика:</h2>
-                        <input
-                            type="text"
-                            value={tableNumber}
-                            onChange={handleTableNumberChange}
-                        />
-                        <button className="buy-position photo" onClick={handleOrderSubmit}>Сохранить</button>
-                    </div>   
-            </ModalBasket>
+                <ModalBasket active={modalActive1} setActive={setModalActive1}> 
+                        <div className="modal-info photo">
+                            <h2 className='modal-title' photo>Введите номер столика:</h2>
+                            <input
+                                type="text"
+                                value={tableNumber}
+                                onChange={handleTableNumberChange}
+                            />
+                            <button className="buy-position photo" onClick={handleOrderSubmit}>Сохранить</button>
+                        </div>   
+                </ModalBasket>
                 <div className="header-wrapper">
                     <Logo></Logo>
                     <nav className="navbar">

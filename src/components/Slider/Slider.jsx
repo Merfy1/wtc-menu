@@ -1,5 +1,6 @@
 import React, { useState, useEffect  } from "react";
 import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
+import { Swipeable } from 'react-touch-events';
 
 const Slider = ({ images }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -32,10 +33,29 @@ const Slider = ({ images }) => {
     const goToSlide = (index) => {
       setCurrentSlide(index);
     };
+
+    const [startX, setStartX] = useState(null);
+    const [endX, setEndX] = useState(null);
+  
+    function handleTouchStart(event) {
+      setStartX(event.touches[0].clientX);
+    }
+    function handleTouchEnd(event) {
+      setEndX(event.changedTouches[0].clientX);
+      if (endX < startX) {
+        setCurrentSlide((currentSlide) =>
+          currentSlide === images.length - 1 ? 0 : currentSlide + 1
+        );
+      } else if (endX > startX) {
+        setCurrentSlide((currentSlide) =>
+          currentSlide === 0 ? images.length - 1 : currentSlide - 1
+        );
+      }
+    }
   
     return (
       <div className="slider">
-        <div className="slides">
+        <div className="slides" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
           {images.map((image, index) => (
             <div
               key={index}

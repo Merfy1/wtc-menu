@@ -72,3 +72,15 @@
 .logo{
     cursor: pointer;
 }
+@media (min-width: 320px) and (max-width: 420px) {
+    .navbar-item{
+        display: none;
+    }
+    .container{
+
+        max-width: 330px;
+    }
+    .logo{  
+        width: 160px;
+    }
+}

@@ -47,10 +47,6 @@
 .img-for-modal{
     max-width: 300px;   
 }
-.card-img{
-    border-radius: 20px; 
-    min-width: 260px;
-}
 .modal-info{
     padding: 30px;
     display: flex;

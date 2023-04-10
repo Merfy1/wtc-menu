@@ -20,6 +20,7 @@
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "react-scroll": "^1.8.9",
+    "react-touch-events": "^3.0.0",
     "resend": "^0.11.1",
     "stream": "^0.0.2",
     "use-history": "^1.4.1",
