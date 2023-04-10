@@ -1,6 +1,5 @@
 import React, { useState, useEffect  } from "react";
 import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
-import { Swipeable } from 'react-touch-events';
 
 const Slider = ({ images }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
