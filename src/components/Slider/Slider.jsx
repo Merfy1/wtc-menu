@@ -59,7 +59,7 @@ const Slider = ({ images }) => {
             <div
               key={index}
               className={`slide ${currentSlide === index ? "active" : ""}`}
-              style={{ backgroundImage: `url(${ "http://localhost:3001" + image.slide_patch})` }}
+              style={{ backgroundImage: `url(${ "http://45.12.237.227:3001" + image.slide_patch})` }}
             ></div>
           ))}
         </div>

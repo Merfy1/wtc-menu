@@ -9,7 +9,7 @@ const PositionsElement = ({ name, positionsID}) => {
     useEffect(() => {
         
         async function getPositionsById(positionsID){
-            const result = await axios.get(`http://localhost:3001/api/public/positions/${positionsID}`)
+            const result = await axios.get(`http://45.12.237.227:3001/api/public/positions/${positionsID}`)
             // console.log(result.data.positions)
             setStatePositons(result.data.positions)
         }

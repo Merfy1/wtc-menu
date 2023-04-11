@@ -15,7 +15,7 @@ export function AdminCreateSlider(){
 
         formData.append("img", file);
         formData.append("tocken", token);
-        await axios.post("http://localhost:3001/api/admin/slides/create/", formData)
+        await axios.post("http://45.12.237.227:3001/api/admin/slides/create/", formData)
         .then(res => { 
             setShowComponent(true); 
         })

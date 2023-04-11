@@ -41,7 +41,7 @@ export function MenuHeader( {setPositions} ) {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:3001/api/public/categories', {
+        axios.get('http://45.12.237.227:3001/api/public/categories', {
         }).then((e) => {
             stateCatigories(e.data.catigories)
             setPositions(e.data.catigories)
@@ -66,7 +66,7 @@ export function MenuHeader( {setPositions} ) {
                 price_positions: item.price
             }))
         };
-        axios.post('http://localhost:3001/api/public/order', orderData)
+        axios.post('http://45.12.237.227:3001/api/public/order', orderData)
         .then(response => {
             console.log(response.data);
         })

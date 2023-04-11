@@ -15,7 +15,7 @@ export function AdminPosition (){
     };
 
     useEffect(() => {
-        axios.get('http://localhost:3001/api/admin/positions/')
+        axios.get('http://45.12.237.227:3001/api/admin/positions/')
           .then(response => {
             setPosition(response.data.listPositions);
           })
@@ -24,7 +24,7 @@ export function AdminPosition (){
           });
       }, []);
     useEffect(() => {
-        axios.get('http://localhost:3001/api/admin/tags/')
+        axios.get('http://45.12.237.227:3001/api/admin/tags/')
           .then(response => {
             setCatigories(response.data.catigories);
           })
@@ -33,7 +33,7 @@ export function AdminPosition (){
           });
       }, []);
     const handleDeleteUser = (id) => {
-      axios.delete(`http://localhost:3001/api/admin/positions/${id}`,{
+      axios.delete(`http://45.12.237.227:3001/api/admin/positions/${id}`,{
           data: { token: localStorage.getItem("tokenLogin") },
       }).then(() => {
         setPosition(listPositions.filter((position) => position.id_position !== id ));

@@ -16,7 +16,7 @@ export function AdminOrderMore ({id_order, onHidden, onHiddenSet, setShowCompone
 
     useEffect(() => {
         const access_token = localStorage.getItem('tokenLogin')
-        axios.get(`http://localhost:3001/api/admin/order/${id_order}`, {
+        axios.get(`http://45.12.237.227:3001/api/admin/order/${id_order}`, {
             headers: {
               'Authorization': access_token
             }

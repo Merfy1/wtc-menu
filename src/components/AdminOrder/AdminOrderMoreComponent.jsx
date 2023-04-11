@@ -7,7 +7,7 @@ export function AdminOrderMoreComponent ({order}){
     let nameCategories = ""
     
     useEffect(() => {
-        axios.get('http://localhost:3001/api/admin/tags/')
+        axios.get('http://45.12.237.227:3001/api/admin/tags/')
         .then(response => {
           setCatigories(response.data.catigories);
         })  

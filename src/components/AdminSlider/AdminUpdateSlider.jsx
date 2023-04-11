@@ -13,7 +13,7 @@ export function AdminUpdateSlider({sliderId, onClose}){
     const [title, setTitle] = useState("");
 
     useEffect(() => {
-        axios.get('http://localhost:3001/api/admin/slides/', {
+        axios.get('http://45.12.237.227:3001/api/admin/slides/', {
             headers: {
                 Authorization: token
             }
@@ -28,7 +28,7 @@ export function AdminUpdateSlider({sliderId, onClose}){
         }, []);
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/api/public/slides/`)
+        axios.get(`http://45.12.237.227:3001/api/public/slides/`)
         .then((response) => {
           setTitle(response.data.title);
         });
@@ -45,7 +45,7 @@ export function AdminUpdateSlider({sliderId, onClose}){
     const handleSubmit = async (event, id) => {
         event.preventDefault();
         try {
-        await axios.put(`http://localhost:3001/api/admin/slides/update/`,{     
+        await axios.put(`http://45.12.237.227:3001/api/admin/slides/update/`,{     
 
                 id_slide: title,
                 tocken: token
@@ -61,7 +61,7 @@ export function AdminUpdateSlider({sliderId, onClose}){
         }
       };
       const handleDeleteUser = (id) => {
-        axios.delete(`http://localhost:3001/api/admin/slides/delete/`,{
+        axios.delete(`http://45.12.237.227:3001/api/admin/slides/delete/`,{
           data: { 
                     tocken: localStorage.getItem("tokenLogin"),
                     id_slide: id

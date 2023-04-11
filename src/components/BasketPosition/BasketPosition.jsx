@@ -53,7 +53,7 @@ export function BasketPosition({id, key, name, price, img, count}) {
     }
     return (
         <div className="modal-basket__position">
-            <img src={"http://localhost:3001"+img} alt="" className="modal-basket-img"/>
+            <img src={"http://45.12.237.227:3001"+img} alt="" className="modal-basket-img"/>
             <div className="modal-basket__position-info">
                 <span className="position-name">{name}</span>
                 <span className="position-price">{price + ' руб'}</span>

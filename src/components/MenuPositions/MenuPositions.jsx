@@ -12,7 +12,7 @@ export function MenuPositions({positionsID}) {
     const [positions, statePosition] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
     useEffect(() => {
-        axios.get(`http://localhost:3001/api/public/positions/`, {
+        axios.get(`http://45.12.237.227:3001/api/public/positions/`, {
         }).then((e) => {
             statePosition(e.data.positions)
         })

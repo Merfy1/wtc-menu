@@ -10,7 +10,7 @@ export function AdminOrder (){
     
     useEffect(() => {
         const access_token = localStorage.getItem('tokenLogin')
-        axios.get('http://localhost:3001/api/admin/order/', {
+        axios.get('http://45.12.237.227:3001/api/admin/order/', {
             headers: {
               'Authorization': access_token
             }
@@ -24,7 +24,7 @@ export function AdminOrder (){
     }, []);
 
     const handleDeleteOrder = (id) => {
-        axios.delete(`http://localhost:3001/api/admin/order/${id}`,
+        axios.delete(`http://45.12.237.227:3001/api/admin/order/${id}`,
         {
             data: { token: localStorage.getItem("tokenLogin") },
         }).then(() => {
@@ -37,13 +37,13 @@ export function AdminOrder (){
     
     const handleEdit = (orderId) => {
         const access_token = localStorage.getItem('tokenLogin')
-        axios.put(`http://localhost:3001/api/admin/order/${orderId}`,
+        axios.put(`http://45.12.237.227:3001/api/admin/order/${orderId}`,
             {
                 token: access_token,
             }
         )
         .then((response) => {
-            axios.get('http://localhost:3001/api/admin/order/', {
+            axios.get('http://45.12.237.227:3001/api/admin/order/', {
                 headers: {
                   'Authorization': access_token
                 }

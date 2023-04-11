@@ -14,7 +14,7 @@ export function AdminUser (){
     };
 
     useEffect(() => {
-        axios.get('http://localhost:3001/api/admin/user/view/')
+        axios.get('http://45.12.237.227:3001/api/admin/user/view/')
           .then(response => {
             setUsers(response.data.date);
           })
@@ -24,7 +24,7 @@ export function AdminUser (){
       }, []);
 
       const handleDeleteUser = (id) => {
-        axios.delete(`http://localhost:3001/api/admin/user/deleteUser/${id}`,{
+        axios.delete(`http://45.12.237.227:3001/api/admin/user/deleteUser/${id}`,{
             data: { tocken: localStorage.getItem("tokenLogin") },
         }).then(() => {
             setUsers(date.filter((user) => user.id_employeer !== id));
