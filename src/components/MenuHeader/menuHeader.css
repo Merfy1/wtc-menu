@@ -36,7 +36,6 @@
 }
 .navbar-item.active{
     background-color: #75777B;
-
 }
 .basket-icon{
     position: relative;
@@ -77,10 +76,12 @@
         display: none;
     }
     .container{
-
         max-width: 330px;
     }
     .logo{  
-        width: 160px;
+        width: 150px;
+    }
+    .header{
+        padding: 31px 35px;
     }
 }

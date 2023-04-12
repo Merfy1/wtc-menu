@@ -196,7 +196,7 @@ export function MenuHeader( {setPositions} ) {
                         </form>
                         <hr className="line"/>
                         <div className="buy-basket" >
-                            <button onClick={twoFunction} className="modal-basket__button-buy">{finalPrice + ' руб'}</button>
+                            <button onClick={twoFunction} className="modal-basket__button-buy">{'Оформить ' + finalPrice + ' руб'}</button>
                         </div>
                     </>
                 )

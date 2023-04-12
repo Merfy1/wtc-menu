@@ -72,12 +72,12 @@ export function MenuPosition({name, price, img, ingridint, key, id_position, id_
 
     return(
         <>
-        <div className="card">
+        <div className="card" onClick={() => setModalActive(true)}>
             <img src={"http://45.12.237.227:3001"+img} alt="" className="card-img"/>
             <span className="card-title">{name}</span>
             <span className="card-price">{price + " руб"}</span>
             <button onClick={() => setModalActive(true)} className="card-buy">В корзину</button>
-        </div>
+        </div>    
          <Modal active={modalActive} setActive={setModalActive}>
                 <div className="modal-img">
                     <img  src={"http://45.12.237.227:3001"+img} alt="tom" className="img-for-modal"/>
@@ -101,7 +101,7 @@ export function MenuPosition({name, price, img, ingridint, key, id_position, id_
                         <div className="buy-basket">
                             <button className="buy-position" onClick={() => {
                                   addPositions()
-                            }}>В корзину</button>
+                            }}>Добавить</button>
                         </div>
                     </div>
                 </div>

@@ -18,12 +18,12 @@ export function AdminCreateUser (){
             if (userPassword.length < 8) {
               return false;
             }
-            
+
             // Проверяем, содержит ли пароль цифры
             if (!/\d/.test(userPassword)) {
               return false;
             }
-          
+            
             // Проверяем, содержит ли пароль специальные символы
             if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(userPassword)) {
               return false;
