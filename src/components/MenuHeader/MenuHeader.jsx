@@ -8,6 +8,7 @@ import { Menucategories } from "../MenuCategories/Menucategories";
 import { BasketPosition } from "../BasketPosition/BasketPosition";
 import emailjs from 'emailjs-com';
 import { Logo } from "../Logo/Logo";
+import { ModalTable } from "../ModalBasket/ModalTable";
 
 export const MyContext = React.createContext();
 
@@ -138,17 +139,17 @@ export function MenuHeader( {setPositions} ) {
         <>
         <div className="header">
             <div className="container">
-                <ModalBasket active={modalActive1} setActive={setModalActive1}> 
+                <ModalTable active={modalActive1} setActive={setModalActive1}> 
                         <div className="modal-info photo">
                             <h2 className='modal-title' photo>Введите номер столика:</h2>
-                            <input
-                                type="text"
+                            <input className="tableNumber"
+                                type="number"
                                 value={tableNumber}
                                 onChange={handleTableNumberChange}
                             />
                             <button className="buy-position photo" onClick={handleOrderSubmit}>Сохранить</button>
                         </div>   
-                </ModalBasket>
+                </ModalTable>
                 <div className="header-wrapper">
                     <Logo></Logo>
                     <nav className="navbar">

@@ -84,4 +84,11 @@
     .header{
         padding: 31px 35px;
     }
+    .modal-info.photo input{  
+        max-width: 300px;
+    }
+    .modal-info.photo h2{
+        font-size: 25px;
+        text-align: center;
+    }
 }
