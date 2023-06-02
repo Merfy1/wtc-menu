@@ -6,20 +6,25 @@ import { AdminCategory } from './AdminCategory';
 export function AdminCreateCategory (){
     const [ShowComponent, setShowComponent] = useState(false);
     const [categoryName, setCategoryName] = useState('');
+    const restNum = localStorage.getItem('RestouranNumber');
+    const token = localStorage.getItem('tokenLogin'); // получаем токен из localStorage
+
     const handleCreateCategory = async () => {
-        const token = localStorage.getItem('tokenLogin'); // получаем токен из localStorage
         try {
-          const response = await axios.post('http://localhost:3001/api/admin/tags/',
+          const response = await axios.post(`http://localhost:3001/api/admin/tags/1`,
             {
               name: categoryName,
               token: token,
             }
           );
           console.log(response.data); // выводим ответ сервера в консоль
+          setShowComponent(true);
+
         } catch (error) {
           console.error(error); // выводим ошибку в консоль
+          alert("Не удается создать категорию");
         }
-        setShowComponent(true);
+
     };
     const handleClick = () => {
         setShowComponent(true);
