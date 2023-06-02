@@ -8,7 +8,7 @@ import axios, {isCancel, AxiosError} from 'axios';
 export function MenuSlider() {
     const [slide, setSlide] = useState([])
     useEffect(() => {
-        axios.get('http://45.12.237.227:3001/api/public/slides', {
+        axios.get('http://localhost:3001/api/public/slides', {
         }).then((e) => {
             setSlide(e.data.slides)
         })

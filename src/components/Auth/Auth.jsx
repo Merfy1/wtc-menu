@@ -15,7 +15,7 @@ export function Auth(){
     };
     async function auth(e) {
         e.preventDefault();
-        const authResult = await axios.post('http://45.12.237.227:3001/api/admin/login', {
+        const authResult = await axios.post('http://localhost:3001/api/admin/login', {
             nickname,
             password
         })

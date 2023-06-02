@@ -23,7 +23,7 @@ export function AdminSlider (){
     };
 
     useEffect(() => {
-        axios.get('http://45.12.237.227:3001/api/public/slides')
+        axios.get('http://localhost:3001/api/public/slides')
           .then(response => {
             setSlides(response.data.slides);
             setCountSlide(response.data);
@@ -34,7 +34,7 @@ export function AdminSlider (){
       }, []);
 
     const handleDeleteUser = (id) => {
-      axios.delete(`http://45.12.237.227:3001/api/admin/slides/delete/`,{
+      axios.delete(`http://localhost:3001/api/admin/slides/delete/`,{
         data: { tocken: localStorage.getItem("tokenLogin"),
                 id_slide: id
               },

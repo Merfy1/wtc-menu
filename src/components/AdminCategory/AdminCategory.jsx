@@ -22,7 +22,7 @@ export function AdminCategory (){
     };
 
     useEffect(() => {
-        axios.get('http://45.12.237.227:3001/api/admin/tags/')
+        axios.get('http://localhost:3001/api/admin/tags/')
         .then(res => {
             setCategories(res.data.catigories);
         })
@@ -32,7 +32,7 @@ export function AdminCategory (){
     }, []);
 
     const handleDeleteCategory = (id) => {
-      axios.delete(`http://45.12.237.227:3001/api/admin/tags/${id}`).then(() => {
+      axios.delete(`http://localhost:3001/api/admin/tags/${id}`).then(() => {
         setCategories(catigories.filter((category) => category.id_categoria !== id));
       }).catch((err) => {
         console.log(err);
@@ -43,7 +43,7 @@ export function AdminCategory (){
     const handleCategoryUpdate  = async (newName) => {
         const tocken = localStorage.getItem("tokenLogin");
         try {
-        const response = await axios.put(`http://45.12.237.227:3001/api/admin/tags/${categoryToUpdate}`,{
+        const response = await axios.put(`http://localhost:3001/api/admin/tags/${categoryToUpdate}`,{
             new_name: newName,
             tocken: tocken,
           })
@@ -54,7 +54,7 @@ export function AdminCategory (){
             console.error(error); // выводим ошибку в консоль
         }
 
-        axios.get('http://45.12.237.227:3001/api/admin/tags/')
+        axios.get('http://localhost:3001/api/admin/tags/')
         .then(res => {
             setCategories(res.data.catigories);
         })

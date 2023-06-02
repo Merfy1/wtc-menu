@@ -12,7 +12,7 @@ export function AdminCreatePosition (){
     const [posIngrid, setPosIngrid] = useState('');
 
     useEffect(() => {
-        axios.get('http://45.12.237.227:3001/api/admin/tags/')
+        axios.get('http://localhost:3001/api/admin/tags/')
         .then(res => {
             setCatigories(res.data.catigories);
             console.log(res.data.catigories[0])
@@ -24,7 +24,7 @@ export function AdminCreatePosition (){
         event.preventDefault();
         const token = localStorage.getItem('tokenLogin'); // получаем токен из localStorage
         try {
-            const response = await axios.post('http://45.12.237.227:3001/api/admin/positions/create/',
+            const response = await axios.post('http://localhost:3001/api/admin/positions/create/',
                 {
                     name: posName,
                     price: parseInt(posPrice),

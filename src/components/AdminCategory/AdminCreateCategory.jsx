@@ -9,7 +9,7 @@ export function AdminCreateCategory (){
     const handleCreateCategory = async () => {
         const token = localStorage.getItem('tokenLogin'); // получаем токен из localStorage
         try {
-          const response = await axios.post('http://45.12.237.227:3001/api/admin/tags/',
+          const response = await axios.post('http://localhost:3001/api/admin/tags/',
             {
               name: categoryName,
               token: token,

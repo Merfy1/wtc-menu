@@ -33,7 +33,7 @@ export function AdminCreateUser (){
         }
         try {
           if(validatePassword(userPassword)){
-            const response = await axios.post('http://45.12.237.227:3001/api/admin/user/create/',
+            const response = await axios.post('http://localhost:3001/api/admin/user/create/',
                 {
                     name: userName,
                     lastname: userLastname,
