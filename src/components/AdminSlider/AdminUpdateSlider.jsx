@@ -46,7 +46,6 @@ export function AdminUpdateSlider({sliderId, onClose}){
         event.preventDefault();
         try {
         await axios.put(`http://localhost:3001/api/admin/slides/update/`,{     
-
                 id_slide: title,
                 tocken: token
             },

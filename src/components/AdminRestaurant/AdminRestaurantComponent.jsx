@@ -1,28 +1,31 @@
 import { BsPencil,  BsTrash } from 'react-icons/bs';
 import React from 'react';
 
-export function AdminRestaurantComponent (){
+export function AdminRestaurantComponent ({rests, onDelete}){
+    const handleDelete = () => {
+        onDelete(rests.id);
+    }
     return (
         <>
-            <td colSpan="2">
+            <td colSpan="4">
                 <div className='line'/>
             </td>
             <tbody>
-                    {catigories.map((category) => (
-                        <tr>
-                            <td>{category.name}</td>
-                            <div className="main-table__button">
-                                <button> 
-                                    <button onClick={() => onUpdateCategory(category.id_categoria)}>
-                                        <BsPencil className='icon'></BsPencil>
-                                    </button>
-                                    <button onClick={(e) => {handleDelete(category)}}>
-                                        <BsTrash className='icon'/>
-                                    </button>
-                                </button>
-                            </div>
-                        </tr>
-                    ))}
+                <tr>
+                    <td>{rests.name}</td>
+                    <td>{rests.address}</td>
+                    <td>{rests.email}</td>
+                    <div className="main-table__button">
+                        <button> 
+                            <button /*onClick={() => onUpdateCategory(rests.id)}*/>
+                                <BsPencil className='icon'></BsPencil>
+                            </button>
+                            <button onClick={(e) => {handleDelete(rests)}} >
+                                <BsTrash className='icon'/>
+                            </button>
+                        </button>
+                    </div>
+                </tr>
             </tbody>
         </>
     );
