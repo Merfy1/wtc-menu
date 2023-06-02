@@ -20,6 +20,7 @@ export function MenuHeader( {setPositions} ) {
     const [finalPrice, setFinalPrice] = useState(0)
     const [typePay, setTypePay] = useState('')
     const [basket_active, setBasketActive] = useState(false)
+    const restNum = localStorage.getItem('RestouranNumber')
     const [tableNumber, setTableNumber] = useState("");
 
     useEffect(() => {
@@ -42,7 +43,7 @@ export function MenuHeader( {setPositions} ) {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:3001/api/public/categories/1', {
+        axios.get(`http://localhost:3001/api/public/categories/${restNum}`, {
         }).then((e) => {
             stateCatigories(e.data.catigories)
             setPositions(e.data.catigories)

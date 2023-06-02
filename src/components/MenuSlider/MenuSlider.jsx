@@ -7,8 +7,10 @@ import axios, {isCancel, AxiosError} from 'axios';
 
 export function MenuSlider() {
     const [slide, setSlide] = useState([])
+    localStorage.setItem('RestouranNumber', 1);
+    const restNum = localStorage.getItem('RestouranNumber')
     useEffect(() => {
-        axios.get('http://localhost:3001/api/public/slides', {
+        axios.get(`http://localhost:3001/api/public/slides/${restNum}`, {
         }).then((e) => {
             setSlide(e.data.slides)
         })
