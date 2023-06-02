@@ -3,6 +3,7 @@ import { FiUser } from 'react-icons/fi';
 import { AiOutlineTags } from 'react-icons/ai';
 import { TfiLayoutSlider } from 'react-icons/tfi';
 import { HiTemplate } from 'react-icons/hi';
+import { BiFoodMenu } from 'react-icons/bi';
 import { MdBorderColor } from 'react-icons/md';
 import { ImExit } from 'react-icons/im';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
@@ -12,6 +13,7 @@ import { AdminUser } from '../AdminUser/AdminUser';
 import { AdminSlider } from '../AdminSlider/AdminSlider';
 import { AdminOrder } from '../AdminOrder/AdminOrder';
 import { AdminMain } from '../AdminMain/AdminMain';
+import { AdminRestaurant } from '../AdminRestaurant/AdminRestaurant';
 import "./sidebar.css"
 import { SidebarMore } from '../AdminSidebarMore/SidebarMore';
 
@@ -65,6 +67,15 @@ const Component1 = () => {
         <>
             {/* <SidebarMore></SidebarMore> */}
             <AdminOrder></AdminOrder>
+        </>
+    )
+  };
+
+  const Component7 = () => {
+    return (
+        <>
+            {/* <SidebarMore></SidebarMore> */}
+            <AdminRestaurant></AdminRestaurant>
         </>
     )
   };
@@ -160,6 +171,10 @@ export function Sidebar(){
                                     <MdBorderColor className='sidebar-icon'></MdBorderColor>
                                     <span className='sidebar-text'>Заказы</span>
                                 </button>
+                                <button className={selectedPosition === 6? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(6); handleButtonClick(7);}}>
+                                    <BiFoodMenu className='sidebar-icon'></BiFoodMenu>
+                                    <span className='sidebar-text'>Рестораны</span>
+                                </button>
                             </div>
                             <div className="line"/>
                             <button className="sidebar-exit" onClick={() => {
@@ -184,6 +199,7 @@ export function Sidebar(){
             {activeComponent === 4 && <Component4 />}
             {activeComponent === 5 && <Component5 />}
             {activeComponent === 6 && <Component6 />}
+            {activeComponent === 7 && <Component7 />}
         </>
     );
 };
