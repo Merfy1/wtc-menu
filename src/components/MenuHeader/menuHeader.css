@@ -86,6 +86,7 @@
     }
     .modal-info.photo input{  
         max-width: 300px;
+        color: red;
     }
     .modal-info.photo h2{
         font-size: 25px;

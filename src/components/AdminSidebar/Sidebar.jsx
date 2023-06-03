@@ -56,6 +56,7 @@ export function Sidebar(){
 
     const handleLogOut = () =>{
         localStorage.removeItem('tokenLogin')
+        localStorage.removeItem('restNumber')
         window.location.reload()
     }
     

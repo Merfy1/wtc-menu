@@ -107,4 +107,12 @@
     margin: 5px 0px;
     font-size: 15px;
     font-weight: bold;
+    background-color: transparent;
+    border: white 1px solid;
+    color: white;
+}
+.sidebar-option{
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
 }

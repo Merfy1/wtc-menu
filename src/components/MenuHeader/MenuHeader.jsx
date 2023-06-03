@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { BsBasket } from "react-icons/bs";
 import { ModalBasket } from "../ModalBasket/ModalBasket";
-import './menuHeader.css'
+import './menuHeader.css';
+import "../AdminSidebar/sidebar.css";
 import '../ModalBasket/modalBasket.css'
 import { Menucategories } from "../MenuCategories/Menucategories";
 import { BasketPosition } from "../BasketPosition/BasketPosition";
@@ -22,8 +23,8 @@ export function MenuHeader( {setPositions} ) {
     const [basket_active, setBasketActive] = useState(false)
     const restNum = localStorage.getItem('restNumber')
     const [tableNumber, setTableNumber] = useState("");
-    const [restNumber, setRestNumber] = useState("");
-    const [dropdownData, setDropdownData] = useState([]);
+    const [restaurants, setRestaurants] = useState([]);
+    const [selectedRestaurant, setSelectedRestaurant] = useState('');
 
     useEffect(() => {
         const storedTableNumber = localStorage.getItem("tableNumber");  
@@ -41,7 +42,9 @@ export function MenuHeader( {setPositions} ) {
 
     const handleOrderSubmit = () => {
       localStorage.setItem("tableNumber", tableNumber);
+      localStorage.setItem('restNumber', selectedRestaurant);
       setModalActive1(false)
+      window.location.reload();
     };
 
     useEffect(() => {
@@ -52,13 +55,20 @@ export function MenuHeader( {setPositions} ) {
         })
     },[],)
 
-    // useEffect(() => {
-    //     axios.get(`http://localhost:3001/api/admin/restoran/`, {
-    //     }).then((response ) => {
-    //         setDropdownData(response.data)
-    //         console.log(response.data.res)
-    //     })
-    // },[],)
+    useEffect(() => {
+        axios.get(`http://localhost:3001/api/public/listRestoran/`, {})
+        .then((response ) => {
+            setRestaurants(response.data.listRestoran)
+            setSelectedRestaurant(response.data.listRestoran[0].id);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    },[],)
+    
+    const handleSelectChange = (event) => {
+        setSelectedRestaurant(event.target.value);
+    };
     
     let coutns = 0
     function twoFunction(){
@@ -151,11 +161,17 @@ export function MenuHeader( {setPositions} ) {
                 <ModalTable active={modalActive1} setActive={setModalActive1}> 
                         <div className="modal-info photo">
                             <h2 className='modal-title' photo>Введите номер столика:</h2>
-                            <input className="tableNumber"
+                            <input className="table-number"
                                 type="number"
                                 value={tableNumber}
                                 onChange={handleTableNumberChange}
                             />
+                            <h2 className='sidebar-modal-text' photo>Выберите ресторан:</h2>
+                            <select className="sidebar-select" value={selectedRestaurant} onChange={handleSelectChange}>
+                                {restaurants.map(item => (
+                                    <option className="sidebar-option" key={item.id} value={item.id}>{item.name}</option>
+                                ))}
+                            </select>
                             <button className="buy-position photo" onClick={handleOrderSubmit}>Сохранить</button>
                         </div>   
                 </ModalTable>

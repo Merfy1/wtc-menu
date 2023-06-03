@@ -8,6 +8,7 @@ export function Logo(){
         if (clickCount === 2) {
           setClickCount(0);
           window.location.href = 'admin';
+          localStorage.removeItem('tableNumber');
         }
       };
     return (
