@@ -88,7 +88,7 @@ export function Sidebar(){
                             <h2 className='sidebar-modal-text' photo>Выберите ресторан:</h2>
                             <select className="sidebar-select" value={selectedRestaurant} onChange={handleSelectChange}>
                                 {restaurants.map(item => (
-                                    <option key={item.id} value={item.id}>{item.name}</option>
+                                    <option className="sidebar-option" key={item.id} value={item.id}>{item.name}</option>
                                 ))}
                             </select>
                             <button className="buy-position photo" onClick={handleSave}>Сохранить</button>

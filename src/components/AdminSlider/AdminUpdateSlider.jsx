@@ -1,38 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { BiArrowBack, BiCheck } from 'react-icons/bi';
 import { AdminSlider } from './AdminSlider';
 import { AdminSliderComponent } from './AdminSliderComponent';
 
 export function AdminUpdateSlider({sliderId, onClose}){
-    const token = localStorage.getItem("tokenLogin");
     const [ShowComponent, setShowComponent] = useState(false);
-    const [countSlide, setCountSlide] = useState([]);
     const [allSlides, setAllSlides] = useState([]);
     const [slides, setSlides] = useState([]);
     const [title, setTitle] = useState("");
+    const access_token = localStorage.getItem("tokenLogin");
+    const restNum = localStorage.getItem('restNumber');
+    const MySwal = withReactContent(Swal)
+    const headers = {
+        Authorization: access_token,
+    };
+
+    const updateData = () => {
+        axios.get(`http://localhost:3001/api/admin/slides/${restNum}`, {headers})
+        .then(res => {
+            setAllSlides(res.data.date);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    } 
 
     useEffect(() => {
-        axios.get('http://localhost:3001/api/admin/slides/', {
-            headers: {
-                Authorization: token
-            }
-            })
-            .then(response => {
-                setAllSlides(response.data.date);
-            console.log(response.data.date)
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        }, []);
+        updateData();
+    },[]);
 
     useEffect(() => {
         axios.get(`http://localhost:3001/api/public/slides/`)
         .then((response) => {
-          setTitle(response.data.title);
+            setTitle(response.data.title);
         });
-    }, [sliderId]);
+    },[sliderId]);
   
     const handleTitleChange = (event) => {
       setTitle(event.target.value);
@@ -45,33 +50,47 @@ export function AdminUpdateSlider({sliderId, onClose}){
     const handleSubmit = async (event, id) => {
         event.preventDefault();
         try {
-        await axios.put(`http://localhost:3001/api/admin/slides/update/`,{     
+            await axios.put(`http://localhost:3001/api/admin/slides/update/`,{     
                 id_slide: title,
-                tocken: token
-            },
-          )
-          .then((res) => {
-            setSlides(res.data.slides);
-            onClose();
-          })
-        } catch (error) {
+                tocken: access_token
+            },)
+            .then((res) => {
+                setSlides(res.data.slides);
+                onClose();
+
+            })
+        } 
+        catch (error) {
             console.error(error); 
-            alert("Не удалось изменить слайд");// выводим ошибку в консоль
+            MySwal.fire({
+                title: <strong>Ошибка</strong>,
+                html: <i>Не удалось изменить слайд</i>,
+                icon: 'error'
+            })
         }
+        updateData();
       };
-      const handleDeleteUser = (id) => {
+
+    const handleDeleteUser = (event, id) => {
+        event.preventDefault();
         axios.delete(`http://localhost:3001/api/admin/slides/delete/`,{
-          data: { 
-                    tocken: localStorage.getItem("tokenLogin"),
-                    id_slide: id
-                },
-        }).then(() => {
-          setSlides(slides.filter((slide) => slide.id !== id));
-        }).catch((err) => {
-          console.log(err);
-          alert("Не удалось удалить пользователя");
+            data: { 
+                tocken: access_token,
+                id_slide: id
+            },
+        })
+        .then(() => {
+            setSlides(slides.filter((slide) => slide.id !== id));
+        })
+        .catch((err) => {
+            console.log(err);
+            MySwal.fire({
+                title: <strong>Ошибка</strong>,
+                html: <i>Не удалось удалить слайд</i>,
+                icon: 'error'
+            })
         });
-      }     
+    }     
 
     return (
         <>

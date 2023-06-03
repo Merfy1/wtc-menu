@@ -7,7 +7,7 @@ export function AdminSliderComponent ({slide, onDelete}) {
 
     const handleDelete = () => {
         onDelete(slide.id);
-      }
+    }
     return (
         <>
             <td colSpan="5">

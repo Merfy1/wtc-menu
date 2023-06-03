@@ -116,3 +116,12 @@
     font-size: 15px;
     font-weight: bold;
 }
+.slider-select{
+    padding: 8px 25px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: transparent;
+    border: #EAEAEF 2px solid;
+    color: black;
+}

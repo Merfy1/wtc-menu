@@ -54,7 +54,8 @@ export function AdminCategory (){
     }
 
     const handleUpdateCategory  = async (newName) => {
-        await axios.put(`http://localhost:3001/api/admin/tags/${categoryToUpdate}`,{
+        await axios.put(`http://localhost:3001/api/admin/tags/${categoryToUpdate}`,
+        {
             new_name: newName,
             tocken: access_token,
         })
