@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { BiArrowBack, BiCheck } from 'react-icons/bi';
 import { AdminCategory } from './AdminCategory';
-
+import { AdminComponent } from '../AdminComponent/AdminComponent';
 
 export function AdminCreateCategory (){
     const [ShowComponent, setShowComponent] = useState(false);
@@ -41,32 +41,28 @@ export function AdminCreateCategory (){
             {ShowComponent ? (
                 <AdminCategory/>
             ) : (
-                <div className="main">
-                    <div className="main-container">
-                        <div className="main-wrapper">
-                            <button className="main-header__back" onClick={handleShowComponent}>
-                                <BiArrowBack/>Назад
+                    <AdminComponent>
+                        <button className="main-header__back" onClick={handleShowComponent}>
+                            <BiArrowBack/>Назад
+                        </button>
+                        <div className="main-header">
+                            <span className="main-header__title">
+                                Создание
+                            </span>
+                            <button className="main-header__button" onClick={handleCreateCategory}>
+                                <span><BiCheck/></span>
+                                Сохранить
                             </button>
-                            <div className="main-header">
-                                <span className="main-header__title">
-                                    Создание
-                                </span>
-                                <button className="main-header__button" onClick={handleCreateCategory}>
-                                    <span><BiCheck/></span>
-                                    Сохранить
-                                </button>
-                            </div>
-                            <div className="table-wrapper">
-                                <form className='main-form'> 
-                                    <div className="main-form__input-create">
-                                        <span className="main-form__span">Наименование</span>
-                                        <input value={categoryName} onChange={(e) => setCategoryName(e.target.value)} type="text" className="main-form__input"/>
-                                    </div>
-                                </form>
-                            </div>
                         </div>
-                    </div>
-                </div> 
+                        <div className="table-wrapper">
+                            <form className='main-form'> 
+                                <div className="main-form__input-create">
+                                    <span className="main-form__span">Наименование</span>
+                                    <input value={categoryName} onChange={(e) => setCategoryName(e.target.value)} type="text" className="main-form__input"/>
+                                </div>
+                            </form>
+                        </div>
+                    </AdminComponent>
                 )
             } 
         </>

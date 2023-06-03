@@ -8,8 +8,9 @@ import { useEffect } from 'react';
 export function AdminOrderComponent ({onDelete, id_order, time, status, table, onEdit, order, onHidden, onHiddenSet}) {
     const [ShowComponent, setShowComponent] = useState(false);
     var date = new Date(time);
+
     useEffect(() => {
-    }, [status]);
+    },[status]);
     
     const handleClick = () => {
         setShowComponent(true);
@@ -19,6 +20,7 @@ export function AdminOrderComponent ({onDelete, id_order, time, status, table, o
     const handleDelete = () => {
         onDelete(id_order);
     }
+    
     return (
         <>
             {ShowComponent ? (

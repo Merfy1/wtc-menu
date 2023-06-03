@@ -6,7 +6,7 @@ import withReactContent from 'sweetalert2-react-content';
 import { AdminCategoryComponent } from './AdminCategoryComponent';
 import { AdminCreateCategory } from './AdminCreateCategory';
 import { AdminUpdateCategory } from './AdminUpdateCategory';
-
+import { AdminComponent } from '../AdminComponent/AdminComponent';
 
 export function AdminCategory (){
     const [categories, setCategories] = useState([]);
@@ -90,39 +90,35 @@ export function AdminCategory (){
             }
             {
                !categoryToUpdate && !ShowComponent && (
-                    <div className="main">
-                        <div className="main-container">
-                            <div className="main-wrapper">
-                                <div className="main-header">
-                                    <span className="main-header__title">
-                                        Категория
-                                    </span>
-                                    <button className="main-header__button" onClick={handleShowComponent}>
-                                        <img src="img/plus-mini.svg" alt=""/>
-                                        Добавить
-                                    </button>
-                                </div>
-                                <span> Количество категорий: {categories.length}</span>
-                                <div className="table-wrapper">
-                                    <table className='main-table'>
-                                        <thead>
-                                            <tr>
-                                                <th>Наименование</th>
-                                                <th className="main-table__button">Действия</th>
-                                            </tr>
-                                        </thead>
-                                        {!categoryToUpdate &&  (
-                                            <AdminCategoryComponent
-                                            categories={categories}
-                                            onUpdate={handleCategoryUpdate}
-                                            onDelete={handleDeleteCategory}
-                                            />
-                                        )}
-                                    </table>
-                                </div>
-                            </div>
+                    <AdminComponent>
+                        <div className="main-header">
+                            <span className="main-header__title">
+                                Категория
+                            </span>
+                            <button className="main-header__button" onClick={handleShowComponent}>
+                                <img src="img/plus-mini.svg" alt=""/>
+                                Добавить
+                            </button>
                         </div>
-                    </div>  
+                        <span> Количество категорий: {categories.length}</span>
+                        <div className="table-wrapper">
+                            <table className='main-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Наименование</th>
+                                        <th className="main-table__button">Действия</th>
+                                    </tr>
+                                </thead>
+                                {!categoryToUpdate &&  (
+                                    <AdminCategoryComponent
+                                    categories={categories}
+                                    onUpdate={handleCategoryUpdate}
+                                    onDelete={handleDeleteCategory}
+                                    />
+                                )}
+                            </table>
+                        </div>
+                    </AdminComponent>
                 )
             }
 
