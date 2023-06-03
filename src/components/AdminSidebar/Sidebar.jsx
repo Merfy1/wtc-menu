@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import { FiUser } from 'react-icons/fi';
 import { AiOutlineTags } from 'react-icons/ai';
 import { TfiLayoutSlider } from 'react-icons/tfi';
@@ -14,78 +15,29 @@ import { AdminSlider } from '../AdminSlider/AdminSlider';
 import { AdminOrder } from '../AdminOrder/AdminOrder';
 import { AdminMain } from '../AdminMain/AdminMain';
 import { AdminRestaurant } from '../AdminRestaurant/AdminRestaurant';
+import { ModalTable } from "../ModalBasket/ModalTable";
 import "./sidebar.css"
-import { SidebarMore } from '../AdminSidebarMore/SidebarMore';
 
-// const SlidebarMore = () => {
-//     return <SidebarMore></SidebarMore>;
-//   };
-
-const Component1 = () => {
-    return <AdminMain></AdminMain>
-
-  };
-  
-  const Component2 = () => {
-    return (
-        <>
-            {/* <SidebarMore></SidebarMore> */}
-            <AdminUser></AdminUser>
-        </>
-    )
-  };
-  
-  const Component3 = () => {
-    return (
-        <>
-            {/* <SidebarMore></SidebarMore> */}
-            <AdminCategory></AdminCategory>
-        </>
-    )
-  };
-  
-  const Component4 = () => {
-    return (
-        <>
-            {/* <SidebarMore></SidebarMore> */}
-            <AdminSlider></AdminSlider>
-        </>
-    )
-  };
-  
-  const Component5 = () => {
-    return (
-        <>
-            {/* <SidebarMore></SidebarMore> */}
-            <AdminPosition></AdminPosition>
-        </>
-    )
-  };
-
-  const Component6 = () => {
-    return (
-        <>
-            {/* <SidebarMore></SidebarMore> */}
-            <AdminOrder></AdminOrder>
-        </>
-    )
-  };
-
-  const Component7 = () => {
-    return (
-        <>
-            {/* <SidebarMore></SidebarMore> */}
-            <AdminRestaurant></AdminRestaurant>
-        </>
-    )
-  };
+const Component1 = () => {return <AdminMain></AdminMain>};
+const Component2 = () => {return <AdminUser></AdminUser>};
+const Component3 = () => {return <AdminCategory></AdminCategory>};
+const Component4 = () => {return <AdminSlider></AdminSlider>};
+const Component5 = () => {return <AdminPosition></AdminPosition>};
+const Component6 = () => {return <AdminOrder></AdminOrder>};
+const Component7 = () => {return <AdminRestaurant></AdminRestaurant>};
 
 export function Sidebar(){
     const [selectedPosition, setSelectedPosition] = useState(null);
     const [activeComponent, setActiveComponent] = useState(1);
     const [isClicked, setIsClicked] = useState(false);
-    
-    // const [showComponent1, setShowComponent1] = useState(true);
+    const [modalActive, setModalActive] = useState(true)
+    const [restaurants, setRestaurants] = useState([]);
+    const [selectedRestaurant, setSelectedRestaurant] = useState('');
+    const access_token = localStorage.getItem('tokenLogin'); // получаем токен из localStorage
+    const headers = {
+        Authorization: access_token,
+    };
+
     const handlePositionClick = (position) => {
         if (selectedPosition === position) {
           setSelectedPosition(null);
@@ -93,20 +45,54 @@ export function Sidebar(){
           setSelectedPosition(position);
         }
     };
+    
     const handleButtonClick = (componentNumber) => {
         setActiveComponent(componentNumber);
     };
+
     const handleClick = () => {
         setIsClicked(!isClicked);
-      };
+    };
 
     const handleLogOut = () =>{
         localStorage.removeItem('tokenLogin')
         window.location.reload()
     }
+    
+    useEffect(() => {
+        axios.get(`http://localhost:3001/api/admin/restoran/`, {headers})
+        .then((response ) => {
+            setRestaurants(response.data)
+            setSelectedRestaurant(response.data[0].id);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    },[],)
+
+    const handleSelectChange = (event) => {
+        setSelectedRestaurant(event.target.value);
+    };
+
+    const handleSave = () => {
+        localStorage.setItem('restNumber', selectedRestaurant);
+        setModalActive(false);
+    };
+
     return (
         <>
             <div className='sidebar'>
+                <ModalTable active={modalActive} setActive={setModalActive}> 
+                        <div className="modal-info photo">
+                            <h2 className='sidebar-modal-text' photo>Выберите ресторан:</h2>
+                            <select className="sidebar-select" value={selectedRestaurant} onChange={handleSelectChange}>
+                                {restaurants.map(item => (
+                                    <option key={item.id} value={item.id}>{item.name}</option>
+                                ))}
+                            </select>
+                            <button className="buy-position photo" onClick={handleSave}>Сохранить</button>
+                        </div>   
+                </ModalTable>
                 {isClicked ? (
                     <div className="sidebar-container_hide">
                         <div className="sidebar-wrapper">
@@ -132,10 +118,7 @@ export function Sidebar(){
                                 </button>
                             </div>
                             <div className="line"/>
-                            <button className="sidebar-exit" onClick={() => {
-                                localStorage.removeItem('tokenLogin')
-                                window.location.reload()
-                            }}>
+                            <button className="sidebar-exit" onClick={() => {handleLogOut()}}>
                                 <ImExit className='sidebar_hiden-icon'></ImExit>
                             </button>
                             <button className="sidebar-hide">
@@ -175,12 +158,10 @@ export function Sidebar(){
                                     <BiFoodMenu className='sidebar-icon'></BiFoodMenu>
                                     <span className='sidebar-text'>Рестораны</span>
                                 </button>
+
                             </div>
                             <div className="line"/>
-                            <button className="sidebar-exit" onClick={() => {
-                                localStorage.removeItem('tokenLogin')
-                                window.location.reload()
-                            }}>
+                            <button className="sidebar-exit" onClick={() => {handleLogOut()}}>
                                 <ImExit className='sidebar-icon'></ImExit>
                                 <span className='sidebar-text'>Выход</span>
                             </button>

@@ -11,7 +11,7 @@ export function MenuPositions({positionsID}) {
     const [modalActive, setModalActive] = useState(false)
     const [positions, statePosition] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
-    const restNum = localStorage.getItem('RestouranNumber')
+    const restNum = localStorage.getItem('restNumber')
     useEffect(() => {
         axios.get(`http://localhost:3001/api/public/positions/${restNum}`, {
         }).then((e) => {

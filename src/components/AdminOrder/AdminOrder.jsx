@@ -10,7 +10,7 @@ export function AdminOrder (){
     
     useEffect(() => {
         const access_token = localStorage.getItem('tokenLogin')
-        const restNum = localStorage.getItem('RestouranNumber')
+        const restNum = localStorage.getItem('restNumber')
         axios.get(`http://localhost:3001/api/admin/order/${restNum}`, {
             headers: {
               'Authorization': access_token

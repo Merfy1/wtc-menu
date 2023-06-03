@@ -95,3 +95,16 @@
     font-size: 15px;
     transition: 0.5s;
 }
+.sidebar-modal-text{
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    margin-bottom: 5px;
+}
+.sidebar-select{
+    padding: 8px;
+    border-radius: 8px;
+    margin: 5px 0px;
+    font-size: 15px;
+    font-weight: bold;
+}

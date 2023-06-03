@@ -10,7 +10,7 @@ export function AdminCategory (){
     const [catigories, setCategories] = useState([]);
     const [categoryToUpdate, setCategoryToUpdate] = useState(null);
     const [ShowComponent, setShowComponent] = useState(false);
-    const restNum = localStorage.getItem('RestouranNumber');
+    const restNum = localStorage.getItem('restNumber');
     const [ShowUpdate, setShowUpdate] = useState(false)
 
     const handleUpdateCategory = (categoryId) => {

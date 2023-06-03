@@ -20,8 +20,10 @@ export function MenuHeader( {setPositions} ) {
     const [finalPrice, setFinalPrice] = useState(0)
     const [typePay, setTypePay] = useState('')
     const [basket_active, setBasketActive] = useState(false)
-    const restNum = localStorage.getItem('RestouranNumber')
+    const restNum = localStorage.getItem('restNumber')
     const [tableNumber, setTableNumber] = useState("");
+    const [restNumber, setRestNumber] = useState("");
+    const [dropdownData, setDropdownData] = useState([]);
 
     useEffect(() => {
         const storedTableNumber = localStorage.getItem("tableNumber");  
@@ -48,9 +50,15 @@ export function MenuHeader( {setPositions} ) {
             stateCatigories(e.data.catigories)
             setPositions(e.data.catigories)
         })
-    },
-    [],
-    )
+    },[],)
+
+    // useEffect(() => {
+    //     axios.get(`http://localhost:3001/api/admin/restoran/`, {
+    //     }).then((response ) => {
+    //         setDropdownData(response.data)
+    //         console.log(response.data.res)
+    //     })
+    // },[],)
     
     let coutns = 0
     function twoFunction(){

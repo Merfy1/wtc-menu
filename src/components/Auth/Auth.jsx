@@ -20,7 +20,6 @@ export function Auth(){
             password
         })
         localStorage.setItem('tokenLogin', authResult.data.session)
-        localStorage.setItem('RestouranNumber', 1);
         window.location.reload();
     }
     const [clickCount, setClickCount] = useState(0);

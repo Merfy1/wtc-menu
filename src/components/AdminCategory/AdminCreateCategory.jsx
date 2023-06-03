@@ -6,7 +6,7 @@ import { AdminCategory } from './AdminCategory';
 export function AdminCreateCategory (){
     const [ShowComponent, setShowComponent] = useState(false);
     const [categoryName, setCategoryName] = useState('');
-    const restNum = localStorage.getItem('RestouranNumber');
+    const restNum = localStorage.getItem('restNumber');
     const token = localStorage.getItem('tokenLogin'); // получаем токен из localStorage
 
     const handleCreateCategory = async () => {
