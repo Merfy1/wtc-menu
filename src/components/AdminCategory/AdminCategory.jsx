@@ -11,6 +11,7 @@ export function AdminCategory (){
     const [catigories, setCategories] = useState([]);
     const [categoryToUpdate, setCategoryToUpdate] = useState(null);
     const [ShowComponent, setShowComponent] = useState(false);
+    const restNum = localStorage.getItem('RestouranNumber');
     const [ShowUpdate, setShowUpdate] = useState(false)
 
     const handleUpdateCategory = (categoryId) => {
@@ -22,7 +23,7 @@ export function AdminCategory (){
     };
 
     useEffect(() => {
-        axios.get('http://localhost:3001/api/admin/tags/')
+        axios.get(`http://localhost:3001/api/admin/tags/${restNum}`)
         .then(res => {
             setCategories(res.data.catigories);
         })

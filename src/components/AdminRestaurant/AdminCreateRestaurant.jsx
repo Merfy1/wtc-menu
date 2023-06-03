@@ -8,10 +8,10 @@ export function AdminCreateRestaurant () {
     const [restName, setRestName] = useState('');
     const [restAddress, setRestAddress] = useState('');
     const [restEmail, setRestEmail] = useState('');
-    const [isRestCastomerLogin, setIsCastomerLogin] = useState(true);
-    const [isRestActive, setIsRestActive] = useState(true);
-    const [isRestActiveBalance, setIsRestActiveBalance] = useState(true);
-    const [isRestAactiveLoyality, setIsRestAactiveLoyality] = useState(true);
+    // const [isRestCastomerLogin, setIsCastomerLogin] = useState(true);
+    // const [isRestActive, setIsRestActive] = useState(true);
+    // const [isRestActiveBalance, setIsRestActiveBalance] = useState(true);
+    // const [isRestAactiveLoyality, setIsRestAactiveLoyality] = useState(true);
 
     const access_token = localStorage.getItem('tokenLogin'); // получаем токен из localStorage
 
@@ -23,10 +23,10 @@ export function AdminCreateRestaurant () {
             name: restName,
             address: restAddress,
             email: restEmail,
-            activeRestoran: isRestActive,
-            activeLoginCastomer: isRestCastomerLogin,
-            activeBalance: isRestActiveBalance,
-            activeLoyality: isRestAactiveLoyality
+            // activeRestoran: isRestActive,
+            // activeLoginCastomer: isRestCastomerLogin,
+            // activeBalance: isRestActiveBalance,
+            // activeLoyality: isRestAactiveLoyality
         };
         try {
           const response = await axios.post('http://localhost:3001/api/admin/restoran/', restaurantData, {headers});
@@ -41,18 +41,18 @@ export function AdminCreateRestaurant () {
     const handleClick = () => {
         setShowComponent(true);
     };
-    const handleIsRestActiveChange = (event) => {
-        setIsRestActive(event.target.value === 'true');
-    };
-    const handleIsRestCastomerLogin = (event) => {
-        setIsCastomerLogin(event.target.value === 'true');
-    };
-    const handleIsRestActiveBalance = (event) => {
-        setIsRestActiveBalance(event.target.value === 'true');
-    };
-    const handleIsRestActiveLoyality = (event) => {
-        setIsRestAactiveLoyality(event.target.value === 'true');
-    };
+    // const handleIsRestActiveChange = (event) => {
+    //     setIsRestActive(event.target.value === 'true');
+    // };
+    // const handleIsRestCastomerLogin = (event) => {
+    //     setIsCastomerLogin(event.target.value === 'true');
+    // };
+    // const handleIsRestActiveBalance = (event) => {
+    //     setIsRestActiveBalance(event.target.value === 'true');
+    // };
+    // const handleIsRestActiveLoyality = (event) => {
+    //     setIsRestAactiveLoyality(event.target.value === 'true');
+    // };
     return (
         <>
             {ShowComponent ? (
@@ -87,7 +87,7 @@ export function AdminCreateRestaurant () {
                                         <span className="main-form__span">Почта</span>
                                         <input value={restEmail} onChange={(e) => setRestEmail(e.target.value)} type="text" className="main-form__input"/>
                                     </div>
-                                    <div className="main-form__input-create">
+                                    {/* <div className="main-form__input-create">
                                         <span className="main-form__span"> <br/>
                                             Активен ли ресторан? <br/>
                                             <input
@@ -162,7 +162,7 @@ export function AdminCreateRestaurant () {
                                             onChange={handleIsRestActiveLoyality}
                                             /> Нет
                                         </span>
-                                    </div>
+                                    </div> */}
                                 </form>
                             </div>
                         </div>

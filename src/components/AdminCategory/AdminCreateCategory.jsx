@@ -11,7 +11,7 @@ export function AdminCreateCategory (){
 
     const handleCreateCategory = async () => {
         try {
-          const response = await axios.post(`http://localhost:3001/api/admin/tags/1`,
+          const response = await axios.post(`http://localhost:3001/api/admin/tags/${restNum}`,
             {
               name: categoryName,
               token: token,
