@@ -1,79 +1,76 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "./admincategory.css"
+import "./admincategory.css";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { AdminCategoryComponent } from './AdminCategoryComponent';
 import { AdminCreateCategory } from './AdminCreateCategory';
 import { AdminUpdateCategory } from './AdminUpdateCategory';
 
 
 export function AdminCategory (){
-    const [catigories, setCategories] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [categoryToUpdate, setCategoryToUpdate] = useState(null);
     const [ShowComponent, setShowComponent] = useState(false);
-    const restNum = localStorage.getItem('restNumber');
     const [ShowUpdate, setShowUpdate] = useState(false)
+    const access_token = localStorage.getItem("tokenLogin");
+    const restNum = localStorage.getItem('restNumber');
+    const MySwal = withReactContent(Swal)
 
-    const handleUpdateCategory = (categoryId) => {
-        setCategoryToUpdate(categoryId);
-    };
-
-    const handleClick = () => {
+    const handleShowComponent = () => {
         setShowComponent(true);
     };
-
-    useEffect(() => {
+    
+    const handleCategoryUpdate = (categoryId) => {
+        setCategoryToUpdate(categoryId);
+    };
+    
+    const updateData = () => {
         axios.get(`http://localhost:3001/api/admin/tags/${restNum}`)
         .then(res => {
             setCategories(res.data.catigories);
         })
-        .catch(error => {
-            console.error(error);
+        .catch(err => {
+            console.error(err);
         });
-    }, []);
-
-    const handleDeleteCategory = (id) => {
-      axios.delete(`http://localhost:3001/api/admin/tags/${id}`).then(() => {
-        setCategories(catigories.filter((category) => category.id_categoria !== id));
-      }).catch((err) => {
-        console.log(err);
-        alert("Не удалось удалить категорию");
-      });
     }
 
-    const handleCategoryUpdate  = async (newName) => {
-        const tocken = localStorage.getItem("tokenLogin");
-        try {
-        const response = await axios.put(`http://localhost:3001/api/admin/tags/${categoryToUpdate}`,{
-            new_name: newName,
-            tocken: tocken,
-          })
-          .then((res) => {
-            setCategoryToUpdate(null);
-          })
-        } catch (error) {
-            console.error(error); // выводим ошибку в консоль
-        }
-
-        axios.get('http://localhost:3001/api/admin/tags/')
-        .then(res => {
-            setCategories(res.data.catigories);
-        })
-        .catch(error => {
-            console.error(error);
-        });
-    };
-
-
-    let useRenderListCategories = true
-
     useEffect(() => {
-        if (!categoryToUpdate & !ShowComponent){
-            useRenderListCategories = false
-            console.log('Я сейчас не показываюсь')
-        }   else {
-            useRenderListCategories = true            
-        }
-    }, [categoryToUpdate, ShowComponent]);
+        updateData();
+    },[]);
+
+    const handleDeleteCategory = (id) => {
+        axios.delete(`http://localhost:3001/api/admin/tags/${id}`)
+        .then(() => {
+            setCategories(categories.filter((category) => category.id_categoria !== id));
+        }).catch((err) => {
+            console.log(err);
+            MySwal.fire({
+                title: <strong>Ошибка</strong>,
+                html: <i>Не удалось удалить категорию</i>,
+                icon: 'error'
+            })
+        });
+    }
+
+    const handleUpdateCategory  = async (newName) => {
+        await axios.put(`http://localhost:3001/api/admin/tags/${categoryToUpdate}`,{
+            new_name: newName,
+            tocken: access_token,
+        })
+        .then(() => {
+            setCategoryToUpdate(null);
+        })
+        .catch((err) => {
+            console.error(err);
+            MySwal.fire({
+                title: <strong>Ошибка</strong>,
+                html: <i>Не удалось изменить категорию</i>,
+                icon: 'error'
+            })
+        });
+        updateData();
+    };
 
     return (
         <>
@@ -85,8 +82,7 @@ export function AdminCategory (){
                 categoryToUpdate && (
                     <AdminUpdateCategory
                     setCategoryToUpdate={setCategoryToUpdate}
-                    categoryId={categoryToUpdate}
-                    onUpdateCategory={handleCategoryUpdate}
+                    onUpdateCategory={handleUpdateCategory}
                     setShowComponent1={setShowComponent}
                     setShowUpdate={setShowUpdate}
                     />
@@ -101,12 +97,12 @@ export function AdminCategory (){
                                     <span className="main-header__title">
                                         Категория
                                     </span>
-                                    <button className="main-header__button" onClick={handleClick}>
+                                    <button className="main-header__button" onClick={handleShowComponent}>
                                         <img src="img/plus-mini.svg" alt=""/>
                                         Добавить
                                     </button>
                                 </div>
-                                <span> Количество категорий: {catigories.length}</span>
+                                <span> Количество категорий: {categories.length}</span>
                                 <div className="table-wrapper">
                                     <table className='main-table'>
                                         <thead>
@@ -117,8 +113,8 @@ export function AdminCategory (){
                                         </thead>
                                         {!categoryToUpdate &&  (
                                             <AdminCategoryComponent
-                                            catigories={catigories}
-                                            onUpdateCategory={handleUpdateCategory}
+                                            categories={categories}
+                                            onUpdate={handleCategoryUpdate}
                                             onDelete={handleDeleteCategory}
                                             />
                                         )}

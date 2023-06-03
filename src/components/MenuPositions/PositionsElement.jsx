@@ -3,19 +3,14 @@ import axios from 'axios'
 import { MenuPosition } from "../MenuPosition/MenuPosition";
 
 const PositionsElement = ({ name, positionsID}) => {
-
     const [statePositons, setStatePositons] = useState([]);
 
-    useEffect(() => {
-        
+    useEffect(() => {   
         async function getPositionsById(positionsID){
             const result = await axios.get(`http://localhost:3001/api/public/positions/${positionsID}`)
-            // console.log(result.data.positions)
             setStatePositons(result.data.positions)
         }
-
         getPositionsById(positionsID)
-        
     }, []);
 
     return (
@@ -32,7 +27,5 @@ const PositionsElement = ({ name, positionsID}) => {
             </div>
         </div>
     )
-
 }
-
 export default PositionsElement

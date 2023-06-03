@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { BiArrowBack, BiCheck } from 'react-icons/bi';
 import { AdminCategory } from './AdminCategory';
 
-export function AdminUpdateCategory ( {categoryId, onUpdateCategory, setCategoryToUpdate, setShowComponent1, setShowUpdate}){
+export function AdminUpdateCategory ( {onUpdateCategory, setCategoryToUpdate, setShowComponent1, setShowUpdate}){
     const [ShowComponent, setShowComponent] = useState(false);
     const [newName, setNewName] = useState("");
 

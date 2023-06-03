@@ -1,34 +1,41 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { BiArrowBack, BiCheck } from 'react-icons/bi';
 import { AdminCategory } from './AdminCategory';
+
 
 export function AdminCreateCategory (){
     const [ShowComponent, setShowComponent] = useState(false);
     const [categoryName, setCategoryName] = useState('');
     const restNum = localStorage.getItem('restNumber');
-    const token = localStorage.getItem('tokenLogin'); // получаем токен из localStorage
+    const access_token = localStorage.getItem('tokenLogin');
+    const MySwal = withReactContent(Swal)
 
     const handleCreateCategory = async () => {
         try {
-          const response = await axios.post(`http://localhost:3001/api/admin/tags/${restNum}`,
-            {
-              name: categoryName,
-              token: token,
-            }
-          );
-          console.log(response.data); // выводим ответ сервера в консоль
-          setShowComponent(true);
-
-        } catch (error) {
-          console.error(error); // выводим ошибку в консоль
-          alert("Не удается создать категорию");
+            await axios.post(`http://localhost:3001/api/admin/tags/${restNum}`,
+                {
+                    name: categoryName,
+                    token: access_token,
+                }
+            );
+            setShowComponent(true);
+        } catch (err) {
+            console.error(err);
+            MySwal.fire({
+                title: <strong>Ошибка</strong>,
+                html: <i>Не удалось создать категорию</i>,
+                icon: 'error'
+            })
         }
-
     };
-    const handleClick = () => {
+
+    const handleShowComponent = () => {
         setShowComponent(true);
     };
+
     return (
         <>
             {ShowComponent ? (
@@ -37,8 +44,8 @@ export function AdminCreateCategory (){
                 <div className="main">
                     <div className="main-container">
                         <div className="main-wrapper">
-                            <button className="main-header__back" onClick={handleClick}>
-                                <BiArrowBack/> Назад
+                            <button className="main-header__back" onClick={handleShowComponent}>
+                                <BiArrowBack/>Назад
                             </button>
                             <div className="main-header">
                                 <span className="main-header__title">

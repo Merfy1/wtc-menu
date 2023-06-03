@@ -26,6 +26,13 @@ export function MenuHeader( {setPositions} ) {
     const [restaurants, setRestaurants] = useState([]);
     const [selectedRestaurant, setSelectedRestaurant] = useState('');
 
+    const handleOrderSubmit = () => {
+      localStorage.setItem("tableNumber", tableNumber);
+      localStorage.setItem('restNumber', selectedRestaurant);
+      setModalActive1(false)
+      window.location.reload();
+    };
+
     useEffect(() => {
         const storedTableNumber = localStorage.getItem("tableNumber");  
         if (storedTableNumber) {
@@ -38,13 +45,6 @@ export function MenuHeader( {setPositions} ) {
 
     const handleTableNumberChange = (e) => {
       setTableNumber(e.target.value);
-    };
-
-    const handleOrderSubmit = () => {
-      localStorage.setItem("tableNumber", tableNumber);
-      localStorage.setItem('restNumber', selectedRestaurant);
-      setModalActive1(false)
-      window.location.reload();
     };
 
     useEffect(() => {
@@ -140,7 +140,8 @@ export function MenuHeader( {setPositions} ) {
         if (positionsBasket?.length > 0) {
             setBasketActive(countTovar)
 
-        }   else {
+        }
+        else {
             setBasketActive(false)
         }
         
@@ -151,9 +152,8 @@ export function MenuHeader( {setPositions} ) {
     useEffect(() => {
         const elements = JSON.parse(localStorage.getItem('card'))
         setPositionsBasket(elements)
-    },
-    [],
-    )
+    },[],)
+    
     return(
         <>
         <div className="header">

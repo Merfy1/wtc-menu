@@ -23,6 +23,8 @@
     "react-touch-events": "^3.0.0",
     "resend": "^0.11.1",
     "stream": "^0.0.2",
+    "sweetalert2": "^11.7.10",
+    "sweetalert2-react-content": "^5.0.7",
     "use-history": "^1.4.1",
     "web-vitals": "^2.1.4"
   },

@@ -22,7 +22,6 @@ export function MenuPositions({positionsID}) {
     )
 
     useEffect(() => {
-        // console.log('useEffect', positionsID[0])
     }, [positionsID]);
     const filteredCards = positions.filter((positions) =>
         positions.name.toLowerCase().includes(searchTerm.toLowerCase())
