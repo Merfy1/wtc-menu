@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BiArrowBack, BiCheck } from 'react-icons/bi';
-import { AdminRestaurant } from './AdminRestaurant';
+import { AdminUsers } from './AdminUsers';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-export function AdminCreateRestaurant () {
+export function AdminUsersCreate () {
     const [ShowComponent, setShowComponent] = useState(false);
-    const [restName, setRestName] = useState('');
-    const [restAddress, setRestAddress] = useState('');
-    const [restEmail, setRestEmail] = useState('');
+    const [usersName, setUsersName] = useState('');
+    const [usersLastname, setUsersLastname] = useState('');
+    const [usersSurname, setUsersSurname] = useState('');
+    const [usersPhone, setUsersPhone] = useState('');
+    const [usersDate, setUsersDate] = useState('');
     const access_token = localStorage.getItem('tokenLogin');
     const MySwal = withReactContent(Swal)
 
@@ -17,13 +19,15 @@ export function AdminCreateRestaurant () {
         const headers = {
             Authorization: access_token,
         };
-        const restaurantData = {
-            name: restName,
-            address: restAddress,
-            email: restEmail,
+        const userstData = {
+            name: usersName,
+            lastname: usersLastname,
+            surname: usersSurname,
+            phone: usersPhone,
+            dateBirsdate: usersDate,
         };
         try {
-            const response = await axios.post('http://localhost:3001/api/admin/restoran/', restaurantData, {headers});
+            const response = await axios.post('http://localhost:3001/api/admin/castomer/', userstData, {headers});
             setShowComponent(true);
         } catch (error) {
             console.error(error);
@@ -33,7 +37,6 @@ export function AdminCreateRestaurant () {
                 icon: 'error'
             })
         }
-
     };
 
     const handleClick = () => {
@@ -43,7 +46,7 @@ export function AdminCreateRestaurant () {
     return (
         <>
             {ShowComponent ? (
-                <AdminRestaurant/>
+                <AdminUsers/>
             ) : (
                 <div className="main">
                     <div className="main-container">
@@ -63,16 +66,24 @@ export function AdminCreateRestaurant () {
                             <div className="table-wrapper">
                                 <form className='main-form'> 
                                     <div className="main-form__input-create">
-                                        <span className="main-form__span">Наименование</span>
-                                        <input value={restName} onChange={(e) => setRestName(e.target.value)} type="text" className="main-form__input"/>
+                                        <span className="main-form__span">Имя</span>
+                                        <input value={usersName} onChange={(e) => setUsersName(e.target.value)} type="text" className="main-form__input"/>
                                     </div>
                                     <div className="main-form__input-create">
-                                        <span className="main-form__span">Адрес</span>
-                                        <input value={restAddress} onChange={(e) => setRestAddress(e.target.value)} type="text" className="main-form__input"/>
+                                        <span className="main-form__span">Фамилия</span>
+                                        <input value={usersLastname} onChange={(e) => setUsersLastname(e.target.value)} type="text" className="main-form__input"/>
                                     </div>
                                     <div className="main-form__input-create">
-                                        <span className="main-form__span">Почта</span>
-                                        <input value={restEmail} onChange={(e) => setRestEmail(e.target.value)} type="text" className="main-form__input"/>
+                                        <span className="main-form__span">Отчество</span>
+                                        <input value={usersSurname} onChange={(e) => setUsersSurname(e.target.value)} type="text" className="main-form__input"/>
+                                    </div>
+                                    <div className="main-form__input-create">
+                                        <span className="main-form__span">Телефон</span>
+                                        <input value={usersPhone} onChange={(e) => setUsersPhone(e.target.value)} type="number" className="main-form__input"/>
+                                    </div>
+                                    <div className="main-form__input-create">
+                                        <span className="main-form__span">День рождения</span>
+                                        <input value={usersDate} onChange={(e) => setUsersDate(e.target.value)} type="text" className="main-form__input"/>
                                     </div>
                                 </form>
                             </div>

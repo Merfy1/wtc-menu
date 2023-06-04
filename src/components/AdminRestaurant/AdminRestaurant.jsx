@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { AdminRestaurantComponent } from './AdminRestaurantComponent';
 import { AdminCreateRestaurant } from './AdminCreateRestaurant';
 import { AdminUpdateRestauran } from './AdminUpdateRestauran';
@@ -10,6 +12,7 @@ export function AdminRestaurant (){
     const [ShowComponent, setShowComponent] = useState(false);
     const [ShowUpdate, setShowUpdate] = useState(false)
     const access_token = localStorage.getItem('tokenLogin')
+    const MySwal = withReactContent(Swal)
 
     const handleClick = () => {
         setShowComponent(true);
@@ -23,14 +26,18 @@ export function AdminRestaurant (){
         Authorization: access_token,
     };
 
-    useEffect(() => {
+    const updateData = () => {
         axios.get(`http://localhost:3001/api/admin/restoran`, {headers})
         .then(res => {
             setRest(res.data);
         })
         .catch(err => {
             console.error(err);
-        });   
+        });  
+    }
+
+    useEffect(() => {
+        updateData(); 
     },[]);
 
     const handleDeleteRest = (id) => {
@@ -39,7 +46,11 @@ export function AdminRestaurant (){
             setRest(rest.filter((restaurant) => restaurant.id !== id ));
         }).catch((err) => {
             console.log(err);
-            alert("Не удалось удалить ресторан");
+            MySwal.fire({
+                title: <strong>Ошибка</strong>,
+                html: <i>Не удалось удалить ресторан</i>,
+                icon: 'error'
+            })
         });
     } 
 
@@ -60,16 +71,13 @@ export function AdminRestaurant (){
           })
         } catch (error) {
             console.error(error);
-            alert('Не удалось изменить ресторан') // выводим ошибку в консоль
+            MySwal.fire({
+                title: <strong>Ошибка</strong>,
+                html: <i>Не удалось изменить ресторан</i>,
+                icon: 'error'
+            })
         }
-
-        axios.get(`http://localhost:3001/api/admin/restoran`, {headers})
-        .then(response => {
-            setRest(response.data);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+        updateData(); 
     };
     return (
         <>

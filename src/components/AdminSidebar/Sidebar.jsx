@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { FiUser } from 'react-icons/fi';
+import { FiUser, FiUsers } from 'react-icons/fi';
 import { AiOutlineTags } from 'react-icons/ai';
 import { TfiLayoutSlider } from 'react-icons/tfi';
 import { HiTemplate } from 'react-icons/hi';
@@ -16,6 +16,7 @@ import { AdminOrder } from '../AdminOrder/AdminOrder';
 import { AdminMain } from '../AdminMain/AdminMain';
 import { AdminRestaurant } from '../AdminRestaurant/AdminRestaurant';
 import { ModalTable } from "../ModalBasket/ModalTable";
+import { AdminUsers } from "../AdminUsers/AdminUsers";
 import "./sidebar.css"
 
 const Component1 = () => {return <AdminMain></AdminMain>};
@@ -25,6 +26,7 @@ const Component4 = () => {return <AdminSlider></AdminSlider>};
 const Component5 = () => {return <AdminPosition></AdminPosition>};
 const Component6 = () => {return <AdminOrder></AdminOrder>};
 const Component7 = () => {return <AdminRestaurant></AdminRestaurant>};
+const Component8 = () => {return <AdminUsers></AdminUsers>};
 
 export function Sidebar(){
     const [selectedPosition, setSelectedPosition] = useState(null);
@@ -105,6 +107,9 @@ export function Sidebar(){
                                 <button className={selectedPosition === 1? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(1); handleButtonClick(2);}}>
                                     <FiUser className='sidebar_hiden-icon'></FiUser>
                                 </button>
+                                <button className={selectedPosition === 7? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(7); handleButtonClick(8);}}>
+                                    <FiUsers className='sidebar_hiden-icon'></FiUsers>
+                                </button>
                                 <button className={selectedPosition === 2? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(2); handleButtonClick(3);}}>
                                     <AiOutlineTags className='sidebar_hiden-icon'></AiOutlineTags>
                                 </button>
@@ -116,6 +121,9 @@ export function Sidebar(){
                                 </button>
                                 <button className={selectedPosition === 5? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(5); handleButtonClick(6);}}>
                                     <MdBorderColor className='sidebar_hiden-icon'></MdBorderColor>
+                                </button>
+                                <button className={selectedPosition === 6? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(6); handleButtonClick(7);}}>
+                                    <BiFoodMenu className='sidebar-icon'></BiFoodMenu>
                                 </button>
                             </div>
                             <div className="line"/>
@@ -137,6 +145,10 @@ export function Sidebar(){
                             <div className="sidebar-items">
                                 <button className={selectedPosition === 1? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(1); handleButtonClick(2);}}>
                                     <FiUser className='sidebar-icon'></FiUser>
+                                    <span className='sidebar-text'>Сотрудники</span>
+                                </button>
+                                <button className={selectedPosition === 7? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(7); handleButtonClick(8);}}>
+                                    <FiUsers className='sidebar-icon'></FiUsers>
                                     <span className='sidebar-text'>Пользователи</span>
                                 </button>
                                 <button className={selectedPosition === 2? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(2); handleButtonClick(3);}}>
@@ -182,6 +194,7 @@ export function Sidebar(){
             {activeComponent === 5 && <Component5 />}
             {activeComponent === 6 && <Component6 />}
             {activeComponent === 7 && <Component7 />}
+            {activeComponent === 8 && <Component8 />}
         </>
     );
 };
