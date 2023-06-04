@@ -143,8 +143,7 @@ export function MenuHeader( {setPositions} ) {
         }
         else {
             setBasketActive(false)
-        }
-        
+        }  
     }
       
     setTimeout(sayHi, 100);

@@ -4,10 +4,11 @@ import { MenuPosition } from "../MenuPosition/MenuPosition";
 
 const PositionsElement = ({ name, positionsID}) => {
     const [statePositons, setStatePositons] = useState([]);
+    const restNum = localStorage.getItem('restNumber')
 
     useEffect(() => {   
         async function getPositionsById(positionsID){
-            const result = await axios.get(`http://localhost:3001/api/public/positions/${positionsID}`)
+            const result = await axios.get(`http://localhost:3001/api/public/positions/${restNum}/${positionsID}`)
             setStatePositons(result.data.positions)
         }
         getPositionsById(positionsID)
