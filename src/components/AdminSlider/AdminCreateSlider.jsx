@@ -10,7 +10,7 @@ export function AdminCreateSlider(){
     const [ShowComponent, setShowComponent] = useState(false);
     const [file, setFile] = useState(null);
     const [restaurants, setRestaurants] = useState([]);
-    const [selectedRestaurant, setSelectedRestaurant] = useState('');
+    const restNum = localStorage.getItem('restNumber');
     const access_token = localStorage.getItem("tokenLogin");
     const MySwal = withReactContent(Swal)
     const headers = {
@@ -22,7 +22,7 @@ export function AdminCreateSlider(){
         const formData = new FormData();
         formData.append("img", file);
         formData.append("tocken", access_token);
-        formData.append("id_restoran", selectedRestaurant)
+        formData.append("id_restoran", restNum)
         await axios.post("http://localhost:3001/api/admin/slides/create/", formData)
         .then(res => { 
             setShowComponent(true); 
@@ -30,7 +30,7 @@ export function AdminCreateSlider(){
         .catch (err => {
             MySwal.fire({
                 title: <strong>Ошибка</strong>,
-                html: <i>Недопустимое расширение файлов</i>,
+                html: <i>Недопустимое расширение файла</i>,
                 icon: 'error'
             })
             console.error(err); 
@@ -41,7 +41,6 @@ export function AdminCreateSlider(){
         axios.get(`http://localhost:3001/api/admin/restoran/`, {headers})
         .then((response ) => {
             setRestaurants(response.data)
-            setSelectedRestaurant(response.data[0].id);
         })
         .catch(error => {
             console.error(error);
@@ -50,10 +49,6 @@ export function AdminCreateSlider(){
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
-    };
-
-    const handleSelectChange = (event) => {
-        setSelectedRestaurant(event.target.value);
     };
 
     const handleClick = () => {
@@ -84,14 +79,6 @@ export function AdminCreateSlider(){
                                 <div className="main-form__input-create">
                                     <span className="main-form__span">Картинка</span>
                                     <input type="file" onChange={handleFileChange} className="main-form__input"/>
-                                </div>
-                                <div className="main-form__input-create">
-                                    <span className="main-form__span">Выберите ресторан</span>
-                                    <select className="slider-select" value={selectedRestaurant} onChange={handleSelectChange}>
-                                        {restaurants.map(item => (
-                                            <option className="sidebar-option" key={item.id} value={item.id}>{item.name}</option>
-                                        ))}
-                                    </select>
                                 </div>
                             </form>
                         </div>

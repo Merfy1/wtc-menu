@@ -18,7 +18,6 @@ export function AdminPositionComponent({position, name, price, categories, ingri
         const formData = new FormData();    
         formData.append("img", file);
         formData.append("token", token);
-
         await axios.post(`http://localhost:3001/api/admin/positions/${id}/img`, formData)
         .then(res => {
             console.log(res.data)
