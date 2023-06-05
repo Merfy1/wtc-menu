@@ -117,6 +117,12 @@
     margin-bottom: 10px;
     margin-right: 20px;
 }
+.auth-modal{
+    padding: 14px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+}
 .modal-basket__button-buy{
     background-color: #E69952;
     color: white;

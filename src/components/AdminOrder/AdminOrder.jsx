@@ -17,6 +17,10 @@ export function AdminOrder (){
     };
 
     const updateData = () => {
+
+    }
+
+    useEffect(() => {
         axios.get(`http://localhost:3001/api/admin/order/${restNum}`, {headers})
         .then(response => {
             setOrder(response.data.result_serch);
@@ -24,10 +28,6 @@ export function AdminOrder (){
         .catch(err => {
             console.error(err);
         }); 
-    }
-
-    useEffect(() => {
-        updateData(); 
     }, []);
 
     const handleDeleteOrder = (id) => {
@@ -67,7 +67,7 @@ export function AdminOrder (){
                         Заказы
                     </span>
                 </div>
-                <span> Количество заказов: {order.length}</span>
+                <span>Количество заказов: </span>
                 <div className="table-wrapper">
                     <table className='main-table'>
                         {hiddenHeader && (

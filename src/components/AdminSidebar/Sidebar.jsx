@@ -35,7 +35,9 @@ export function Sidebar(){
     const [modalActive, setModalActive] = useState(true)
     const [restaurants, setRestaurants] = useState([]);
     const [selectedRestaurant, setSelectedRestaurant] = useState('');
-    const access_token = localStorage.getItem('tokenLogin'); // получаем токен из localStorage
+    const access_token = localStorage.getItem('tokenLogin');
+    const restNumber = localStorage.getItem('restNumber');
+    const [showCode, setShowCode] = useState(false)
     const headers = {
         Authorization: access_token,
     };
@@ -47,7 +49,7 @@ export function Sidebar(){
           setSelectedPosition(position);
         }
     };
-    
+
     const handleButtonClick = (componentNumber) => {
         setActiveComponent(componentNumber);
     };
@@ -82,20 +84,30 @@ export function Sidebar(){
         setModalActive(false);
     };
 
+    useEffect(() => {
+        if (restNumber == 0){
+            setShowCode(!showCode);
+        }
+    },[],)
+
     return (
         <>
             <div className='sidebar'>
-                <ModalTable active={modalActive} setActive={setModalActive}> 
-                        <div className="modal-info photo">
-                            <h2 className='sidebar-modal-text' photo>Выберите ресторан:</h2>
-                            <select className="sidebar-select" value={selectedRestaurant} onChange={handleSelectChange}>
-                                {restaurants.map(item => (
-                                    <option className="sidebar-option" key={item.id} value={item.id}>{item.name}</option>
-                                ))}
-                            </select>
-                            <button className="buy-position photo" onClick={handleSave}>Сохранить</button>
-                        </div>   
-                </ModalTable>
+                {showCode && (
+                    <>
+                        <ModalTable active={modalActive} setActive={setModalActive}> 
+                                <div className="modal-info photo">
+                                    <h2 className='sidebar-modal-text' photo>Выберите ресторан:</h2>
+                                    <select className="sidebar-select" value={selectedRestaurant} onChange={handleSelectChange}>
+                                        {restaurants.map(item => (
+                                            <option className="sidebar-option" key={item.id} value={item.id}>{item.name}</option>
+                                        ))}
+                                    </select>
+                                    <button className="buy-position photo" onClick={handleSave}>Сохранить</button>
+                                </div>   
+                        </ModalTable>
+                    </>
+                )}
                 {isClicked ? (
                     <div className="sidebar-container_hide">
                         <div className="sidebar-wrapper">
@@ -104,12 +116,19 @@ export function Sidebar(){
                             </div>
                             <div className="line"/>
                             <div className="sidebar-items">
-                                <button className={selectedPosition === 1? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(1); handleButtonClick(2);}}>
-                                    <FiUser className='sidebar_hiden-icon'></FiUser>
-                                </button>
-                                <button className={selectedPosition === 7? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(7); handleButtonClick(8);}}>
-                                    <FiUsers className='sidebar_hiden-icon'></FiUsers>
-                                </button>
+                            {showCode && (
+                                    <>
+                                        <button className={selectedPosition === 1? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(1); handleButtonClick(2);}}>
+                                            <FiUser className='sidebar_hiden-icon'></FiUser>
+                                        </button>
+                                        <button className={selectedPosition === 7? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(7); handleButtonClick(8);}}>
+                                            <FiUsers className='sidebar_hiden-icon'></FiUsers>
+                                        </button>
+                                        <button className={selectedPosition === 6? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(6); handleButtonClick(7);}}>
+                                            <BiFoodMenu className='sidebar-icon'></BiFoodMenu>
+                                        </button>
+                                    </>
+                                )}
                                 <button className={selectedPosition === 2? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(2); handleButtonClick(3);}}>
                                     <AiOutlineTags className='sidebar_hiden-icon'></AiOutlineTags>
                                 </button>
@@ -122,9 +141,7 @@ export function Sidebar(){
                                 <button className={selectedPosition === 5? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(5); handleButtonClick(6);}}>
                                     <MdBorderColor className='sidebar_hiden-icon'></MdBorderColor>
                                 </button>
-                                <button className={selectedPosition === 6? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(6); handleButtonClick(7);}}>
-                                    <BiFoodMenu className='sidebar-icon'></BiFoodMenu>
-                                </button>
+
                             </div>
                             <div className="line"/>
                             <button className="sidebar-exit" onClick={() => {handleLogOut()}}>
@@ -143,14 +160,22 @@ export function Sidebar(){
                             </div>
                             <div className="line"/>
                             <div className="sidebar-items">
-                                <button className={selectedPosition === 1? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(1); handleButtonClick(2);}}>
-                                    <FiUser className='sidebar-icon'></FiUser>
-                                    <span className='sidebar-text'>Сотрудники</span>
-                                </button>
-                                <button className={selectedPosition === 7? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(7); handleButtonClick(8);}}>
-                                    <FiUsers className='sidebar-icon'></FiUsers>
-                                    <span className='sidebar-text'>Пользователи</span>
-                                </button>
+                                {showCode && (
+                                    <>
+                                        <button className={selectedPosition === 1? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(1); handleButtonClick(2);}}>
+                                            <FiUser className='sidebar-icon'></FiUser>
+                                            <span className='sidebar-text'>Сотрудники</span>
+                                        </button>
+                                        <button className={selectedPosition === 7? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(7); handleButtonClick(8);}}>
+                                            <FiUsers className='sidebar-icon'></FiUsers>
+                                            <span className='sidebar-text'>Пользователи</span>
+                                        </button>
+                                        <button className={selectedPosition === 6? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(6); handleButtonClick(7);}}>
+                                            <BiFoodMenu className='sidebar-icon'></BiFoodMenu>
+                                            <span className='sidebar-text'>Рестораны</span>
+                                        </button>
+                                    </>
+                                )}
                                 <button className={selectedPosition === 2? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(2); handleButtonClick(3);}}>
                                     <AiOutlineTags className='sidebar-icon'></AiOutlineTags>
                                     <span className='sidebar-text'>Категории</span>
@@ -167,10 +192,7 @@ export function Sidebar(){
                                     <MdBorderColor className='sidebar-icon'></MdBorderColor>
                                     <span className='sidebar-text'>Заказы</span>
                                 </button>
-                                <button className={selectedPosition === 6? 'sidebar-item_active' : 'sidebar-item'} onClick={() => {handlePositionClick(6); handleButtonClick(7);}}>
-                                    <BiFoodMenu className='sidebar-icon'></BiFoodMenu>
-                                    <span className='sidebar-text'>Рестораны</span>
-                                </button>
+
 
                             </div>
                             <div className="line"/>

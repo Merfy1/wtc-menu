@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { BsBasket } from "react-icons/bs";
+import { FaRegUserCircle } from "react-icons/fa";
 import { ModalBasket } from "../ModalBasket/ModalBasket";
 import './menuHeader.css';
 import "../AdminSidebar/sidebar.css";
@@ -16,15 +17,17 @@ export const MyContext = React.createContext();
 export function MenuHeader( {setPositions} ) {
     const [modalActive, setModalActive] = useState(false)
     const [modalActive1, setModalActive1] = useState(true)
+    const [modalActive2, setModalActive2] = useState(false)
+    const [showCode, setShowCode] = useState(false)
     const [catigories, stateCatigories] = useState([])
     const [positionsBasket, setPositionsBasket] = useState([])
     const [finalPrice, setFinalPrice] = useState(0)
     const [typePay, setTypePay] = useState('')
     const [basket_active, setBasketActive] = useState(false)
-    const restNum = localStorage.getItem('restNumber')
     const [tableNumber, setTableNumber] = useState("");
     const [restaurants, setRestaurants] = useState([]);
     const [selectedRestaurant, setSelectedRestaurant] = useState('');
+    const restNum = localStorage.getItem('restNumber')
 
     const handleOrderSubmit = () => {
       localStorage.setItem("tableNumber", tableNumber);
@@ -39,7 +42,7 @@ export function MenuHeader( {setPositions} ) {
           setTableNumber(storedTableNumber);
           setModalActive1(false);
         } else {
-            setModalActive1(true); // Если номера нет, открываем модальное окно
+            setModalActive1(true);
         }
     }, []);
 
@@ -148,6 +151,10 @@ export function MenuHeader( {setPositions} ) {
       
     setTimeout(sayHi, 100);
 
+    const toggleCode = () => {
+        setShowCode(!showCode);
+    };
+
     useEffect(() => {
         const elements = JSON.parse(localStorage.getItem('card'))
         setPositionsBasket(elements)
@@ -188,6 +195,7 @@ export function MenuHeader( {setPositions} ) {
                     <div className="basket-wrapper">
                         <span className={basket_active ? "basket-span active" : "basket-span"}>{basket_active}</span>
                         <button onClick={() => setModalActive(true)} className='basket-icon'><BsBasket></BsBasket></button>
+                        <button onClick={() => setModalActive2(true)} className='basket-icon'><FaRegUserCircle></FaRegUserCircle></button>
                     </div>
                 </div>
             </div>  
@@ -222,6 +230,32 @@ export function MenuHeader( {setPositions} ) {
                         <hr className="line"/>
                         <div className="buy-basket" >
                             <button onClick={twoFunction} className="modal-basket__button-buy">{'Оформить ' + finalPrice + ' руб'}</button>
+                        </div>
+                    </>
+                )
+            }
+        </ModalBasket>
+        <ModalBasket active={modalActive2} setActive={setModalActive2}>
+            {
+                modalActive2 && (
+                    <>
+                        <span className="modal-basket__title">Вход</span>
+                        <hr className="line"/>
+                        <form >
+                            <div className="modal-basket__change-pay">
+                                <span className="change-pay__title">Номер телефона</span>
+                                <input type='text' className="auth-modal" value=""  ></input>
+                                {showCode && (
+                                    <>
+                                        <span className="change-pay__title">Код авторизации</span>
+                                        <input type='text' className="auth-modal" value="" ></input>
+                                    </>
+                                )}
+                            </div>
+                        </form>
+                        <hr className="line"/>
+                        <div className="buy-basket" >
+                            <button onClick={toggleCode} className="modal-basket__button-buy">Войти</button>
                         </div>
                     </>
                 )
