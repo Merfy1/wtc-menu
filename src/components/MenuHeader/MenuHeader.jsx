@@ -18,6 +18,7 @@ export function MenuHeader( {setPositions} ) {
     const [modalActive, setModalActive] = useState(false)
     const [modalActive1, setModalActive1] = useState(true)
     const [modalActive2, setModalActive2] = useState(false)
+    const [modalActive3, setModalActive3] = useState(false)
     const [showCode, setShowCode] = useState(false)
     const [catigories, stateCatigories] = useState([])
     const [positionsBasket, setPositionsBasket] = useState([])
@@ -27,7 +28,15 @@ export function MenuHeader( {setPositions} ) {
     const [tableNumber, setTableNumber] = useState("");
     const [restaurants, setRestaurants] = useState([]);
     const [selectedRestaurant, setSelectedRestaurant] = useState('');
-    const restNum = localStorage.getItem('restNumber')
+    const [phone, setPhone] = useState(0);
+    const [phoneReg, setPhoneReg] = useState(0);
+    const [nameUser, setNameUser] = useState("");
+    const [surnameUser, setSurnameUser] = useState("");
+    const [lastNameUser, setLastNameUser] = useState("");
+    const [dateBirthdayUser, setDateBirthdayUser] = useState("");
+    const [code, setCode] = useState(0);
+    const [user, setUser] = useState([]);
+    const restNum = localStorage.getItem('restNumber');
 
     const handleOrderSubmit = () => {
       localStorage.setItem("tableNumber", tableNumber);
@@ -159,6 +168,46 @@ export function MenuHeader( {setPositions} ) {
         const elements = JSON.parse(localStorage.getItem('card'))
         setPositionsBasket(elements)
     },[],)
+
+    async function auth(e) {
+        e.preventDefault();
+        const authResult = await axios.post('http://localhost:3001/api/public/lk/login', {
+            phone: parseInt(phone)
+        })
+        .then((res) => {
+
+        })
+        .catch((err) => {
+            console.log(err)
+            if(err.response.status == 404) {
+                setModalActive2(false);
+                setModalActive3(true);
+            }
+        })
+    }
+
+    async function reg(e) {
+        e.preventDefault();
+        const regResult = await axios.post('http://localhost:3001/api/public/lk/register', {
+            phone: parseInt(phoneReg),
+            name: nameUser,
+            surname: surnameUser,
+            lastname: lastNameUser,
+            dateBirsday: dateBirthdayUser
+        })
+        .then((res) => {
+            setUser(res)
+            console.log(res.data)
+        })
+        .catch((err) => {
+            console.log(err)
+            console.log()
+            if(err.response.status == 404) {
+                setModalActive2(false);
+                setModalActive3(true);
+            }
+        })
+    }
     
     return(
         <>
@@ -244,7 +293,7 @@ export function MenuHeader( {setPositions} ) {
                         <form >
                             <div className="modal-basket__change-pay">
                                 <span className="change-pay__title">Номер телефона</span>
-                                <input type='text' className="auth-modal" value=""  ></input>
+                                <input type='number' className="auth-modal" value={phone} onChange={e => setPhone(e.target.value)}  ></input>
                                 {showCode && (
                                     <>
                                         <span className="change-pay__title">Код авторизации</span>
@@ -255,7 +304,35 @@ export function MenuHeader( {setPositions} ) {
                         </form>
                         <hr className="line"/>
                         <div className="buy-basket" >
-                            <button onClick={toggleCode} className="modal-basket__button-buy">Войти</button>
+                            <button onClick={(e) =>auth(e)} className="modal-basket__button-buy">Войти</button>
+                        </div>
+                    </>
+                )
+            }
+        </ModalBasket>
+        <ModalBasket active={modalActive3} setActive={setModalActive3}>
+            {
+                modalActive3 && (
+                    <>
+                        <span className="modal-basket__title">Вход</span>
+                        <hr className="line"/>
+                        <form >
+                            <div className="modal-basket__change-pay">
+                                <span className="change-pay__title">Номер телефона</span>
+                                <input type='number' className="auth-modal" value={phoneReg} onChange={e => setPhoneReg(e.target.value)}  ></input>
+                                <span className="change-pay__title">Имя</span>
+                                <input type='text' className="auth-modal" value={nameUser} onChange={e => setNameUser(e.target.value)}  ></input>
+                                <span className="change-pay__title">Фамилия</span>
+                                <input type='text' className="auth-modal" value={surnameUser} onChange={e => setSurnameUser(e.target.value)}  ></input>
+                                <span className="change-pay__title">Отчество</span>
+                                <input type='text' className="auth-modal" value={lastNameUser} onChange={e => setLastNameUser(e.target.value)}  ></input>
+                                <span className="change-pay__title">Дата рождения</span>
+                                <input type='text' className="auth-modal" value={dateBirthdayUser} onChange={e => setDateBirthdayUser(e.target.value)}  ></input>
+                            </div>
+                        </form>
+                        <hr className="line"/>
+                        <div className="buy-basket" >
+                            <button onClick={(e) =>reg(e)} className="modal-basket__button-buy">Войти</button>
                         </div>
                     </>
                 )

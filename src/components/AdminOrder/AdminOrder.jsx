@@ -17,17 +17,17 @@ export function AdminOrder (){
     };
 
     const updateData = () => {
-
-    }
-
-    useEffect(() => {
-        axios.get(`http://localhost:3001/api/admin/order/${restNum}`, {headers})
+        axios.get(`http://localhost:3001/api/admin/orders/${restNum}`, {headers})
         .then(response => {
             setOrder(response.data.result_serch);
         })
         .catch(err => {
             console.error(err);
         }); 
+    }
+
+    useEffect(() => {
+        updateData(); 
     }, []);
 
     const handleDeleteOrder = (id) => {

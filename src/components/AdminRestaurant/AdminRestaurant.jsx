@@ -89,7 +89,7 @@ export function AdminRestaurant (){
                 restToUpdate && (
                     <AdminUpdateRestauran
                     setRestToUpdate={setRestToUpdate}
-                    restId={restToUpdate}
+                    restId={rest.id}
                     onUpdateRest={handleRestUpdate}
                     setShowComponent1={setShowComponent}
                     setShowUpdate={setShowUpdate}

@@ -16,7 +16,7 @@ export function AdminUpdateRestauran ({restId, onUpdateRest, setRestToUpdate, se
         setShowComponent1(false)
         setShowUpdate(false)
     }, []);
-
+    console.log(restId)
     const handleNameChange = (e) => {
         setNewName(e.target.value);
         setShowComponent1(false)
