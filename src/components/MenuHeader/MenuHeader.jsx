@@ -19,6 +19,14 @@ export function MenuHeader( {setPositions} ) {
     const [modalActive1, setModalActive1] = useState(true)
     const [modalActive2, setModalActive2] = useState(false)
     const [modalActive3, setModalActive3] = useState(false)
+
+    const [modalValidateRegister, setModalValidateRegister] = useState(false)
+    const [validateCodeRegister, setValidateCodeRegister] = useState("")
+
+    const [modalLK, setModalLk] = useState(false)
+
+    const [userInfo, setUserInfo] = useState(null)
+
     const [showCode, setShowCode] = useState(false)
     const [catigories, stateCatigories] = useState([])
     const [positionsBasket, setPositionsBasket] = useState([])
@@ -28,7 +36,7 @@ export function MenuHeader( {setPositions} ) {
     const [tableNumber, setTableNumber] = useState("");
     const [restaurants, setRestaurants] = useState([]);
     const [selectedRestaurant, setSelectedRestaurant] = useState('');
-    const [phone, setPhone] = useState(0);
+    const [phone, setPhone] = useState("");
     const [phoneReg, setPhoneReg] = useState(0);
     const [nameUser, setNameUser] = useState("");
     const [surnameUser, setSurnameUser] = useState("");
@@ -65,9 +73,7 @@ export function MenuHeader( {setPositions} ) {
             stateCatigories(e.data.catigories)
             setPositions(e.data.catigories)
         })
-    },[],)
 
-    useEffect(() => {
         axios.get(`http://localhost:3001/api/public/listRestoran/`, {})
         .then((response ) => {
             setRestaurants(response.data.listRestoran)
@@ -169,21 +175,54 @@ export function MenuHeader( {setPositions} ) {
         setPositionsBasket(elements)
     },[],)
 
+    const getUserInfo = async () => {
+        await axios.post('http://localhost:3001/api/public/lk/info', {
+                token: localStorage.getItem("castomerToken")
+        })
+            .then((res) => {
+                const data = res?.data
+                setUserInfo({...data})
+            })
+            .catch((err) => {
+                localStorage.removeItem('castomerToken')
+            })
+    }
+
     async function auth(e) {
         e.preventDefault();
-        const authResult = await axios.post('http://localhost:3001/api/public/lk/login', {
-            phone: parseInt(phone)
-        })
-        .then((res) => {
+        if (!showCode){
+            await axios.post('http://localhost:3001/api/public/lk/login', {
+                phone: parseInt(phone)
+            })
+            .then((res) => {
+                setShowCode(true)
+            })
+            .catch((err) => {
+                console.log(err)
+                if(err.response.status == 404) {
+                    setModalActive2(false);
+                    setModalActive3(true);
+                }
+            })
 
-        })
-        .catch((err) => {
-            console.log(err)
-            if(err.response.status == 404) {
-                setModalActive2(false);
-                setModalActive3(true);
-            }
-        })
+        }   else {
+            
+            await axios.post('http://localhost:3001/api/public/lk/login/code', {
+                phone: parseInt(phone),
+                code: parseInt(code)
+            })
+            .then(async (res) => {
+                // console.log(res?.data?.token)
+                localStorage.setItem('castomerToken', res?.data?.token)
+                setModalActive2(false)
+                await getUserInfo()
+            })
+            .catch(() => {
+                setShowCode(false)
+                setCode("")
+            })
+        
+        }
     }
 
     async function reg(e) {
@@ -198,6 +237,9 @@ export function MenuHeader( {setPositions} ) {
         .then((res) => {
             setUser(res)
             console.log(res.data)
+            localStorage.setItem('phoneRegister', phoneReg)
+            setModalActive3(false)
+            setModalValidateRegister(true)
         })
         .catch((err) => {
             console.log(err)
@@ -209,6 +251,39 @@ export function MenuHeader( {setPositions} ) {
         })
     }
     
+
+    const validateRegisterUser = async () => {
+        await axios.post('http://localhost:3001/api/public/lk/register/code', {
+            phone: parseInt(phoneReg),
+            code: parseInt(validateCodeRegister),
+        })
+        .then((res) => {
+            console.log(res)
+            localStorage.setItem('castomerToken', res?.data?.token)
+            setModalValidateRegister(false)
+            getUserInfo()
+        })
+        .catch((err) => {
+            console.log(err)
+                setModalValidateRegister(false)
+                setModalActive3(true);
+        })
+    }
+
+    const clickOpenLk = () => {
+        console.log(localStorage.getItem('castomerToken'))
+        if (localStorage.getItem('castomerToken') === null ) {
+            setModalActive2(true)
+        } else {
+            setModalLk(true);
+        }
+    }
+
+    const exitAccount = () => {
+        localStorage.removeItem('castomerToken')
+        setModalLk(false)
+    }
+
     return(
         <>
         <div className="header">
@@ -244,7 +319,7 @@ export function MenuHeader( {setPositions} ) {
                     <div className="basket-wrapper">
                         <span className={basket_active ? "basket-span active" : "basket-span"}>{basket_active}</span>
                         <button onClick={() => setModalActive(true)} className='basket-icon'><BsBasket></BsBasket></button>
-                        <button onClick={() => setModalActive2(true)} className='basket-icon'><FaRegUserCircle></FaRegUserCircle></button>
+                        <button onClick={() => clickOpenLk()} className='basket-icon'><FaRegUserCircle></FaRegUserCircle></button>
                     </div>
                 </div>
             </div>  
@@ -297,7 +372,7 @@ export function MenuHeader( {setPositions} ) {
                                 {showCode && (
                                     <>
                                         <span className="change-pay__title">Код авторизации</span>
-                                        <input type='text' className="auth-modal" value="" ></input>
+                                        <input type='text' className="auth-modal" value={code} onChange={(e) => setCode(e.target.value)} ></input>
                                     </>
                                 )}
                             </div>
@@ -333,6 +408,53 @@ export function MenuHeader( {setPositions} ) {
                         <hr className="line"/>
                         <div className="buy-basket" >
                             <button onClick={(e) =>reg(e)} className="modal-basket__button-buy">Войти</button>
+                        </div>
+                    </>
+                )
+            }
+        </ModalBasket>
+        <ModalBasket active={modalValidateRegister} setActive={setModalValidateRegister}>
+            {
+                modalValidateRegister && (
+                    <>
+                        <span className="modal-basket__title">Вход</span>
+                        <hr className="line"/>
+                        <div >
+                            <div className="modal-basket__change-pay">
+                                <span className="change-pay__title">Код с СМС:</span>
+                                <input type="text" className="auth-modal" value={validateCodeRegister} onChange={e => setValidateCodeRegister(e.target.value)}  ></input>
+                            </div>
+                        </div>
+                        <hr className="line"/>
+                        <div className="buy-basket" onClick={() =>validateRegisterUser()}>
+                            <button className="modal-basket__button-buy">Зарегистрироваться</button>
+                        </div>
+                    </>
+                )
+            }
+        </ModalBasket>
+        <ModalBasket active={modalLK} setActive={setModalLk}>
+            {
+                modalLK && (
+                    <>
+                        <span className="modal-basket__title">Личный кабинет</span>
+                        <hr className="line"/>
+                        <div >
+                            <div className="modal-basket__change-pay">
+                                {
+                                    userInfo && (
+                                        <>
+                                        <p>Имя: {userInfo?.name}</p>
+                                        <p>Фамилия: {userInfo?.lastname}</p>
+                                        <p>Баллы на счету: {userInfo?.balance}</p>
+                                        </>
+                                    )
+                                }
+                            </div>
+                            
+                        </div>
+                        <div className="buy-basket" onClick={() =>exitAccount()}>
+                            <button className="modal-basket__button-buy">Выйти</button>
                         </div>
                     </>
                 )
