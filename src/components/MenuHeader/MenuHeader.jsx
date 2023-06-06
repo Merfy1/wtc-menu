@@ -44,11 +44,15 @@ export function MenuHeader( {setPositions} ) {
     const [dateBirthdayUser, setDateBirthdayUser] = useState("");
     const [code, setCode] = useState(0);
     const [user, setUser] = useState([]);
+    const [minusSumm, setMinusSumm] = useState(0)
     const restNum = localStorage.getItem('restNumber');
 
     const handleOrderSubmit = () => {
       localStorage.setItem("tableNumber", tableNumber);
       localStorage.setItem('restNumber', selectedRestaurant);
+      const restoranInfo = restaurants.filter((e) => e.id == selectedRestaurant)
+    //   console.log(restoranInfo[0])
+      localStorage.setItem('restoranInfo', JSON.stringify(restoranInfo[0]))
       setModalActive1(false)
       window.location.reload();
     };
@@ -74,7 +78,7 @@ export function MenuHeader( {setPositions} ) {
             setPositions(e.data.catigories)
         })
 
-        axios.get(`http://localhost:3001/api/public/listRestoran/`, {})
+        axios.get(`http://localhost:3001/api/public/listRestoran/`)
         .then((response ) => {
             setRestaurants(response.data.listRestoran)
             setSelectedRestaurant(response.data.listRestoran[0].id);
@@ -90,21 +94,33 @@ export function MenuHeader( {setPositions} ) {
     
     let coutns = 0
     function twoFunction(){
+        if (JSON.parse(localStorage.getItem('restoranInfo')).activeLoginCastomer) {
+            if (localStorage.getItem('castomerToken') === null) {
+                setModalActive(false)
+                return setModalActive2(true)
+            }
+        } 
         sendOrder()
         sendMail()
     }
     function sendOrder() {
         const tableId = localStorage.getItem('tableNumber');
         const card = JSON.parse(localStorage.getItem('card'));
+
+        const checkEnableRegister = JSON.parse(localStorage.getItem('restoranInfo'))
         const orderData = {
             table_id: parseInt(tableId),
             positions: card.map(item => ({
                 count: item.count,
                 id_positions: item.key,
                 price_positions: item.price
-            }))
+            })),
+            minus: minusSumm
         };
-        axios.post('http://localhost:3001/api/public/order', orderData)
+        if (checkEnableRegister.activeLoginCastomer){
+            orderData.token = localStorage.getItem('castomerToken');
+        }
+        axios.post(`http://localhost:3001/api/public/order/${localStorage.getItem('restNumber')}`, orderData)
         .then(response => {
             console.log(response.data);
         })
@@ -349,12 +365,22 @@ export function MenuHeader( {setPositions} ) {
                                     </input>
                                     Наличными
                                 </label>
+                                {
+                                    JSON.parse(localStorage.getItem('restoranInfo')).activeLoginCastomer && (
+                                        <>
+                                        <span className="change-pay__title">Сумма списания: </span>
+                                        <input type='text' className="auth-modal" value={minusSumm} onChange={(e) => setMinusSumm(e.target.value)} ></input>
+                                        <p>Баланс: {userInfo?.balance}</p>
+                                        </>
+                                    )
+                                }
                             </div>
                         </form>
                         <hr className="line"/>
                         <div className="buy-basket" >
                             <button onClick={twoFunction} className="modal-basket__button-buy">{'Оформить ' + finalPrice + ' руб'}</button>
                         </div>
+
                     </>
                 )
             }
