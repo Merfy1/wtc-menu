@@ -11,6 +11,8 @@ import { BasketPosition } from "../BasketPosition/BasketPosition";
 import emailjs from 'emailjs-com';
 import { Logo } from "../Logo/Logo";
 import { ModalTable } from "../ModalBasket/ModalTable";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 export const MyContext = React.createContext();
 
@@ -46,6 +48,7 @@ export function MenuHeader( {setPositions} ) {
     const [user, setUser] = useState([]);
     const [minusSumm, setMinusSumm] = useState(0)
     const restNum = localStorage.getItem('restNumber');
+    const MySwal = withReactContent(Swal)
 
     const handleOrderSubmit = () => {
       localStorage.setItem("tableNumber", tableNumber);
@@ -133,7 +136,11 @@ export function MenuHeader( {setPositions} ) {
     function sendMail () {
         setModalActive(false)
         if (typePay === '' ){
-            return alert('Не выбран способ оплаты');
+            return MySwal.fire({
+                title: <strong>Ошибка</strong>,
+                html: <i>Не выбран способ оплаты</i>,
+                icon: 'error'
+            })
         }
 
         if (!positionsBasket.length) {
@@ -150,8 +157,13 @@ export function MenuHeader( {setPositions} ) {
 
         emailjs.send('service_isdyzs9', 'template_4hrk63c', {message: zakaz}, 'gHcdNx_UCNyEUzLaN')
         .then((result) => {
-          localStorage.clear();
-          alert('Заказ отправлен');
+        localStorage.removeItem("card");
+        MySwal.fire({
+            title: <strong>Сделано!</strong>,
+            html: <i>Заказ отправлен</i>,
+            icon: 'success'
+        })
+        //   getUserInfo();
         }, (error) => {
             console.log(error.text);
         });
@@ -470,9 +482,9 @@ export function MenuHeader( {setPositions} ) {
                                 {
                                     userInfo && (
                                         <>
-                                        <p>Имя: {userInfo?.name}</p>
-                                        <p>Фамилия: {userInfo?.lastname}</p>
-                                        <p>Баллы на счету: {userInfo?.balance}</p>
+                                        <span className="change-pay__title">Имя: {userInfo?.name}</span>
+                                        <span className="change-pay__title">Фамилия: {userInfo?.lastname}</span>
+                                        <span className="change-pay__title">Баллы на счету: {userInfo?.balance}</span>
                                         </>
                                     )
                                 }
